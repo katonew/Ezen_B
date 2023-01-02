@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<form> <!--  form s -->
+			<fieldset> <!--  입력 그룹 s -->
+			
+				<legend> <h2>비회원 게시판</h2> </legend>
+				
+				카테고리
+				<select>
+					<option> 공지사항 </option>
+					<option> 자유게시판 </option>
+					<option> 공유게시판 </option>
+				</select><br/>
+				
+				<input type = "text" placeholder="작성자" autofocus="autofocus"/>	
+				<input type = "password" placeholder="비밀번호" autofocus="autofocus"/><br/>
+				
+				<hr/> <!-- 구분선 (밑줄) -->
+				<input type = "text" placeholder="게시물 제목 입력" autofocus="autofocus"/>	<br/>
+				<hr/> <!-- 구분선 (밑줄) -->
+				<textarea rows="20" cols="50" style="resize: none" placeholder="게시물 내용 입력"></textarea><br/>
+				
+				공개선택
+				<input type = "radio" name="email" checked="checked"/> 공개글
+				<input type = "radio" name="email"/> 비공개글 <br/>
+				공유선택
+				<input type = "checkbox"name="item"/> 카카오톡
+				<input type = "checkbox"name="item"/> 트위터
+				<input type = "checkbox"name="item"/> 네이버카페<br/>
+				작성일자
+				<input type = "date"/>
+				작성시간 	
+				<input type = "time"/><br/>
+				<hr/>
+				<p>
+				첨부파일
+				<input type="file" /> <br/>
+				</p>
+				<input type = "button" value="목록보기" />
+				<input type = "button" value="글쓰기" />
+				<input type = "button" value="다시쓰기" />
+			</fieldset>	<!-- 입력그룹 e -->
+		</form> <!--  form e -->
+	
+	</body>
+</html>

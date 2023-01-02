@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+*{ /* s */
+	font-family: "굴림";
+} /* e */
+h1{
+	text-align: center;
+}
+
+th{
+	text-align: center;
+	
+}
+
+td{
+	font-weight: bold;
+	text-align: left;
+}
+
+fieldset {
+	background-color: #c0c0c0;
+}
+table{
+	text-align: center;
+}
