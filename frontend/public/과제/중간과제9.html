@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link href="중간과제9.css" rel="stylesheet">
+</head>
+<body>
+	<h3 class="head"> 회원 가입 폼</h3>
+	
+	<form = class="signup_form">	<!-- 추후에 입력 된 input들의 데이터 보낼 예정 -->
+		<ul class="signup_box">	<!-- 테이블 처럼 제작 -->
+			<li>	<!-- 1행으로 사용 -->
+				
+				<ul class="colums">
+					<li class="col1">아이디</li>										<!-- 1열 -->
+					<li class="col2"><input type = "text"/></li>	<!-- 2열 -->
+				</ul>
+			</li>
+			<li>	<!-- 2행으로 사용 -->
+				<ul class="colums">
+					<li class="col1">비밀번호</li>										<!-- 1열 -->
+					<li class="col2"><input type = "password"/></li>	<!-- 2열 -->
+				</ul>
+			</li>
+			<li>	<!-- 3행으로 사용 -->
+				<ul class="colums">
+					<li class="col1">비밀번호 확인</li>										<!-- 1열 -->
+					<li class="col2"><input type = "password"/></li>	<!-- 2열 -->
+				</ul>
+			</li>
+			<li>	<!-- 4행으로 사용 -->
+				<ul class="colums">
+					<li class="col1">이름</li>										<!-- 1열 -->
+					<li class="col2"><input type = "text"/></li>	<!-- 2열 -->
+				</ul>
+			</li>
+			<li>	<!-- 5행으로 사용 -->
+				<ul class="colums">
+					<li class="col1">이메일</li>										<!-- 1열 -->
+					<li class="col2"><input type = "text"> @
+									<select>
+										<option>직접입력</option> 
+										<option>naver.com</option>
+										<option>gmail.com</option>
+									</select></li>	<!-- 2열 -->
+				</ul>				
+			</li>
+			<li>	<!-- 6행으로 사용 -->
+				<ul class="colums">
+					<li class="col1">이메일 수신</li>									<!-- 1열 -->
+					<li>
+						<input type = "radio" name="none_check"/>비수신 
+						<input type = "radio" name="none_check"/>수신
+					</li>	<!-- 2열 -->
+				</ul>				
+			</li>
+			<li>	<!-- 7행으로 사용 -->
+				<ul class="colums">
+					<li class="col1">가입경로</li>										<!-- 1열 -->
+					<li >
+						<input type = "checkbox"name="item"/> 친구추천													<!-- 네모 선택 버튼 -->
+						<input type = "checkbox"name="item"/> 인터넷 검색
+						<input type = "checkbox"name="item" checked="checked"/> 기타</li>	<!-- 2열 -->
+				</ul>
+			</li>
+			<li>	<!-- 8행으로 사용 -->
+				<ul class="colums">
+					<li class="col3">인사말</li>										<!-- 1열 -->
+					<li class="col2">
+						<textarea rows="10" cols="52"></textarea>
+					</li>	<!-- 2열 -->
+				</ul>				
+			</li>
+		</ul>
+		<div class="btn_box">
+			<input type = "submit" value="저장하기"/>
+			<input type = "reset" value="취소하기"/>
+		</div>
+	</form>
+	
+
+</body>
+</html>
