@@ -1,19 +1,38 @@
 @charset "UTF-8";
 
-.cummu{
+.cummu table{
 	margin: 0 auto;
-	width: 600px;
-	
+	width: 400px;
+}
+.cummu div{
+	margin: 0 auto;
 }
 
-textarea{resize: none;}
+textarea{
+	resize: none;
+}
 .cummu input{width: 300px;}
 
-
-.btn_box input{
-	padding: 10px 20px;
-	margin: 10px 7px 0px 0px;
-	background-color: #EEEEEE;
+.a1{
+	border-top: solid 3px black;
 }
 
-.btn_box{text-align: right;}
+.a1 td{
+	width: 100px;
+	border-bottom : dotted 1px #EEEEEE; 
+}
+
+.btn_box input{
+	
+	border-radius: 5px;
+	width: 80px;
+	height: 30px;
+	padding: 5px 10px;
+	margin: 10px 7px 0px 0px;
+	background-color: #EEEEEE;
+	border: solid 1px black;
+}
+.btn_box{
+	text-align: right;
+	width: 400px;
+}
