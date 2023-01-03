@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+.cummu{
+	margin: 0 auto;
+	width: 600px;
+	
+}
+
+textarea{resize: none;}
+.cummu input{width: 300px;}
+
+
+.btn_box input{
+	padding: 10px 20px;
+	margin: 10px 7px 0px 0px;
+	background-color: #EEEEEE;
+}
+
+.btn_box{text-align: right;}
