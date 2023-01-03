@@ -1,0 +1,30 @@
+@charset "UTF-8";
+/*
+	식별자
+	1. *
+	2. 태그명
+	3. .class
+	4. #
+*/
+
+.book{
+	width: 300px;	/* 이미지 가로 사이즈*/
+}
+
+.title_no{
+	color: #FFA400;		/* 글꼴 색*/
+	font-size: 40px;	/* 글꼴 크기*/
+	
+}
+.middle{
+	background-color: #0F6878;
+	width: 500px; /* 가로 길이*/
+	padding: 20px; /* 안쪽 여백*/
+	color: white;
+	line-height: 150%;
+}
+
+.bold{
+	color: #FFA400;		/* 글꼴 색*/
+	font-weight: bold;	/* 글꼴 진하게*/
+}
