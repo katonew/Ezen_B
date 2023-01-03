@@ -29,3 +29,28 @@ p{
 		letter-spacing: 2px;
 		line-height: 200%;
 }
+
+/*
+		1.텍스트
+1.font-family: "폰트명" 		: 글꼴
+2.color : 색상명			: 폰트 색상
+3.text-decoration
+overline  윗줄
+line-through : 취소선
+underline : 밑줄
+
+	4.text-shadow : x축 y축 깊이(흐림정도) 색상
+
+	5.text-align :	center 		: 가운데정렬
+	  		left		: 왼쪽 정렬
+	  		right		: 오른쪽 정렬
+
+	6. font-size 			: 글자크기
+	7. font-style: italic;			: 기울기
+	8. font-weight: bold		: 굵게/진하게
+	9. word-spacing 			: 단어 간격[어간]
+	10. letter-spacing			: 글자 간격[자간]
+	11. line-height: 100%		: 줄간격 [%]
+
+
+*/
