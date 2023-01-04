@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+.container{
+	display: flex;
+}
+
+.box{
+	width: 10%; height: 50%;
+	background-color: red;
+	color: white;
+	border: 1px solid white;
+}
+#flex_box1{justify-content: flex-start;}
+#flex_box2{justify-content: flex-end;}
+#flex_box3{justify-content: center;}
+#flex_box4{justify-content: space-between;}
+#flex_box5{justify-content: space-around;}
+#flex_box6{justify-content: space-evenly;}

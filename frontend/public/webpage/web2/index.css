@@ -1,0 +1,161 @@
+@charset "UTF-8";
+
+/*
+	눈누 : 무료 폰트 사이트
+	1. 기본 베이스 폰트 : 맑은 고딕, 굴림
+	2. 강조 폰트 : 외부 폰트 사용 [ @font-face ]
+	
+*/
+
+
+
+/* ------------공통-------------*/
+/* 1.모든 곳에 여백 제거 2. 기본 폰트 맑은 고딕 */
+*{padding : 0px; margin: 0px; font-family: "맑은 고딕";}
+/* 2.링크[a] 색상, 밑줄 제거 */
+a{color:black; text-decoration: none;}
+/* 3. 글머리 제거 */
+li{list-style-type: none;}
+/* 4. 웹 폰트 */
+@font-face { /* 외부에서 가져온 폰트*/
+    font-family: 'SUIT-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face { /* 외부에서 가져온 폰트*/
+    font-family: 'DeogonPrincess';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/DeogonPrincess.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+/* ------------공통 끝-------------*/
+/*---------------헤더----------------*/
+#header{ /* 헤더 */
+	width: 1200px; /* 가로 길이*/
+	margin: 0 auto; /* 가운데 정렬*/
+	display: flex;	/* 하위요소 가로배치*/
+	justify-content: space-between;	/* 양쪽 여백 없이 균등배치 */
+	padding-top: 20px;
+}
+.top_menu{ /* 상단 메뉴 */
+	text-align: right;	/* 오른쪽 정렬*/ 
+	padding: 10px 0px;
+}
+.main_menu li{
+	display: inline-block;
+	margin-left: 100px;
+	padding: 30px 0px;
+}
+.main_menu li a{ /* 메인메뉴 */
+	display: inline-block;	/* li 가로 배치 [자동으로 글머리 제거] */
+	padding: 10px 0px;
+	font-family: "SUIT-Regular";		/* PC에 설치 된 폰트만 가능 */
+}
+
+
+
+/*---------------대표 이미지----------------*/
+#main_img{
+	background-image: url("img/main_image.png");	/* 배경 이미지 입력 */
+	background-position: center;		/* 이미지의 위치 지정 */
+	background-repeat : no-repeat;		/* 자동 채우기 제거 */
+	height: 250px; width: 100%;			/* 사이즈 설정 */
+}
+/*---------------본문----------------*/
+#content{
+	width: 1200px; margin: 0 auto;					/* 가로 사이즈, 가운데 정렬*/
+	display: flex; justify-content: space-between;	/* 하위요소 가로배치 */
+}
+
+/* 1.사이드 바*/
+.side_bar{width: 250px;}			/* 사이즈 지정*/
+.search h3{ 
+	background-color: #0CA9A3;
+	color: white;
+	font-size: 20px;
+	padding: 15px;
+	margin: 20px 0px;
+}
+.side_bar p{ padding: 15px; line-height: 150%; }
+.side_bar .search_input{ width: 150px; height: 30px;}
+.side_bar .search_btn{ margin-left:5px; padding: 6px 10px;}
+.side_bar h4{
+	border-top: solid 2px black;
+	border-bottom: solid 1px #eeeeee;
+	padding: 15px; font-size: 15px;
+	margin-top: 20px;
+}
+.side_bar li{padding: 10px 15px;}
+
+
+/* 2.메인 본문 */
+.main_content{width: 940px; height: 800px;}		/* 사이즈 지정*/
+.main_content{
+	display: flex;
+	justify-content: space-between;
+	margin: 15px 0px 0px 30px;
+}
+.main_content h3{
+	border-bottom: 2px solid black;
+	padding-bottom: 8px;
+}
+.info_box{width: 450px;}
+.made{width: 450px; padding: 5px;}
+
+.info ul{
+	display: flex;
+	justify-content: space-between;
+	margin: 10px;
+	padding: 5px 0px;
+}
+.low_menu h3{
+	border-top: solid 2px black;
+}
+
+.made_ul{
+	width: 200px; margin: 20px 10px 20px 10px;
+}
+.pd_list{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+/*---------------푸터----------------*/
+#footer{
+	background-color: #05354E;
+	
+}
+#ft_box1{
+	width: 1200px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	padding: 10px;
+}
+.list_ul li{
+	margin-right: 20px;
+	padding: 5px;
+}
+.list_ul{
+	display: flex;
+}
+.small_title{
+	display: flex;
+}
+#ft_box2{
+	width: 1200px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	padding: 20px;
+}
+#footer li{
+	color: white;
+}
+
+
+
+
+
+
