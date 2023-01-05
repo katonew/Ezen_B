@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+/*
+	눈누 : 무료 폰트 사이트
+	1. 기본 베이스 폰트 : 맑은 고딕, 굴림
+	2. 강조 폰트 : 외부 폰트 사용 [ @font-face ]
+	
+*/
+
+
+
+/* ------------공통-------------*/
+/* 1.모든 곳에 여백 제거 2. 기본 폰트 맑은 고딕 */
+/* *{border: 1px solid red;} */
+*{padding : 0px; margin: 0px; font-family: "맑은 고딕";}
+/* 2.링크[a] 색상, 밑줄 제거 */
+a{color:black; text-decoration: none;}
+/* 3. 글머리 제거 */
+li{list-style-type: none;}
+/* 4. 웹 폰트 */
+@font-face {
+    font-family: 'KIMM_Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KIMM_Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+/* ------------공통 끝-------------*/
+
+
+/*---------------헤더----------------*/
+#header{ /* 헤더 */
+	width: 1200px; height: 100px; margin: 0 auto; /* 가운데 정렬*/
+	position: relative;			/* 상위 요소에 relative*/
+}
+.h_logo{position: absolute; 	/*하위 요소에 absolute*/
+		left: 0px; top: 30px;}
+		
+.h_logo span{color: blue; font-weight: bold;}
+
+.h_menu{
+	position: absolute;			/*하위 요소에 absolute*/
+	right: 0px;
+	top: 30px;
+}
+.h_menu li{
+	display: inline-block;	/* li 가로 배치 [자동으로 글머리 제거] */
+	padding: 10px 10px;
+	font-family: "KIMM_Bold";		/* PC에 설치 된 폰트만 가능 */
+}
+
+/*---------------대표 이미지----------------*/
+#main_img{text-align: center;}
+
+/*---------------본문----------------*/
+#content{display: flex; width: 1200px; margin: 0 auto;}
+
+.banner{display: flex; margin: 80px 50px; }
+.banner img{padding: 0px 20px;}
+
+#items{background-color: #EEEEEE; display: flex; padding: 30px;}
+.item{width: 270px; border: 1px solid red; margin: 10px 0px;}
+.item img{width: 100%;}
+.item li{padding: 3px 0px;}
+
+/*---------------푸터----------------*/
+#footer{
+	background-color: #292C32;
+}
+.ft_content{
+	width: 1200px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	padding: 50px 10px;
+	color: white;
+}
+
+.ft_item{width: 500px;}
+.ft_sns{width: 200px;}
+.ft_content li{display: inline-block;}
+
+
+
+
+

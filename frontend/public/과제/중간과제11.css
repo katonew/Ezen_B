@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+.parent{
+	width: 700px; height: 600px; 
+	background-color: green; 
+	margin: 0 auto;
+	position: relative;			/* 상위 요소 포지션*/
+}	
+	
+
+.parent div{
+	margin: 0 auto;
+	width: 100px;
+	height: 70px;
+	background-color: yellow;
+	border: 1px solid black;
+	text-align: center;
+	border-radius: 15px;
+	padding-top: 5px;
+	position: absolute;	/* 포지션*/
+}
+
+.box1{left: 300px; top: 100px;}
+.box2{left: 450px; top: 170px;}
+.box3{left: 150px; top: 170px;}
+.box4{left: 150px; top: 320px;}
+.box5{left: 450px; top: 320px;}
+.box6{left: 300px; top: 390px;}
