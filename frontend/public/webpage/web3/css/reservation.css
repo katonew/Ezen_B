@@ -1,1 +1,52 @@
 @charset "UTF-8";
+
+#sub_img2{
+	background-image: url("../img/sub_reservation.jpg");
+}
+
+
+.left_box{
+	width: 600px;
+	background-color: #FCF9EA;
+	border: 1px solid red;
+}
+.left_box p, span{justify-content: center;}
+
+.cal{
+	width: 400px;
+	height: 150px;
+	background-color: white;
+	border: 1px solid black;
+	border-collapse: collapse;
+	font-size: small;
+}
+.cal td{
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+.first{text-align: center;}
+
+.sun{color: red;}
+
+
+
+
+.right_box{
+	width: 250px;
+	font-size: small; 
+	display:inline-block;
+	
+}
+.right_box{padding: 15px; }
+.right_box ul{margin-bottom: 10px;}
+.right_box li{
+	list-style-type: circle; 
+	padding: 2px;
+	margin-left: 30px;
+}
+.right_box h2{
+	border-left: 10px solid black;
+	padding: 5px;
+	margin: 10px;
+}
+.right_box p{color: green;}

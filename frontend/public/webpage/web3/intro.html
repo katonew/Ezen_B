@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="css/index.css" rel="stylesheet">
+	<link href="css/index.css" rel="stylesheet">	<!-- 헤더, 푸터 CSS -->
+	<link href="css/intro.css" rel="stylesheet">	<!-- 본문 CSS -->
 </head>
 <body>
 	<div id="wrap"> 						<!-- 웹 전체 구역 s-->
@@ -28,37 +29,55 @@
 		</div>								<!--  헤더 e -->
 <!-- ------------------------------- 대표 이미지 -------------------------------------- -->
 
-		<div id="main_img">					<!--  대표 이미지 -->
-			<img src="img/sub_intro.jpg">
+		<div class="sub_img" id="sub_img1">					<!--  대표 이미지 -->
+			<h3> 스튜디오 소개 </h3>
+			<p> 제품 사진 촬영을 위한 스튜디오 임대! </p>
 		</div>
 <!-- -------------------------------  intro 본문 -------------------------------------- -->
 		
 		<div id="content"> 					<!--  본문 s -->
-
-		</div>								<!--  본문 e -->
+			<img src="img/intro1.jpg">
+			<div class ="text">
+				<h2>최상의 결과</h2>
+				<h5>"하나의 목표를 위해 최선의 노력을"</h5>
+				<p>스튜디오 촬영용 세트를 만드는 데에 통상 많은 비용이 들어 제작비를 상승시키는 주원인이 됩니다.</p>
+               	<p>그러나 THE 스튜디오에서는 변수가 생기지 않도록 완벽한 촬영 준비와 함께 기획 단계에 같이 참여하여 최상의 결과물을 얻을 수 있게 합니다.</p>
+			</div>
+		</div>
+		<div id="items">
+			<div id="content">
+				<div class ="text">
+				<h2>최적의 환경</h2>
+				<h5>"고품질의 작품 탄생을 위한 최적의 환경"</h5>
+				<p>모던한 스튜디오의 인테리어, 다양하고 멋진 소품, 빛 예술을 구현하는 최적의 조명을 제공하여 다양한 이미지를 연출할 수 있습니다.</p>
+                <p>고객의 편안한 대기를 위해 로비 라운지를 운영하고 있으며 최대 20대까지 주차할 수 있는 주차장을 보유하고 있습니다.</p>
+				</div>
+				<img src="img/intro2.jpg">
+			</div>
+		</div>							<!--  본문 e -->
 		
 <!-- ------------------------------- 푸터 -------------------------------------- -->
 		<div id="footer">					<!--  푸터 s [width : 100% 배경색 적용 -->
 			<div class="ft_content">
-				<div clss="ft_item">
+				<div class="ft_item">
 					<h3>고객 센터</h3>
 					<h1> TEL : 1588 - 1588</h1>
 				</div>
-				<div clss="ft_item">
+				<div class="ft_item">
 					<ul>
-						<li>회사소개</li> |
-						<li>개인정보처리방침</li> |
-						<li>이용약관</li> |
+						<li>회사소개 |</li> 
+						<li>개인정보처리방침 |</li> 
+						<li>이용약관 |</li> 
 						<li>제휴안내</li>
 					</ul>
 					<ul>
-						<li>주소 : 경기도 안산시 단원구</li> <br/>
-						<li>email : qweqwrqwqw @ aqwewqeq.com</li> <br/>
+						<li>주소 : 경기도 안산시 단원구</li>
+						<li>email : qweqwrqwqw @ aqwewqeq.com</li> 
 						<li>COPURIGHT : &copy; 2023 The 스튜디오. ALL RIGHT</li>
 					</ul>
 					
 				</div>
-				<div clss="ft_sns">
+				<div class="ft_sns">
 					<img alt="" src="img/facebook.png">
 					<img alt="" src="img/instagram.png">
 					<img alt="" src="img/blog.png">

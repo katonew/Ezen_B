@@ -52,15 +52,17 @@ li{list-style-type: none;}
 #main_img{text-align: center;}
 
 /*---------------본문----------------*/
-#content{display: flex; width: 1200px; margin: 0 auto;}
+#content{display: flex; width: 1200px; margin: 0 auto; justify-content: center;}
 
 .banner{display: flex; margin: 80px 50px; }
 .banner img{padding: 0px 20px;}
 
-#items{background-color: #EEEEEE; display: flex; padding: 30px;}
-.item{width: 270px; border: 1px solid red; margin: 10px 0px;}
-.item img{width: 100%;}
-.item li{padding: 3px 0px;}
+#items{ display:flex; 
+		background-color: #eeeeee;}
+.content{display:flex;  margin: 0 auto;}
+.item{ width: 270px; margin: 30px 30px; }
+.item img{ width: 100%; }
+.item li { padding: 3px 0px;  }
 
 /*---------------푸터----------------*/
 #footer{
@@ -75,9 +77,11 @@ li{list-style-type: none;}
 	color: white;
 }
 
-.ft_item{width: 500px;}
+.ft_item{width: 400px;}
+.ft_item ul{margin: 10px; font-size: small;}
 .ft_sns{width: 200px;}
 .ft_content li{display: inline-block;}
+
 
 
 
