@@ -52,7 +52,12 @@ li{list-style-type: none;}
 #main_img{text-align: center;}
 
 /*---------------본문----------------*/
-#content{display: flex; width: 1200px; margin: 0 auto; justify-content: center;}
+#content{
+	display: flex; 
+	width: 1200px; 
+	margin: 0 auto; 
+	justify-content: center;
+}
 
 .banner{display: flex; margin: 80px 50px; }
 .banner img{padding: 0px 20px;}

@@ -5,48 +5,73 @@
 }
 
 
-.left_box{
-	width: 600px;
-	background-color: #FCF9EA;
-	border: 1px solid red;
+.left_box {
+    width: 600px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FCF9EA;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px 10px;
 }
-.left_box p, span{justify-content: center;}
 
+.left_box p{justify-content: center; margin: 15px 0px;}
+.left_box span{justify-content: center; margin: 15px 0px;}
+.left_box span input{background-color: #FCF9EA; border: #FCF9EA; margin: 5px; }
+/*----------------달력 부분------------------*/
 .cal{
-	width: 400px;
-	height: 150px;
+	width: 550px;
+	height: 300px;
 	background-color: white;
 	border: 1px solid black;
 	border-collapse: collapse;
 	font-size: small;
 }
-.cal td{
+.cal button{width: 15px;}
+.cal td{	/* 테이블 내 검정 선 */
+	position: relative;
+	width: 30px;
 	border: 1px solid black;
 	border-collapse: collapse;
+	vertical-align: top;
+	padding: 3px;
+	font-size: xx-small;
 }
-.first{text-align: center;}
 
-.sun{color: red;}
-
+.first{
+	text-align: center;	/* 첫째줄 중앙정렬*/
+	height: 20px;	/* 첫째줄 높이 작게*/
+}	
+.sun{color: red;}	/* 일요일 빨간 글씨*/
+/*----------------달력 부분 끝------------------*/
 
 
 
 .right_box{
+	margin: 30px 0px;
 	width: 250px;
-	font-size: small; 
 	display:inline-block;
+	align-items: flex-start;
 	
 }
 .right_box{padding: 15px; }
 .right_box ul{margin-bottom: 10px;}
 .right_box li{
+	font-size: xx-small;
 	list-style-type: circle; 
 	padding: 2px;
 	margin-left: 30px;
 }
-.right_box h2{
+.right_box h4{
+	margin: 0px;
 	border-left: 10px solid black;
 	padding: 5px;
-	margin: 10px;
 }
 .right_box p{color: green;}
+
+
+
+
