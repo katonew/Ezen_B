@@ -20,7 +20,7 @@
 
 .left_box p{justify-content: center; margin: 15px 0px;}
 .left_box span{justify-content: center; margin: 15px 0px;}
-.left_box span input{background-color: #FCF9EA; border: #FCF9EA; margin: 5px; }
+.left_box span input{background-color: #FCF9EA; border:none; margin: 5px; }
 /*----------------달력 부분------------------*/
 .cal{
 	width: 550px;
