@@ -1,0 +1,139 @@
+@charset "UTF-8";
+
+/*        */
+*{font-family: "맑은 고딕"}
+*:focus{outline: none;}/* input 입력창에 마우스커서 생겼을떄의 이벤트*/
+body{background-color: #f5f6f7;}	/* 전체 배경색 */
+a{color: black; text-decoration: none;}
+/*------------------------------------*/
+
+
+/*------------------헤더---------------*/
+.logo{
+	width: 460px;				/* 로고 박스권 */
+	margin: 0 auto;				/* 로고 가운데 정렬 */
+	display: flex;				/* 하위 요소 가운데 정렬 */
+	justify-content: center;
+	
+}
+.logo img{
+	height: 50px;				/* 사진 높이 사이즈 */
+	margin: 50px 0px;			/* 위아래 바깥여백 */
+}
+/*------------------본문---------------*/
+#join_form{width: 460px; margin: 0 auto;}
+h3{text-align: left; font-size: 14px; margin-bottom: 8px;}
+
+/* 1. 입력상자 */
+
+
+.signup_input{
+	border: 1px solid #dadada; /* input+span 상자의 테두리*/
+	background-color: white;	
+	padding: 10px;
+	display: flex;
+	align-items: center;
+	/* 세로정렬 */
+	
+}
+.signup_at{color: #8e8e8e;}	/* @naver.com 흐린색으로 변경 */
+.input_id{
+	border: none;	/* input 테두리 지우기*/
+	width: 100%;	/* input 사이즈 지정 */
+	height: 30px;	/* input 높이 지정*/
+}
+.signup-lock{
+	/* 네이버에서 아이콘 주소 */
+	background-image: url("https://static.nid.naver.com/images/ui/join/m_icon_pw_step.png");
+	/* 요소 사이즈 지정*/
+	width: 25px; height: 25px;		
+	/* 배경 이미지 사이즈 */
+	background-size: 120px 75px;	
+	/*  */
+	margin-top: 5px;				
+}
+/* 생년월일 */
+.birthbox{
+	display: flex;
+	justify-content: space-between;
+}
+#birth_y, #birth_m, #birth_d{
+	width: 120px;
+}
+#birthbox_m{margin: 0px 20px;}
+
+.s_text{
+	font-size: 8px;
+	color: #8e8e8e;
+	font-weight: normal; /* 진하게 제거 */
+}
+/* 휴대전화입력란, 인증버튼 */
+.phone_box{
+	display: flex; 
+	justify-content: space-between;
+	margin: 10px 0px;
+}
+/* 휴대전화입력란 */
+#input_phone{width: 300px;}
+
+/* 인증버튼*/
+.btn_auth{
+	background-color: #03c75a;
+	border: none;
+	color: white;
+	width: 120px;
+	font-weight: bold;
+}
+/* 인증번호 입력란 */
+#authbox, #intput_auth{background-color: #f5f6f7}
+
+.btn_sugnup{
+	background-color: #03c75a;	/* 버튼색 */
+	border: none;				/* 테두리 제거 */
+	color: white;				/* 글자색*/
+	width: 100%;				/*  버튼 너비*/
+	height: 50px;				/*  버튼 높이*/
+	font-size: 20px;			/*  버튼 글씨 사이즈*/
+	font-weight: bold;			/*  버튼 글씨 두껍게*/
+	margin: 30px 0px;			/*  버튼 위아래 바깥여백*/
+}
+
+/*------------------푸터---------------*/
+
+
+.ft_box{
+	width: 460px;	/* 푸터 내용물 사이즈 */
+	margin: 0 auto;	/* 푸터 내용물 박스 가운데 정렬*/
+	text-align: center;	/* 푸터 내용을 박스 내 텍스트 가운데 정렬 */
+}
+
+.ft_top a{font-size: 8px;}	/*  폰트 사이즈 */
+
+.ft_top a:hover { /* 마우스 올렸을때 */
+	color: #03c75a;	/* 색상 */
+	text-decoration: underline;	/* 밑줄*/
+}
+
+.ft_sub{
+	margin-top: 3px;
+	display: flex; 				/* 이미지와 텍스트 가로배치 */
+	justify-content: center;	/* 가로 중앙 정렬 */	
+	align-items: center;		/* 세로 중앙 정렬 */
+}
+
+.ft_sub img{height: 10px; padding: 10px;}
+
+.ft_sub div{font-size: 5px;}
+
+.a_line{color: #8e8e8e; font-size: 5px;}
+
+.ft_sub span{font-weight: bold;}	/*NAVER Corp.만 진하게*/
+
+
+
+
+
+
+
+
+
