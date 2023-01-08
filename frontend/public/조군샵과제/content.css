@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+/* ------------공통-------------*/
+/* 1.모든 곳에 여백 제거 2. 기본 폰트 맑은 고딕 */
+/* *{border: 1px solid red;} */
+*{padding : 0px; margin: 0px; font-family: "맑은 고딕";}
+/* 2.링크[a] 색상, 밑줄 제거 */
+a{color:black; text-decoration: none;}
+/* 3. 글머리 제거 */
+li{list-style-type: none;}
+/* 4. 웹 폰트 */
+@font-face {
+    font-family: 'KIMM_Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KIMM_Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+/* ------------공통 끝-------------*/
+
+/* 메인 이미지 설정 */
+#main_img{
+	width: 100%;
+	height:700px;
+	background-image: url("img/main_image.jpg");
+	background-size: cover;
+}
+
+/* 사진3장 넣는 곳 + 핫 아이템 사이즈 설정 */
+
+#content{
+	margin: 0 auto;
+}
+.middle_text{text-align: center;}
+#main_banner{width: 1500px; margin: 0 auto;}
+.three_img{
+	display: flex;
+	justify-content: space-between;
+	margin: 15px;
+	padding: 15px;
+}
+
+.middle_text{margin-bottom: 10px;}
+
+
+
+/* ---------HOT ITEM------------- */
+#hotitem_wrap{
+	display: flex; 
+	flex-wrap: wrap;
+	margin: 0 auto;
+	justify-content: center;
+}
+.hotitem_box{padding: 30px;}
+.item_color{display: flex; }
+#first_block, #second_block{
+	display: flex; 
+	justify-content: space-between;
+	margin-top: 10px;
+}
+
+#last_block{
+	margin-top: 5px;
+	display: flex;
+}
+
+#review{color: gray;}
+
+.item_color span{
+	width: 8px; height: 
+	8px; border: 1px solid black; 
+	background-color: black;
+	margin: 1px;
+}
+.discount{color: red; font-weight: bold;}
+.small_font{font-size: small;}
+.best_item{color: red; font-size: 10px; font-weight: bold;}
+.order_max{color: blue; font-size: 10px;}
+.quick_del{color: gray; font-size: 10px;}
+.real_price{text-decoration: line-through; color: gray;}
+#size{margin-bottom: 30px; color: gray;}
+
+
+
+
+
+
+
