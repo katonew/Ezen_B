@@ -216,31 +216,42 @@ console.log('가장 큰 수는 : ' +가장큰수)
 */
 
 //문제 12번
-let 정수7 = Number(prompt('정수1'))	//7
-let 정수8 = Number(prompt('정수2'))	//5
-let 정수9 = Number(prompt('정수3'))	//9
-temp = 정수7
 
-console.log(+정수7 ,+정수8, +정수9, +temp)
+let n1 = Number( prompt('첫번째 값을 입력하세요') )
+let n2 = Number( prompt('두번째 값을 입력하세요') )
+let n3 = Number( prompt('세번째 값을 입력하세요') )
 
-temp > 정수8 ? 정수7=정수8 : temp=정수8
-console.log('단계1 :'+정수7 ,+정수8, +정수9, +temp)
+let temp = 0
 
-temp > 정수9 ? 정수7=정수9 : temp=정수9
-console.log('단계2 :'+정수7 ,+정수8, +정수9, +temp)
 
-정수9=temp
-console.log('단계3 :'+정수7 ,+정수8, +정수9, +temp)
 
-temp=정수7
-console.log('단계4 :'+정수7 ,+정수8, +정수9, +temp)
+temp = n1 < n2 && n3 < n2 ? n2 :
+       n1 < n3 && n2 < n3 ? n3 : n3
 
-temp > 정수8 ? 정수7=정수8 : temp=정수8
-console.log('단계5 :'+정수7 ,+정수8, +정수9, +temp)
+n2 = n1 < n2 && n1 > n3 ?  n1 :
+          n1 > n2 && n1 < n3 ?  n1 :
+          n3 < n2 && n3 > n1 ?  n3 :
+          n3 > n2 && n3 < n1 ?  n3 : middle1
 
-정수8=temp
+bottom1 = n1 < n3 && n1 < n2 ? n1 :
+          n2 < n3 && n2 < n1 ? n2 : bottom1
+         
 
-console.log('단계6 :'+정수7 ,+정수8, +정수9, +temp)
+console.log( n1 + ", " + n2 + ", " + n3 + " 입력한 세 수의 오름차순 정렬은" + top1 + ", " + middle1 + ", " + bottom1 )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
