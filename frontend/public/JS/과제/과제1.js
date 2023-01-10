@@ -18,13 +18,12 @@
 
 const studentArray = ['20230110' , '20230109' , '20230108' ]
 
-function onLogin(){ 
+function onLogin(){ //onLogin 함수 시작
 	//<input> 마크업을 js변수로 가져오기 [DOM 객체]
 	let class_num = document.querySelector('.class_num')
-
 	// <input>마크업에 입력된 데이터 호출
 	let sname = class_num.value
-	//길이 알기
+	// 데이터 길이 알기
 	let long = sname.length
 	// 찾기 [ 만약에 배열내 입력한 값이 존재하면]
 	let dindex = studentArray.indexOf(sname);
@@ -38,7 +37,7 @@ function onLogin(){
 	else if(dindex!=-1){
 		document.querySelector('.resultBox').innerHTML = '로그인성공!';
 		// 로그인 성공 시 input의 데이터 공백으로 초기화
-		
+		document.querySelector('.class_num').value = "";
 		}
 	//배열내에 입력한 값이 존재하지 않았으면 로그인 실패
 	else 
@@ -46,27 +45,36 @@ function onLogin(){
 	// 배열 확인용
 	console.log(studentArray)
 	
-}
+} //onLogin 함수 끝
 
 
-function join(){
+function join(){ //join함수 시작
+	//<input> 마크업을 js변수로 가져오기 [DOM 객체]
 	let class_num2 = document.querySelector('.class_num2')
+	// <input>마크업에 입력된 데이터 호출
 	let sname2 = class_num2.value
+	// 데이터 길이 알기
 	let long2 = sname2.length
-	console.log(long2)
+	// 찾기 [ 만약에 배열내 입력한 값이 존재하면]
 	let dindex2 = studentArray.indexOf(sname2);
+	//입력한것이 없으면 학번입력
 	if(sname2=="")
 		document.querySelector('.resultBox2').innerHTML = '학번을 입력해주세요!';
+	//입력한 숫자가 8자리가 아니면 8자리 입력하라는 출력
 	else if(long2!=8)
 		document.querySelector('.resultBox2').innerHTML = '학번을 8자리로 입력해주세요!';
+	// 배열내에 입력한 값이 존재했으면 이미 있는 학번이라는 출력
 	else if(dindex2 != -1) 
 		document.querySelector('.resultBox2').innerHTML = '이미 있는 학번입니다!';
+	// 배열 내에 입력한 값이 존재하지 않으면 배열 내에 입력한 값 등록, 등록 성공 문구 출력, input 초기화
 	else {
 		studentArray.push(class_num2.value); 
 		document.querySelector('.resultBox2').innerHTML = '학번 등록 성공!'; 
+		document.querySelector('.class_num2').value = "";
 		}
+	//배열 확인용
 	console.log(studentArray)
-}
+} //join함수 끝
 
 
 
