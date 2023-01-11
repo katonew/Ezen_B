@@ -23,15 +23,13 @@ function onLogin(){ //onLogin 함수 시작
 	let class_num = document.querySelector('.class_num')
 	// <input>마크업에 입력된 데이터 호출
 	let sname = class_num.value
-	// 데이터 길이 알기
-	let long = sname.length
 	//출력을 위한 지역변수 생성
 	let resultBox = document.querySelector('.resultBox')
 	// 입력한것이 없으면 학번입력
 	if(sname=="") 
 		resultBox.innerHTML = '학번을 입력해주세요!';
 	// 입력한 숫자가 8자리가 아니면 8자리 입력하라는 출력
-	else if(long!=8)
+	else if(sname.length!=8)
 		resultBox.innerHTML = '학번을 8자리로 입력해주세요!';
 	// 배열내에 입력한 값이 존재했으면 로그인 성공
 	else if(studentArray.indexOf(sname)!=-1){
@@ -53,15 +51,13 @@ function join(){ //join함수 시작
 	let class_num2 = document.querySelector('.class_num2')
 	// <input>마크업에 입력된 데이터 호출
 	let sname2 = class_num2.value
-	// 데이터 길이 알기
-	let long2 = sname2.length
 	//출력을 위한 지역변수 생성
 	let resultBox2 = document.querySelector('.resultBox2')
 	//입력한것이 없으면 학번입력
 	if(sname2=="")
 		resultBox2.innerHTML = '학번을 입력해주세요!';
 	//입력한 숫자가 8자리가 아니면 8자리 입력하라는 출력
-	else if(long2!=8)
+	else if(sname2.length!=8)
 		resultBox2.innerHTML = '학번을 8자리로 입력해주세요!';
 	// 배열내에 입력한 값이 존재했으면 이미 있는 학번이라는 출력
 	else if(studentArray.indexOf(sname2) != -1) 
@@ -81,15 +77,13 @@ function del(){ //del함수 시작
 	let class_num3 = document.querySelector('.class_num3')
 	// <input>마크업에 입력된 데이터 호출
 	let sname3 = class_num3.value
-	// 데이터 길이 알기
-	let long3 = sname3.length
 	//출력을 위한 지역변수 생성
 	let resultBox3 = document.querySelector('.resultBox3')
 	//입력한것이 없으면 학번입력
 	if(sname3=="")
 		resultBox3.innerHTML = '학번을 입력해주세요!';
 	//입력한 숫자가 8자리가 아니면 8자리 입력하라는 출력
-	else if(long3!=8)
+	else if(sname3.length!=8)
 		resultBox3.innerHTML = '학번을 8자리로 입력해주세요!';
 	// 배열내에 입력한 값이 존재하면 학번 삭제
 	else if(studentArray.indexOf(sname3) != -1) {
