@@ -7,7 +7,7 @@
  */
 
 function onResult(){ //함수 s
-	//반복할때마다 초기화 되기 위해 선언당시에는 비우고 함수 시작시 단곤값 입력
+	//반복할때마다 초기화 되기 위해 함수 시작시 입력
 	let table = '<tr><th>단</th><th>곱</th><th>값</th></tr>'
 	//<input> 단과 곱에 입력된 value 값 각 변수에 저장
 	let dan = document.querySelector('.dan').value
