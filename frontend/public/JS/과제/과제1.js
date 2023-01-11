@@ -97,6 +97,7 @@ function del(){ //del함수 시작
 		studentArray.splice(dindex3,1); 
 		document.querySelector('.class_num3').value = "";
 		}
+	// 배열내에 입력한 값이 존재하지 않으면 학번없음 출력
 	else {
 		document.querySelector('.resultBox3').innerHTML = '없는 학번입니다.';
 	}
