@@ -22,7 +22,7 @@ let contentArray =[]
 	 // 배열 0번째 인덱스부터 배열길이까지 table에 입력
 	 for(i=0;i<contentArray.length;i++){
 		 document.querySelector('.text_table').innerHTML 
-		 +='<tr><th>'+i+'</th><th>'+ contentArray[i]+'</th></tr>'; 
+		 +='<tr><th>'+(i+1)+'</th><th>'+ contentArray[i]+'</th></tr>'; 
  	}
  }
  
