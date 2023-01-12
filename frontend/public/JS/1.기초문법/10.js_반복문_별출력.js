@@ -111,31 +111,55 @@ console.log(output)
 
 */
 // 과제1.입력받은 홀수 줄 수 만큼 출력 [ 다이아 모양 만들기]
-
+//내가 작성
 let output = ''
-let line7 = Number(prompt('문제5) 줄수'))
-for(let i = 1 ; i<=line7/2; i++){
-	for(let k = 1 ; k<=line7/2-i; k++){
+let line7 = Number(prompt('과제1) 줄수'))
+//상단부분 입력한 수만큼 반복
+for(let i = 1 ; i<=line7; i++){
+	//공백부분 입력한수-줄수 만큼 입력
+	for(let k = 1 ; k<=line7-i; k++){
 		output += ' '
 	}
+	//별부분 홀수의 줄수배=(줄수*2)-1 만큼 입력
 	for(let j = 1 ; j<=i*2-1; j++){
 		output += '*'
 	}
+	//줄바꿈 입력
 	output += '\n'
 }
-for(let i = 1 ; i<=line7/2; i++){
+//하단부분 입력한 수만큼 반복
+for(let i = 1 ; i<=line7; i++){
+	// 초기값 = 입력한 값, 
 	for(let k = line7 ; k>line7-i+1; k--){
 		output += ' '
 	}
-	for(let j = line7 ; j>=i*2; j--){
+	//
+	for(let j = line7 ; j>=i*2-line7; j--){
 		output += '*'
 	}
+	//줄바꿈 입력
 	output += '\n'
 }
+//출력
 console.log(output)
 
 
 
+//과제1 . 팀원이 작성
+
+output = ''
+let line5 = Number(prompt('문제 5 줄수 '))
+for ( let i = 1; i <= line5; i++){
+	for ( let b = 1; b <= line5-i; b++) {output += ' '}
+	for ( let s = 1; s <= (i*2)-1; s++) { output += '*'}
+	{ output += '\n' }
+}
+for ( let i = 1; i <= line5; i++){
+	for ( let b = 1; b <= i-1;  b++) {output += ' '}
+	for ( let s = 1; s <= line5*2-i*2+1; s++ ) { output += '*'}
+	{ output += '\n' }
+}
+console.log(output)
 
 
 
