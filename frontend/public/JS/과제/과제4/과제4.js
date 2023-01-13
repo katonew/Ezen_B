@@ -45,14 +45,20 @@
  
  
  function take(x){ //대여 함수
+ 	//도서목록에서 데이터 가져옴
  	let book = 도서목록[x]
+ 	//데이터값이 도서목록에 있는지 확인 [ 있으면 인덱스 번호 들어가고 없으면 -1]
  	let bookname = 도서목록.indexOf(book)
+ 	//데이터값이 대여목록에 있는지 확인 [ 있으면 인덱스 번호 들어가고 없으면 -1]
  	let noneBook = 대여목록.indexOf(book)
+ 	//대여목록에 있으면 이미 대여된거
  	if(noneBook!=-1){
 		 output.innerHTML = '이미 대여된 책입니다.'
 		 return;
 	}
+	//대여목록에 없으면 대여실행 
  	else{
+		 //도서목록에 있는 데이터를 대여목록에 삽입
 		 대여목록.push(도서목록[x])
 		 output.innerHTML = '대여하였습니다.'
  	}
@@ -93,13 +99,12 @@
  function possible(x){ //대여여부함수
    	let book = 도서목록[x]
  	let noneBook = 대여목록.indexOf(book)
- 	if(noneBook>0){
-		 document.querySelector('.list('+ x +')').innerHTML = '대여중'
+ 	if(noneBook==-1){
+		 return '대여중'
 	 }
-	 else{document.querySelector('.list('+ x +')').innerHTML = '대여가능'}
+	 else{ return '대여불가'}
 	 
  } // 대여 여부 함수 끝
- 
  
  
  
