@@ -100,9 +100,9 @@
    	let book = 도서목록[x]
  	let noneBook = 대여목록.indexOf(book)
  	if(noneBook==-1){
-		 return '대여중'
+		 return '대여가능'
 	 }
-	 else{ return '대여불가'}
+	 else{ return '대여중'}
 	 
  } // 대여 여부 함수 끝
  
