@@ -11,7 +11,10 @@
 		<th>번호</th><th>방문록</th>
 	</tr>
  */
-let contentArray =[]
+
+/*
+ //내가 한것
+ let contentArray =[]
 
  function addContent(){
 	 //table 시작 부분 입력
@@ -24,5 +27,29 @@ let contentArray =[]
 		 document.querySelector('.text_table').innerHTML 
 		 +='<tr><th>'+(i+1)+'</th><th>'+ contentArray[i]+'</th></tr>'; 
  	}
+ }
+ */
+
+ 	//강사님 식
+ 	contentArray =[]
+
+	function addContent(){
+		//text박스에서 데이터 가져와서 배열에 넣기
+		let content = document.querySelector('.text').value
+		
+		// 배열내에 입력받은 변수 저장
+		contentArray.push(content)
+		
+		// 출력할 html 구성
+		let html = `<tr><th>번호</th><th>방문록</th></tr>`
+		
+		// 내용추가
+		for(i=0;i<contentArray.length;i++){
+			html += '<tr><td>'+(i+1)+'</td><td>'+ contentArray[i]+'</td></tr>'; 
+	 	}
+	 	
+		//위에서 구성된 html을 해당 마크업에 대입
+		document.querySelector('.text_table').innerHTML = html
+
  }
  
