@@ -96,6 +96,7 @@ function 등록하기 ( 등록 ){
  	}
  	//출력함수
 	print()
+	printContent( )
  } //대여 함수 끝
  
  function retrun(x){ // 반납함수
@@ -117,7 +118,7 @@ function 등록하기 ( 등록 ){
  	}
  	//출력함수
 	print()
-	 
+	printContent( )
  }// 반납함수 끝
  
  function print(){ // 출력함수
