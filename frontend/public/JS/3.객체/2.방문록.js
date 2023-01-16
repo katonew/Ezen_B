@@ -66,7 +66,7 @@ function 출력(){
 function 수정(i){ // 수정함수 s
 	//1. [비밀번호 검증] 비밀번호를 입력받는다.
 	let 비밀번호확인 = prompt('게시물 비밀번호 입력 : ')
-	//2. 입력받은 비밀번호와 내가 선택한 게시물의 비밀번호가 같으면 삭제한다.
+	//2. 입력받은 비밀번호와 내가 선택한 게시물의 비밀번호가 같으면 수정한다.
 		if(boardArray[i].password == 비밀번호확인){ //if s
 			let 수정내용 = prompt('수정할 내용 : ')
 			console.log(boardArray[i])
