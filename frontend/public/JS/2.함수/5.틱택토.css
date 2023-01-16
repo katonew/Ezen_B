@@ -1,0 +1,25 @@
+@charset "UTF-8";
+/*
+	선택자
+		1. 마크업{ }
+		2. .class명
+		3.#id{ }
+		4. *{ }
+	하위 선택자
+		1. 상위선택자 하위선택자
+*/
+
+.게임판{
+	width: 40%;			/* 가로사이즈*/
+	margin: 0 auto;		/* 가운데정렬*/
+	display: flex;		/* 레이아웃 = 효과적인 배치도*/
+	flex-wrap: wrap;	/* wrap : 자동줄정렬 - 기본값:nowrap */
+}
+
+.게임판 div{ /*class명이 게임판 아래에 있는 div 선택*/
+	width: 30%; height: 150px; /*가로세로 사이즈*/
+	border: 5px solid black; /* 테두리 */
+	background-color: rgb(224, 247, 252);	/* 배경 */
+	font-size: 110px; color: white; /* 폰트 크기와 색상*/
+	text-align: center;	/* 글꼴 정렬*/
+}
