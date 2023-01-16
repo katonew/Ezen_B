@@ -68,12 +68,15 @@ function 수정(i){ // 수정함수 s
 	let 비밀번호확인 = prompt('게시물 비밀번호 입력 : ')
 	//2. 입력받은 비밀번호와 내가 선택한 게시물의 비밀번호가 같으면 수정한다.
 		if(boardArray[i].password == 비밀번호확인){ //if s
+			//3. 수정할 내용 입력 받음
 			let 수정내용 = prompt('수정할 내용 : ')
+			//4. 선택한 게시물의 속성값 수정
 			//boardArray = 배열
 			//boardArray[i] = 배열의 i번째 요소 == 객체
 			//boardArray[i].content = 배열의 i번째 요소의 content == board.content
 			boardArray[i].content = 수정내용;
 			alert('게시물 수정 성공');
+			//5.화면 새로고침
 			출력();
 		} //if e		
 		else{alert('비밀번호가 다릅니다. 수정 불가')}
