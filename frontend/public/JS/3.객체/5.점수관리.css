@@ -7,7 +7,7 @@
 	flex-wrap: wrap;
 }
 .addbox, .listbox, .updatebox{
-	border: 1px solid red;	/* 빨간 테두리*/
+	border: 1px solid black;	/* 빨간 테두리*/
 	width: 40%;				/* 가로길이 배율 */
 	text-align: center;		/* 내용물 가운데 정렬 */
 }
