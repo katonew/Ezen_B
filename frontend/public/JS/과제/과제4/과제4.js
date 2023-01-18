@@ -15,6 +15,24 @@ let content_register = document.querySelector('.content_register').value
 	printContent( ) // 이 안에 Delete 기능
 } // f e
 
+// 유효성검사 (중복, 글자수 제한)
+function 등록하기 ( 등록 ){
+	// 1. 중복검사/취소
+	if (도서목록.indexOf( 등록 ) >= 0 ) {
+		alert('도서명이 이미 등록되어있습니다. [등록되지 않습니다.]')
+		도서목록.splice( 도서목록.indexOf(등록), 1 )
+		printContent()
+		return;
+	}
+	if ( 등록.length < 5 || 등록.length > 10){
+		alert('글자 길이[5-10]를 맞춰주세요.')
+		printContent()
+		return;
+	}
+	도서목록.push( 등록 )
+	print()
+}
+
 // 2. 삭제 버튼 함수
 
 function Delete ( i ){
@@ -29,7 +47,7 @@ function Delete ( i ){
 	print()
 }
 
-function printContent( ){
+function printContent( ){	//출력함수
 	let html = `<tr>
 					<th>번호</th>
 					<th>도서</th>
@@ -56,23 +74,7 @@ function printContent( ){
 	} // for e
 } // f e
 
-// 유효성검사 (중복, 글자수 제한)
-function 등록하기 ( 등록 ){
-	// 1. 중복검사/취소
-	if (도서목록.indexOf( 등록 ) >= 0 ) {
-		alert('도서명이 이미 등록되어있습니다. [등록되지 않습니다.]')
-		도서목록.splice( 도서목록.indexOf(등록), 1 )
-		printContent()
-		return;
-	}
-	if ( 등록.length < 5 || 등록.length > 10){
-		alert('글자 길이[5-10]를 맞춰주세요.')
-		printContent()
-		return;
-	}
-	도서목록.push( 등록 )
-	print()
-}
+
  /* ----------------최성아 작성 끝-------------- */
  
  /* ----------------권태형 작성 시작-------------- */
