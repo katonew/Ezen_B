@@ -9,7 +9,7 @@
 }
 
 /* 기본값 제거 */
-*{ padding: 0px; margin: 0px; } /* 여백 기본값 제거 */
+*{ padding: 0px; margin: 0px;} /* 여백 기본값 제거 */
 *{ font-family: 'TTTtangsbudaejjigaeB'; } /* 기본폰트 적용 */
 li{list-style-type: none;}
 /* 구역 나누기 */
@@ -132,18 +132,33 @@ li{list-style-type: none;}
 
 
 /*---------------관리자 페이지--------------*/
+#producer{text-align: center; padding: 10px;}
+#producer table{
+	border: 1px solid black;
+}
 /*---------------공통---------------------*/
 
-td, tr, th{
-	border: 1px solid red;
-}
 
 
 /*------------------버거 등록---------------------*/
+
+.addTable{
+	width: 50%; height: 150px;
+	text-align: center;
+	border-bottom: 2px solid black;
+	margin: 0 auto;
+}
+.addBtn{width: 60px; height: 30px;}
 /*------------------버거 현황---------------------*/
+.burgerbox, .orderbox, .totalList{
+	margin: 10px;
+	text-align: center;
+}
+.burgerTable, .orderTable, .totaltable{
+	margin: 0 auto;
+}
 /*------------------주문 목록---------------------*/
 /*------------------매출현황---------------------*/
-
 
 
 

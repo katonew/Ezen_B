@@ -66,14 +66,14 @@ function productPrint(x){
 	for(let i =0; i<burgerList.length;i++){ // for s
 	// i는 0번째 인덱스부터 마지막 인덱스까지 버거 객체를 가져온다.
 		if(burgerList[i].category == categoryList[x]){ //if s
-		// i번째 버거객체의 카테고리와 선택된 카테고리가 같으면 
+		// i번째 버거객체의 카테고리와 선택된 카테고리가 같으면
 		html += `<div onclick="cardadd(${i})" class="product">
 						<img src="img/${burgerList[i].img}" width="100%" />
 						<div class="productinfo">
 							<div class="ptitle">${burgerList[i].name}</div>
 							<div class="pprice"> ${burgerList[i].price.toLocaleString()}원 </div>
 						</div>
-					</div>` 
+					</div>`
 			} // if e
 		} // for e
 	//2. 구성된 html을 마크업에 대입
@@ -97,7 +97,7 @@ function cancel(){
 
 //6. 주문 하기 버튼
 
-function order(){
+function onOrder(){
 	alert('주문합니다.');
 	//1.주문번호 만들기
 	// * 마지막 인덱스 : 배열명.length-1
@@ -176,12 +176,15 @@ function addbtn(){
 	//burgerinfo에 순서대로 저장된 것을 객체로 만들어 burgerList 배열에 입력해야함
 	let burgerbox = {
 		name : burgerinfo[0].value, 
-		price : burgerinfo[2].value , 
+		price : burgerinfo[2].value ,
 		img : burgerinfo[3].value, 
 		category : burgerinfo[1].value }
+	if(isNaN(burgerbox.price)){
+		alert('숫자만 입력하세요')
+		return;
+	}
+	// 카테고리 비교해서 맞는거 없으면 안되는것 구현
 	burgerList.push(burgerbox)
-	//입력칸을 빈칸으로 하는것 아직 구현 안됨
-	//document.querySelectorAll('.burgerinfo').values = ''
 	burgerTable()
 	sellTotal()
 }
@@ -210,7 +213,6 @@ function burgerTable(){
 	document.querySelector('.burgerTable').innerHTML = html
 	sellTotal()
 }
-
 
 //주문 목록 현황 테이블
 function orderTable(){
@@ -248,8 +250,7 @@ function orderState(x){
 
 function orderEnd(x){
 	orderList[x].state = false
-	//주문완료 버튼 클릭하면 사라지게 하는 버튼
-	//document.querySelector('.orderBtn').style.display = 'block'
+	//주문완료 버튼 클릭하면 사라지게 하는 버튼 구현
 	orderTable();
 }
 //버거 데이터 삭제 버튼 함수
@@ -257,7 +258,6 @@ function burgerDelete(x){
 	burgerList.splice(x,1)
 	burgerTable();
 	productPrint()
-	
 }
 
 //매출현황 함수
@@ -271,23 +271,36 @@ function sellTotal(){
 				<th>순위</th>
 			</tr>`
 	for(let i=0;i<burgerList.length;i++){
-		let total = 0;
-		for(let j=0; j<orderList.length;j++){
-			let keycount = 0;
-			console.log(orderList)
-			for(let key in orderList[i].items) {keycount++;}
-			for(s=0;s<keycount;s++){
-				if(burgerList[i].name==orderList[i].items[j].name){total++;}
-				console.log('여기서 : ' +total)
+		lank=1;
+		let total2 = total(burgerList[i].name) * burgerList[i].price
+		for(let j=0;j<burgerList.length;j++){
+			if(total2<total(burgerList[j].name) * burgerList[j].price){
+				lank++;
 			}
 		}
 		html += `<tr>
 				<th>${i+1}</th>
 				<th>${burgerList[i].name}</th>
-				<th>${total}</th>
-				<th>${total*burgerList[i].price}</th>
-				<th>순위</th>
+				<th>${total(burgerList[i].name)}</th>
+				<th class="abcd">${total2}</th>
+				<th>${lank}</th>
 		</tr>`
 	}
 	document.querySelector('.totaltable').innerHTML = html
 }
+
+//판매수량 구하는 함수
+function total(x){
+	let total = 0;
+	for(i=0;i<orderList.length;i++){
+		let keycount = 0;
+		for(let key in orderList[i].items) {keycount++;}
+		for(let j=0; j<keycount;j++){
+			if(x==orderList[i].items[j].name){
+				total++;
+			}
+		}
+	}
+	return total;
+}
+
