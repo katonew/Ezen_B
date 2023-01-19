@@ -9,7 +9,7 @@
 
 	<div class="wrap"> <!--전체 구역 -->
 	
-		<div class="container"> <!-- 키오스크 구현 -->
+		<div class="container" id="consumer"> <!-- 키오스크 구현 -->
 			<div class="kioskbox"> <!-- 키오스크 s -->
 			
 				<div class="header">	<!-- 키오스크 헤더 s  -->
@@ -48,9 +48,42 @@
 			</div>
 		</div>  <!-- 키오스크 end -->
 		
-		<div class="container">  <!-- 포스기 구현 -->
-			<div>
-				주문목록
+		<div class="container" id="producer">  <!-- 포스기 구현 -->
+			<div class="addBurger">
+				<h3>버거 등록</h3>
+				<table class="addTable">
+					<tr>
+						<th>버거이름</th>
+						<td><input type="text" class="burgerinfo">
+					</tr>
+					<tr>
+						<th>카테고리</th>
+						<td><input type="text" class="burgerinfo">
+					</tr>
+					<tr>
+						<th>가격</th>
+						<td><input type="text" class="burgerinfo">
+					</tr>
+					<tr>
+						<th>이미지명</th>
+						<td><input type="text" class="burgerinfo">
+					</tr>
+					<tr>
+						<td colspan="2"><button onclick="addbtn()">등록</button></td>
+					</tr>
+				</table>
+			</div>
+			<div class="burgerbox">
+				<h3>버거 현황</h3>
+				<table class="burgerTable"></table>
+			</div>
+			<div class="orderbox">
+				<h3>주문 목록 현황</h3>
+				<table class="orderTable"></table>
+			</div>
+			<div class="totalList">
+				<h3>매출현황</h3>
+				<table class="totaltable"></table>
 			</div>
 		</div>
 		

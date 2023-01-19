@@ -7,22 +7,28 @@
 
  */
 
-//공통
+//공통 DB
 let categoryList = [ '프리미엄', '스페셜', '와퍼', '올데이킹', '치킨버거' ] 
+//등록된 버거 목록
 let burgerList = [
 	{name : '기네스콰트로치즈와퍼', price : 9500 , img : '기네스콰트로치즈와퍼.png', category : '프리미엄'},
-	{name : '몬스터X', price : 8000 , img : '몬스터X.png', category : '프리미엄'},
-	{name : '몬스터와퍼', price : 9200 , img : '몬스터와퍼.png', category : '스페셜'}
+	{name : '몬스터X', price : 8000 , img : '몬스터X.png', category : '치킨버거'},
+	{name : '몬스터와퍼', price : 9600 , img : '몬스터와퍼.png', category : '스페셜'},
+	{name : '콰트로치즈와퍼', price : 10500 , img : '콰트로치즈와퍼.png', category : '와퍼'},
+	{name : '콰트로치즈X', price : 4800 , img : '콰트로치즈X.png', category : '올데이킹'}
 ]
 let cartList = []	//카트 목록
 let orderList = []	//주문 목록
 
 
 
-
-category_print();
-category_select(0);	//기본값 : 프리미엄
-productPrint(0);	//기본값 : 프리미엄
+//JS 열렸을때 실행될 함수
+category_print();	//카테고리 출력해주는 함수 호출 (1회)
+category_select(0);	//카테고리 선택시 CSS 변경 / 카테고리별 제품 출력 함수 [기본값 : 프리미엄]
+productPrint(0);	//제품 출력 함수 [기본값 : 프리미엄]
+orderTable();	//주문 현황 테이블
+burgerTable();	//버거 현황 테이블
+sellTotal()		//매출 현황 테이블
 
 //1. 카테고리 출력하는 함수 [1.JS 열렸을 때]
 function category_print(){
@@ -123,17 +129,17 @@ function order(){
 	
 	//2.order 객체 배열에 저장
 	orderList.push(order)
-	console.log('주문후')
-	console.log(orderList)
 	//주문 완료 후
 	cartList.splice(0);
 	cartPrint()
+	orderTable()
 }
 
 // 카트리스트 삭제 함수
 function onDelete(x){
 	cartList.splice(x,1)
 	cartPrint()
+	orderTable()
 }
 
 //7. 출력함수	[1. 제품 클릭할 때 마다]
@@ -163,14 +169,125 @@ function cartPrint(){
 }
 
 
+//버거 등록 버튼 함수
+function addbtn(){
+	//burgerList에 등록
+	let burgerinfo = document.querySelectorAll('.burgerinfo')
+	//burgerinfo에 순서대로 저장된 것을 객체로 만들어 burgerList 배열에 입력해야함
+	let burgerbox = {
+		name : burgerinfo[0].value, 
+		price : burgerinfo[2].value , 
+		img : burgerinfo[3].value, 
+		category : burgerinfo[1].value }
+	burgerList.push(burgerbox)
+	//입력칸을 빈칸으로 하는것 아직 구현 안됨
+	//document.querySelectorAll('.burgerinfo').values = ''
+	burgerTable()
+	sellTotal()
+}
+//버거현황 테이블
+function burgerTable(){
+	html = `<tr>
+				<th>번호</th>
+				<th>이미지</th>
+				<th>이름</th>
+				<th>카테고리</th>
+				<th>가격</th>
+				<th>비고</th>
+			</tr>`
+	//orderList에서 주문을 가져와야함
+	for(i=0;i<burgerList.length;i++){
+			html += `<tr>
+					<th>${i+1}</th>
+					<th><img src="img/${burgerList[i].img}" width="60px"/></th>
+					<th>${burgerList[i].name}</th>
+					<th>${burgerList[i].category}</th>
+					<th>${burgerList[i].price}</th>
+					<th><button onclick="burgerDelete(${i})">삭제</button></th>
+			</tr>`
+		
+	}
+	document.querySelector('.burgerTable').innerHTML = html
+	sellTotal()
+}
 
 
+//주문 목록 현황 테이블
+function orderTable(){
+	//html에 입력될 변수
+	html = `<tr>
+				<th>주문번호</th>
+				<th>이름</th>
+				<th>주문상태</th>
+				<th>비고</th>
+			</tr>`
+	//orderList에서 주문을 가져오기
+	for(i=0;i<orderList.length;i++){
+		let keycount = 0;
+		for(let key in orderList[i].items) {
+  			keycount++;
+		}
+		for(let j=0; j<keycount;j++){
+			html += `<tr>
+					<th>${orderList[i].no}</th>
+					<th>${orderList[i].items[j].name}</th>
+					<th>${orderState(orderList[i].state)}</th>
+					<th><button onclick="orderEnd(${i})" class="orderBtn(${i})">주문완료</button></th>
+					</tr>`
+		}
+	}
+	document.querySelector('.orderTable').innerHTML = html
+	sellTotal()
+}
 
+//버거 주문현황 출력 함수
+function orderState(x){
+	if(x==true){return '주문요청';}
+	else{return '주문완료';}
+}
 
+function orderEnd(x){
+	orderList[x].state = false
+	//주문완료 버튼 클릭하면 사라지게 하는 버튼
+	//document.querySelector('.orderBtn').style.display = 'block'
+	orderTable();
+}
+//버거 데이터 삭제 버튼 함수
+function burgerDelete(x){
+	burgerList.splice(x,1)
+	burgerTable();
+	productPrint()
+	
+}
 
-
-
-
-
-
-
+//매출현황 함수
+function sellTotal(){
+	//html에 입력될 변수
+	html = `<tr>
+				<th>제품번호</th>
+				<th>버거이름</th>
+				<th>판매수량</th>
+				<th>매출액</th>
+				<th>순위</th>
+			</tr>`
+	for(let i=0;i<burgerList.length;i++){
+		let total = 0;
+		for(let j=0; j<orderList.length;j++){
+			let keycount = 0;
+			console.log(orderList)
+			for(let key in orderList[i].items) {keycount++;}
+			for(s=0;s<keycount;s++){
+				if(burgerList[i].name==orderList[i].items[j].name){total++;}
+				console.log('여기서 : ' +total)
+			}
+		}
+		html += `<tr>
+				<th>${i+1}</th>
+				<th>${burgerList[i].name}</th>
+				<th>${total}</th>
+				<th>${total*burgerList[i].price}</th>
+				<th>순위</th>
+		</tr>`
+	}
+	document.querySelector('.totaltable').innerHTML = html
+}
