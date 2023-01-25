@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+/* 웹 폰트*/
+@font-face {
+    font-family: 'KorailRoundGothicBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KorailRoundGothicBold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+/* 기본값*/
+*{
+	font-family: '맑은 고딕';
+	color: black;
+	margin: 0px;
+	padding: 0px;
+}
+/* 로고 구역*/
+.logobox{
+	text-align: center;
+}
+
+/* 로고 제목 */
+.title{
+	font-family: KorailRoundGothicBold;
+	color: black;
+	font-size: 40px;
+}
+
+/* 하단 메뉴 top 위치 변경*/
+.h_bottom{top: 40px !important;}	/* 부트스트랩 보다 우선순위 */
+
+/* 부트 스트랩 class 수정 */
+.nav-link{color: black !important;}
+
+/* 상단 메뉴 오른쪽 배치*/
+.h_topmenu{
+	width: 100%; 
+	display: flex; 
+	justify-content: flex-end; 
+	font-size: 12px;
+}
+
+/* 균등배치*/
+.h_bottommenu{
+	width: 100%; 
+	display: flex; 
+	justify-content: space-between; 
+	font-size: 14px;
+	font-weight: bold !important;
+}
+
+
+
+
+
+
+
+
+
