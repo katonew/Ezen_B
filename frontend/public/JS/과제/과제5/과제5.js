@@ -33,7 +33,7 @@ sellTotal()		//매출 현황 테이블
 //1. 카테고리 출력하는 함수 [1.JS 열렸을 때]
 function category_print(){
 	//1.HTML 구성
-	let html = 	`<ul>`
+	let html = 	`<ul class="categoryitem">`
 	//*
 	for( let i =0; i<categoryList.length;i++){
 		html += `<li class="categoryli" onclick="category_select(${i})">${categoryList[i]}</li>`
@@ -79,6 +79,7 @@ function productPrint(x){
 	//2. 구성된 html을 마크업에 대입
 	document.querySelector('.productbox').innerHTML = html
 }
+
 //4. 선택한 품목 카트에 담기
 function cardadd(x){
 	//1. 선택한 i번째 버거의 객체를 cartlist에 추가
@@ -194,8 +195,10 @@ function addbtn(){
 	document.querySelector('.burgerimg').value = ''
 	burgerTable()
 	sellTotal()
+	category_select(0)
 }
-//버거현황 테이블
+
+//버거현황 테이블 출력함수
 function burgerTable(){
 	html = `<tr>
 				<th>번호</th>
@@ -242,11 +245,14 @@ function orderTable(){
 					orderList[i].time.getSeconds()
 		for(let j=0; j<keycount;j++){
 			html += `<tr>
-					<th>${orderList[i].no}</th>
-					<th>${orderList[i].items[j].name}</th>
-					<th>${orderState(orderList[i].state)}</th>
-					<th>${date}</th>
-					<th><button onclick="orderEnd(${i})" class="orderBtn(${i})">주문완료</button></th>
+						<th>${orderList[i].no}</th>
+						<th>${orderList[i].items[j].name}</th>
+						<th>${orderState(orderList[i].state)}</th>
+						<th>${date}</th>
+						<th><div>
+								${orderList[i].state ? `<button onClick = "orderEnd(${i})">주문완료</button>` : `완료`}
+							</div>
+						</th>
 					</tr>`
 		}
 	}
@@ -254,12 +260,17 @@ function orderTable(){
 	sellTotal()
 }
 
+
+
+
+
 //버거 주문현황 출력 함수
 function orderState(x){
 	if(x==true){return '주문요청';}
 	else{return '주문완료';}
 }
 
+// 주문완료 버튼 함수
 function orderEnd(x){
 	orderList[x].state = false
 	//주문완료 버튼 클릭하면 사라지게 하는 버튼 구현
@@ -271,6 +282,7 @@ function burgerDelete(x){
 	burgerList.splice(x,1)
 	productPrint();
 	burgerTable();
+	category_select(0)
 }
 
 //버거 가격 수정 버튼 함수
@@ -279,6 +291,7 @@ function burgerchange(x){
 	burgerList[x].price = rePrice
 	productPrint();
 	burgerTable();
+	category_select(0)
 	
 }
 

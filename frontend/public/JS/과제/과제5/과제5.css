@@ -36,6 +36,9 @@ li{list-style-type: none;}
 	margin: 10px 40px;
 	color: #8e8e8e;
 }
+.categoryitem{
+	text-align: center;
+}
 /* 선택된 li 꾸미기 */
 .categoryselect{
 	color : red !important; /* 속성 충돌시 최우선 !important */
@@ -135,6 +138,10 @@ li{list-style-type: none;}
 #producer{text-align: center; padding: 10px;}
 #producer table{
 	border: 1px solid black;
+	width: 80%;
+}
+#producer div{
+	margin: 10px;
 }
 /*---------------공통---------------------*/
 
