@@ -171,20 +171,27 @@ function cartPrint(){
 
 //버거 등록 버튼 함수
 function addbtn(){
-	//burgerList에 등록
-	let burgerinfo = document.querySelectorAll('.burgerinfo')
 	//burgerinfo에 순서대로 저장된 것을 객체로 만들어 burgerList 배열에 입력해야함
 	let burgerbox = {
-		name : burgerinfo[0].value, 
-		price : burgerinfo[2].value ,
-		img : burgerinfo[3].value, 
-		category : burgerinfo[1].value }
+		name : document.querySelector('.burgername').value, 
+		price : Number(document.querySelector('.burgerprice').value) ,
+		img : document.querySelector('.burgerimg').value, 
+		category : document.querySelector('.burgercate').value
+		}
 	if(isNaN(burgerbox.price)){
 		alert('숫자만 입력하세요')
 		return;
 	}
 	// 카테고리 비교해서 맞는거 없으면 안되는것 구현
+	if(categoryList.indexOf(burgerbox.category) == -1 ){
+			alert('일치하는 카테고리가 없습니다.')
+			return;
+	}
 	burgerList.push(burgerbox)
+	document.querySelector('.burgername').value = ''
+	document.querySelector('.burgercate').value = ''
+	document.querySelector('.burgerprice').value = ''
+	document.querySelector('.burgerimg').value = ''
 	burgerTable()
 	sellTotal()
 }
@@ -205,8 +212,8 @@ function burgerTable(){
 					<th><img src="img/${burgerList[i].img}" width="60px"/></th>
 					<th>${burgerList[i].name}</th>
 					<th>${burgerList[i].category}</th>
-					<th>${burgerList[i].price}</th>
-					<th><button onclick="burgerDelete(${i})">삭제</button></th>
+					<th>${burgerList[i].price.toLocaleString()}</th>
+					<th><button onclick="burgerDelete(${i})">삭제</button><button onclick="burgerchange(${i})">수정</button></th>
 			</tr>`
 		
 	}
@@ -221,6 +228,7 @@ function orderTable(){
 				<th>주문번호</th>
 				<th>이름</th>
 				<th>주문상태</th>
+				<th>주문시간</th>
 				<th>비고</th>
 			</tr>`
 	//orderList에서 주문을 가져오기
@@ -229,11 +237,15 @@ function orderTable(){
 		for(let key in orderList[i].items) {
   			keycount++;
 		}
+		let date = orderList[i].time.getHours() + ':' +
+					orderList[i].time.getMinutes() + ':' +
+					orderList[i].time.getSeconds()
 		for(let j=0; j<keycount;j++){
 			html += `<tr>
 					<th>${orderList[i].no}</th>
 					<th>${orderList[i].items[j].name}</th>
 					<th>${orderState(orderList[i].state)}</th>
+					<th>${date}</th>
 					<th><button onclick="orderEnd(${i})" class="orderBtn(${i})">주문완료</button></th>
 					</tr>`
 		}
@@ -253,11 +265,21 @@ function orderEnd(x){
 	//주문완료 버튼 클릭하면 사라지게 하는 버튼 구현
 	orderTable();
 }
+
 //버거 데이터 삭제 버튼 함수
 function burgerDelete(x){
 	burgerList.splice(x,1)
+	productPrint();
 	burgerTable();
-	productPrint()
+}
+
+//버거 가격 수정 버튼 함수
+function burgerchange(x){
+	let rePrice = Number(prompt('수정가격'))
+	burgerList[x].price = rePrice
+	productPrint();
+	burgerTable();
+	
 }
 
 //매출현황 함수
@@ -303,4 +325,31 @@ function total(x){
 	}
 	return total;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
