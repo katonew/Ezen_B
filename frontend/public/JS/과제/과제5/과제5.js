@@ -314,12 +314,12 @@ function sellTotal(){
 			}
 		}
 		html += `<tr>
-				<th>${i+1}</th>
-				<th>${burgerList[i].name}</th>
-				<th>${total(burgerList[i].name)}</th>
-				<th class="abcd">${total2}</th>
-				<th>${lank}</th>
-		</tr>`
+					<th>${i+1}</th>
+					<th>${burgerList[i].name}</th>
+					<th>${total(burgerList[i].name)}</th>
+					<th class="abcd">${total2}</th>
+					<th>${lank}</th>
+				</tr>`
 	}
 	document.querySelector('.totaltable').innerHTML = html
 }

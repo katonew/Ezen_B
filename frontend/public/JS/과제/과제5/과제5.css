@@ -130,10 +130,6 @@ li{list-style-type: none;}
 	border: 1px solid blue;	/* 테두리 */
 }
 
-
-
-
-
 /*---------------관리자 페이지--------------*/
 #producer{text-align: center; padding: 10px;}
 #producer table{
