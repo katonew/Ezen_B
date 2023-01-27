@@ -36,7 +36,11 @@ document.addEventListener('keydown' , (e)=>{
 		user.state = !(user.state)
 		if(user.state==false){
 			document.querySelector('.textbox').innerHTML =`방어태세로 전환합니다.`
-		}else{document.querySelector('.textbox').innerHTML =`공격태세로 전환합니다.`}
+			userbox.style.backgroundImage = `url(img/mario4.png)`
+		}else{
+			document.querySelector('.textbox').innerHTML =`공격태세로 전환합니다.`
+			userbox.style.backgroundImage = `url(img/mario1.png)`
+		}
 		userinfo()
 	}
 	else if(key==37){ //왼쪽키 입력되었을때
@@ -87,25 +91,13 @@ document.addEventListener('keydown' , (e)=>{
 
 //2. 문서 안에서 키 떼었을때 이벤트
 document.addEventListener('keydown' , (e)=>{
-	let key = e.keyCode;	//입력된 키 코드를 변수에 저장
-	if(user.state==false){
-		userbox.style.backgroundImage = `url(img/mario4.png)`
-	}else if(key!=83&&key!=37&&key!=39&&key!=65){
-		userbox.style.backgroundImage = `url(img/mario1.png)`
-		userbox.style.backgroundSize = `100%`;
-	}
+	userbox.style.backgroundImage = `url(img/mario1.png)`
+	userbox.style.backgroundSize = `100%`;
 })
 
 // 3. 몬스터 이동 난수 [ 랜덤 -> 1초마다 이동]
 // 특정시간마다 함수 실행 : setInterval( ()=>{} , 밀리초(1000/1초))
 setInterval( mon_moving , 1000)
-
-//방어태세 전환 시 0.1초마다 확인하여 출력 이미지 교체
-/*
-setInterval( ()=>{
-	if(user.state==false){userbox.style.backgroundImage = `url(img/mario4.png)`
-	}else{userbox.style.backgroundImage = `url(img/mario1.png)`}
-} , 1000)*/
 
 // 3. 몬스터 이동 함수 [ 랜덤 -> 1초마다 이동]
 function mon_moving(){
