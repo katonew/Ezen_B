@@ -28,7 +28,6 @@ let mobList = [
 //js 열릴때 시작할 함수
 mobPrint(user.level-1)	// 첫 몬스터 출력함수
 userinfo()				// 유저 정보 출력함수
-console.log(m_left)
 
 //2. 이동 이벤트
 document.addEventListener('keydown' , (e)=>{
@@ -40,21 +39,22 @@ document.addEventListener('keydown' , (e)=>{
 		}else{document.querySelector('.textbox').innerHTML =`공격태세로 전환합니다.`}
 		userinfo()
 	}
-	if(key==37){ //왼쪽키 입력되었을때
+	else if(key==37){ //왼쪽키 입력되었을때
 		u_left -= 10;
 		u_left = u_left < 0 ? u_left=0 : u_left ;	//만약 차감된 왼쪽 좌표가 0보다 작으면 0으로 고정, 아니면 전진
 		userbox.style.backgroundImage = `url(img/mario3.png)`
+		userbox.style.backgroundSize = `120%`;
 	}else if(key==39){ //오른쪽키 입력 되었을 때
 		u_left += 10;
 		u_left = u_left>910 ? 910 : u_left 
 		userbox.style.backgroundImage = `url(img/mario2.png)`	//이동모션이미지
-		userbox.style.size = `110%`;
+		userbox.style.backgroundSize = `110%`;
 	}else if(key==65){	//a키가 입력되었을때 -> 공격
 		if(user.state==false){
 			document.querySelector('.textbox').innerHTML =`방어태세일때는 공격할 수 없습니다.`
 		}else{
-			userbox.style.backgroundImage = `url(img/mario5.jpg)`	//공격모션이미지
-			userbox.style.backgroundsize = `110%`;
+			userbox.style.backgroundImage = `url(img/mario7.png)`	//공격모션이미지
+			userbox.style.backgroundSize = `110%`;
 			//a키 눌렀을때 몬스터가 타격사거리 안에 있으면 몬스터의 HP 감소
 			if((m_left-u_left)<100&&(u_left-m_left)<30){
 				mob_hp -= user.power;
@@ -87,9 +87,13 @@ document.addEventListener('keydown' , (e)=>{
 
 //2. 문서 안에서 키 떼었을때 이벤트
 document.addEventListener('keydown' , (e)=>{
+	let key = e.keyCode;	//입력된 키 코드를 변수에 저장
 	if(user.state==false){
 		userbox.style.backgroundImage = `url(img/mario4.png)`
-	}else{userbox.style.backgroundImage = `url(img/mario1.png)`}
+	}else if(key!=83&&key!=37&&key!=39&&key!=65){
+		userbox.style.backgroundImage = `url(img/mario1.png)`
+		userbox.style.backgroundSize = `100%`;
+	}
 })
 
 // 3. 몬스터 이동 난수 [ 랜덤 -> 1초마다 이동]

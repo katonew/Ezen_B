@@ -42,7 +42,7 @@ body{background-color: black;}
 	position: absolute;	/* 절대 위치 : 상위요소 relative*/
 	left: 10px; top: 430px;
 	background-image: url("img/mario1.png");
-	background-size: 90%;
+	background-size: 100%;
 	background-repeat: no-repeat;
 }
 
