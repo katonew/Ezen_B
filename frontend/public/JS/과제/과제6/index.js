@@ -60,7 +60,7 @@ document.addEventListener('keydown' , (e)=>{
 			userbox.style.backgroundImage = `url(img/mario7.png)`	//공격모션이미지
 			userbox.style.backgroundSize = `110%`;
 			//a키 눌렀을때 몬스터가 타격사거리 안에 있으면 몬스터의 HP 감소
-			if((m_left-u_left)<100&&(u_left-m_left)<30){
+			if((m_left-u_left)<110&&(u_left-m_left)<30){
 				mob_hp -= user.power;
 				document.querySelector('.textbox').innerHTML =`데미지 ${user.power}을 주었습니다.`
 				if(mob_hp<=0){
@@ -90,9 +90,14 @@ document.addEventListener('keydown' , (e)=>{
 })
 
 //2. 문서 안에서 키 떼었을때 이벤트
-document.addEventListener('keydown' , (e)=>{
-	userbox.style.backgroundImage = `url(img/mario1.png)`
-	userbox.style.backgroundSize = `100%`;
+document.addEventListener('keyup' , (e)=>{
+	if(user.state==false){
+		userbox.style.backgroundImage = `url(img/mario4.png)`
+		userbox.style.backgroundSize = `100%`;
+	}else{
+		userbox.style.backgroundImage = `url(img/mario1.png)`
+		userbox.style.backgroundSize = `100%`;
+	}
 })
 
 // 3. 몬스터 이동 난수 [ 랜덤 -> 1초마다 이동]
