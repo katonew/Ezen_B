@@ -4,13 +4,13 @@ let logbox = document.querySelector('.logbox')
 let logbox2 = document.querySelector('.logbox2')
 let monbox = null;
 // userbox[기본] 위치
-let u_left = 10;	//유저의 처음 위치
-let m_left = 0;
-let user_hp = 100;	//캐릭터의 처음 체력
-let mob_hp = 0;	//몬스터의 처음 체력
-let full_mobhp = 0;
-let mob_exp = 0;
-// 몬스터 배열 생성
+let u_left = 10;		//유저의 위치 변수
+let m_left = 0;			//몬스터의 위치 변수
+let user_hp = 100;		//캐릭터의 처음 체력
+let mob_hp = 0;			//몬스터의 처음 체력
+let full_mobhp = 0;		//몬스터의 최고체력 변수
+let mob_exp = 0;		//몬스터가 유저에게 주는 경험치 변수
+//유저 객체 생성
 let user = {
 	img: 'mario1.png',
 	left:10,
@@ -19,7 +19,7 @@ let user = {
 	power: 20,
 	state: true
 }
-
+// 몬스터 배열 생성
 let mobList = [
 	{ m_img : 'mob.gif' , hp : 100, left : 910, exp : 50, size : 50},
 	{ m_img : 'mob2.gif' , hp : 500, left : 910, exp : 150, size : 60},
