@@ -10,9 +10,7 @@ let productList = [
 ]
 
 
-
 product_print();
-
 //1. 제품 출력 함수 [ 1. JS 열릴 때]
 function product_print(){
 	let html = ``
@@ -43,8 +41,6 @@ function product_print(){
 	
 	document.querySelector('.itembox').innerHTML = html
 }
-
-
 
 
 
