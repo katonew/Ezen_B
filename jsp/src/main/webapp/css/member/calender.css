@@ -1,0 +1,122 @@
+@charset "UTF-8";
+
+/* 캘릭더 구역 */
+.calender{
+	border: 1px solid black;
+	padding: 5%;
+	border-radius: 1%;
+	box-shadow: 0px 0px 3px gray;
+}
+
+/* 캘린더 상단 메뉴 */
+.cal_top{
+	display: flex;	justify-content: center;
+	margin: 5% 0%;
+}
+
+/* 캘린더 내 버튼 */
+.previousbtn, .nextbtn{
+	background-color: white;
+	border: none;
+	padding: 5px 20px;
+	color: black;
+	font-size: 20px;
+}
+
+/* 상단 연도/월 */
+.top_date{
+	font-family: KorailRoundGothicBold;
+	margin: 0% 3%;
+}
+/* 데이 구역 */
+.cal_day{
+	display: flex;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+}
+/* 일 표시될 부분 */
+.day{
+	display: inline-block;
+	border: 1px solid #eeeeee;
+	width: 14%;	/* 100/7 = 14.2~~~ */
+	height: 100px;
+	overflow: hidden;			/* 내용이 구역보다 커졌을때 숨김 */
+}
+/* 일정 박스*/
+.content{
+	color: black;
+	margin: 1%;
+	padding: 1%;
+	/* 내용이 구역 사이즈보다 커졌을때*/
+	white-space: nowrap;		/* 자동 줄바꿈 해제*/
+	overflow: hidden;			/* 넘겼을때 숨김 */
+	text-overflow: ellipsis;	/* ...표시*/
+	max-width: 150px;
+}
+
+/* 요일 구역 */
+.weekday{
+	height: 35px !important;
+	text-align: center;
+	background-color: #eeeeee;
+	font-size: 18px;
+	font-weight: bold;
+	align-items: center;
+}
+
+/* 일요일 구역 */
+.sunday{
+	color: red;
+}
+
+
+
+/* 모달 부분 */
+.modal_wrap{
+	position: fixed; top: 0; left:0; 
+	/* 모든 영역이 배경이 됨 */
+	width: 100%; height: 100%;
+	background-color: rgba(0,0,0,0.5);
+	
+	z-index: 1030;	/* 겹쳤을때의 우선순위 */
+	/* 부트스트랩 에서 사용하는 z-index : 1020 */
+	/* box 가운데 정렬*/
+	display: flex; justify-content: center; align-items: center;
+	/* 버튼에 따른 표시 여부 flex : 모달 열기 none : 모달 숨기기 */
+	display: none;	/* 기본값 : 처음에는 모달 숨기기*/
+}
+
+/* rgb(0,0,0) : 검정색 */
+/* rgba(0,0,0, 투명도) */
+/* 모달 상자 */
+.modal_box{
+	background-color: white;
+	width: 40%;
+	padding: 3%;
+	border-radius: 5%
+}
+
+.modal_date{
+	font-size: 14px; font-weight: normal;
+}
+
+
+/* 모달버튼 */
+.modal_btns{
+	display: flex;
+	justify-content: flex-end;
+	margin: 3% 0%;
+}
+.modal_box button{
+	background-color: white;
+	padding: 5px 20px;
+	margin-left: 2%;
+	border: 1px solid #eeeeee;
+	border-radius: 10px;
+}
+
+
+
+
+
+
