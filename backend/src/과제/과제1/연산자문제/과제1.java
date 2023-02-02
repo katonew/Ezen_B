@@ -179,7 +179,7 @@ public class 과제1 { //class s
 		int a23 = scanner.nextInt();
 		System.out.print("수학 점수를 입력해주세요 : ");
 		int a24 = scanner.nextInt();
-		int total = a22+a23+a24;
+		double total = a22+a23+a24;
 		double temp14 = total/3;
 		System.out.println("총점 : "+ total);
 		System.out.printf("평균 : %.2f\n",temp14);
