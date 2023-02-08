@@ -32,6 +32,7 @@
 .cal_day{
 	display: flex;
 	justify-content: flex-start;
+	align-content: flex-start;
 	flex-wrap: wrap;
 }
 /* 일 표시될 부분 */
