@@ -37,24 +37,25 @@ public class Mcontroller {
 	// 3. 아이디 찾기 로직
 	public String findId(String name, String phone) {
 			for(int i=0; i<memberDb.size();i++) {
-				if(memberDb.get(i).name.equals(name)) {
-					if(memberDb.get(i).phone.equals(phone)) {
-						return "찾은 아이디 : "+memberDb.get(i).id;
-					}else {return "입력정보가 틀렸습니다.";}
-				} //if e
+				if(memberDb.get(i).name.equals(name)&&memberDb.get(i).phone.equals(phone)){
+					return memberDb.get(i).id;	//찾은 아이디 리턴
+				}else {return null;}	//둘의 정보가 같지 않으니 실패 리턴
 			} //for e
-			return "일치하는 정보가 없습니다.";
+			return null;	//일치하는 정보가 없으니 실패 리턴
 		}
 	
 	// 4. 비밀번호 찾기 로직
 	public String findpwd(String id, String phone) {
 		for(int i=0; i<memberDb.size();i++) {
-			if(memberDb.get(i).id.equals(id)) {
-				if(memberDb.get(i).phone.equals(phone)) {
-					return "찾은 비밀번호 : " + memberDb.get(i).pwd;
-				}else {return "입력정보가 틀렸습니다.";}
-			} //if e
+			if(memberDb.get(i).id.equals(id)&&memberDb.get(i).phone.equals(phone)) {
+					return memberDb.get(i).pwd;	//찾은 비밀번호 리턴
+				}else {return null;}	//둘의 정보가 같지 않으니 실패 리턴
 		} //for e
-		return "일치하는 정보가 없습니다.";
+		return null;	//일치하는 정보가 없으니 실패 리턴
+	} // 비밀번호 찾기 로직 e
+	
+	//id반환 로직
+	public String loginid(int loginno) {
+		return memberDb.get(loginno).id;
 	}
 }
