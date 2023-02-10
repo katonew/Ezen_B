@@ -18,7 +18,7 @@ public class Bcontroller {
 	
 	//글 쓰기 함수
 	public void writeBorad(String loginid, String title, String content) {
-		Board board = new Board(0,loginid,content);
+		Board board = new Board(0,loginid,title,content);
 		boradDb.add(board);
 	}//글 쓰기 함수 e
 	

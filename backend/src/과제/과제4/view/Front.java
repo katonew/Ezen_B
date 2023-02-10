@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import 과제.과제4.controller.Bcontroller;
 import 과제.과제4.controller.Mcontroller;
+import 과제.과제4.model.Board;
 
 // * 입출력 : print , scanner
 
@@ -100,7 +101,12 @@ public class Front {
 	public void viewBoard(int loginno) {
 		System.out.println("게시물 번호 입력 :");
 		int ch3 = scanner.nextInt();
-		String[] temp = bc.viewBoard(mc.loginid(loginno),ch3);
+		Board closeContent = bc.viewBoard(mc.loginid(loginno),ch3);
+		System.out.println("제목 : "+closeContent.title);
+		System.out.println("작성자 : "+closeContent.writer);
+		System.out.println("조회수 : "+closeContent.views);
+		System.out.println("내용 : "+closeContent.content);
+		System.out.println("메뉴> 1. 글삭제 2. 글수정 3. 뒤로가기 : ");
 	}
 	
 } //class e
