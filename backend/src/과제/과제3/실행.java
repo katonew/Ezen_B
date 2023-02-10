@@ -124,8 +124,9 @@ public class 실행 {
 								}else {	System.out.println("잘못입력하였습니다."); continue;	}	//그외가 입력되었을때
 							} //while  2 e
 						}else {System.out.println("비밀번호가 틀렸습니다.");break;}	//id는 같은게 있으나 비밀번호는 틀렸을때
-					}System.out.println("일치하는 id가 없습니다.");	//일치하는 id가 없을때
+					}//if e
 				} //for e
+				System.out.println("일치하는 id가 없습니다.");	//일치하는 id가 없을때
 			}else if(inputlogin==2) {	//회원가입을 눌렀을때
 				//필요한 값들 입력받기
 				System.out.print("아이디 : ");	
