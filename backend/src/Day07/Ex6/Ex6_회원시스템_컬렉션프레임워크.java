@@ -42,4 +42,4 @@ public class Ex6_회원시스템_컬렉션프레임워크 {
 			else {System.out.println("잘못입력하였습니다."); continue;}
 		} //while e		
 	} //main e
-}
+}	//class e

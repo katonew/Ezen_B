@@ -25,7 +25,7 @@ public class Ex1_회원시스템_배열 {	//class s
 			System.out.print("1.회원등록 2.회원삭제 : "); //출력
 			int ch = scanner.nextInt();	//입력받은 값
 			if(ch==1) { //1을 입력했을때
-				System.out.print("회원명 : ");		String name = scanner.next();
+				System.out.print("회원명 : ");	String name = scanner.next();
 				System.out.print("전화번호 : ");	String phone = scanner.next();
 				
 				// 1. 배열내 데이터 등록 // push 기능 만들기 [ 배열내 빈공간(NULL) 찾기]
