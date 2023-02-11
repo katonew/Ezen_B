@@ -17,6 +17,7 @@ public class Front {
 		//1. 메인페이지
 	public void index() {
 		while(true) {
+			System.out.println("----------------로그인------------------- ");
 			System.out.print("1.회원가입 2.로그인 3.아이디찾기 4.비밀번호 찾기 : ");
 			int ch = scanner.nextInt();
 			if(ch==1) {	signup();}
@@ -72,7 +73,7 @@ public class Front {
 		// 게시판 페이지
 	public void board(int loginno) {
 		while(true) {
-			printBoard();
+			System.out.print(bc.printBoard());
 			System.out.print("메뉴> 1.글쓰기 2.글보기 3.로그아웃 : ");
 			int ch2 = scanner.nextInt();
 			if(ch2==1) {		//글쓰기 선택시
@@ -85,15 +86,11 @@ public class Front {
 		} // while e
 	}// board e
 	
-		// 게시판 현황 출력 페이지
-	public void printBoard() {
-		System.out.print(bc.printBoard());
-	}
-	
 		// 글쓰기 페이지
 	public void writeBorad(int loginno) {
-		System.out.println("제목 : ");	String title = scanner.next();
-		System.out.println("내용 : ");	String content = scanner.nextLine();
+		System.out.print("제목 : ");	String title = scanner.next();
+		scanner.nextLine();	//nextLine때문에 한번 더 적은것
+		System.out.print("내용 : ");	String content = scanner.nextLine();
 		bc.writeBorad(mc.loginid(loginno),title,content);
 		System.out.println("글이 등록되었습니다.");
 	}
@@ -106,7 +103,34 @@ public class Front {
 		System.out.println("작성자 : "+closeContent.writer);
 		System.out.println("조회수 : "+closeContent.views);
 		System.out.println("내용 : "+closeContent.content);
+		closeContent.views++;
 		System.out.println("메뉴> 1. 글삭제 2. 글수정 3. 뒤로가기 : ");
+		int ch4 = scanner.nextInt();
+		if(ch4==1) {		//글 삭제 선택시
+			if(closeContent.writer!=mc.loginid(loginno)) {
+				System.err.println("권한없음");
+			}else {
+				bc.boardDelte(ch3);
+				System.out.println("삭제되었습니다.");
+			}
+		}else if(ch4==2) {	//글 수정 선택시
+			if(closeContent.writer!=mc.loginid(loginno)) {
+				System.err.println("권한없음");
+			}else {
+				editContent(ch3);
+			}
+		}else if(ch4==3) {	//로그아웃 선택시
+			board(loginno);
+		}else {System.out.println("잘못 입력하셨습니다.");}
+	}
+	
+	//글 수정 페이지
+	public void editContent(int selectno){
+		System.out.print("수정할 내용을 입력해주세요. : ");
+		scanner.nextLine();
+		String editContent = scanner.nextLine();
+		bc.boardEdit(selectno,editContent);
+		System.out.println("수정되었습니다.");
 	}
 	
 } //class e
