@@ -9,9 +9,9 @@ public class Bcontroller {
 	
 	//게시판 출력함수
 	public String printBoard(){
-		String temp = "--------------------커뮤니티---------------------\n번호\t조회수\t작성자\t제목\t내용\n";
+		String temp = "--------------------커뮤니티---------------------\n번호\t조회수\t작성자\t제목\t\n";
 		for(int i=0;i<boardDb.size();i++) {
-			temp += i+"\t"+boardDb.get(i).views+"\t"+boardDb.get(i).writer+"\t"+boardDb.get(i).title+"\t"+boardDb.get(i).content+"\n";
+			temp += i+"\t"+boardDb.get(i).views+"\t"+boardDb.get(i).writer+"\t"+boardDb.get(i).title+"\n";
 		}
 		return temp;
 	} // 게시판 출력함수 e

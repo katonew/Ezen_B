@@ -100,7 +100,7 @@ public class Front {
 		int ch3 = scanner.nextInt();
 		Board closeContent = bc.viewBoard(mc.loginid(loginno),ch3);
 		System.out.println("제목 : "+closeContent.title);
-		System.out.println("작성자 : "+closeContent.writer);
+		System.out.print("작성자 : "+closeContent.writer+"\t");
 		System.out.println("조회수 : "+closeContent.views);
 		System.out.println("내용 : "+closeContent.content);
 		closeContent.views++;
