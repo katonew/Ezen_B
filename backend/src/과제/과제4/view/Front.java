@@ -104,7 +104,7 @@ public class Front {
 		System.out.println("조회수 : "+closeContent.views);
 		System.out.println("내용 : "+closeContent.content);
 		closeContent.views++;
-		System.out.println("메뉴> 1. 글삭제 2. 글수정 3. 뒤로가기 : ");
+		System.out.print("메뉴> 1. 글삭제 2. 글수정 3. 뒤로가기 : ");
 		int ch4 = scanner.nextInt();
 		if(ch4==1) {		//글 삭제 선택시
 			if(closeContent.writer!=mc.loginid(loginno)) {
