@@ -5,7 +5,7 @@ package 과제.과제4_싱글톤.model;
 	model 관계
 		1. 한명의 회원이 글을 작성한다.			[object]
 		2. 회원은 여러개의 글을 작성할 수 있다. 	[ArrayList]
-		
+		* 양방향 toString 사용 불가
 
 */
 
@@ -29,10 +29,7 @@ public class Board {
 	
 	
 	//3. 메소드
-	@Override
-	public String toString() {
-		return "Board [title=" + title + ", content=" + content + ", view=" + view + ", member=" + member + "]";
-	}
+
 	public String getTitle() {
 		return title;
 	}

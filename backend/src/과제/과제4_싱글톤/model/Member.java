@@ -31,11 +31,7 @@ public class Member {
 	}
 	
 	// 3. 메소드
-	@Override
-	public String toString() {
-		return "Member [id=" + id + ", pw=" + pw + ", name=" + name + ", phone=" + phone + ", boardlist=" + boardlist
-				+ "]";
-	}
+
 	public String getId() {
 		return id;
 	}

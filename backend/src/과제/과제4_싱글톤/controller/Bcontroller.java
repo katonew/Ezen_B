@@ -26,6 +26,12 @@ import 과제.과제4_싱글톤.model.Board;
 
 
 public class Bcontroller {
+	// 싱글톤
+	private static Bcontroller bc = new Bcontroller();
+	private Bcontroller() {}
+	public static Bcontroller getInstance() {return bc;}
+	
+	// 필드
 	private ArrayList<Board> boardDb = new ArrayList<>();
 	
 	public ArrayList<Board> getBoardDb() {
@@ -50,22 +56,27 @@ public class Bcontroller {
 	
 	//6. 글출력 처리
 	public ArrayList<Board> getList() {
-		return null;
+		// 추후에 검색처리, 페이징 처리 등등 로직이 들어갈 예정
+		return boardDb;
 	}
 	
 	//7. 글상세
 	public Board getBoard(int bno) {
-		return null;
+		boardDb.get(bno).setView(boardDb.get(bno).getView()+1);
+		return boardDb.get(bno);		//인수로 전달받은 인덱스의 게시물 반환
 	}
 	
 	//8. 글 삭제
 	public boolean delete(int bno) {
-		return false;
+		boardDb.remove(bno);	//인수로 전달받은 인덱스의 게시물 삭제
+		return true;
 	}
 	
 	//8. 글 수정
-	public boolean update(int bno,String content) {
-		return false;
+	public boolean update(int bno,String title,String content) {
+		boardDb.get(bno).setTitle(title);		//인수로 전달받은 인덱스의 게시물 제목 수정
+		boardDb.get(bno).setContent(content);	//인수로 전달받은 인덱스의 게시물 내용 수정
+		return true;
 	}
 	
 
