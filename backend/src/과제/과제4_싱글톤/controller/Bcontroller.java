@@ -68,11 +68,17 @@ public class Bcontroller {
 	
 	//8. 글 삭제
 	public boolean delete(int bno) {
-		boardDb.remove(bno);	//인수로 전달받은 인덱스의 게시물 삭제
-		return true;
+		//유효성 검사 [ 현재 게시글의 작성자와 현재 로그인 된 회원과 같으면
+		if(Bcontroller.getInstance().getBoard(bno).getMember().equals(Mcontroller.getInstance().getLoginSession())) {
+			boardDb.remove(bno);
+			return true; 
+		}else {
+			System.err.println("[알림] 삭제 권한이 없습니다.");
+			return false;
+		}
 	}
 	
-	//8. 글 수정
+	//9. 글 수정
 	public boolean update(int bno,String title,String content) {
 		boardDb.get(bno).setTitle(title);		//인수로 전달받은 인덱스의 게시물 제목 수정
 		boardDb.get(bno).setContent(content);	//인수로 전달받은 인덱스의 게시물 내용 수정

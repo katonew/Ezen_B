@@ -100,7 +100,9 @@ public class Front {
 				write_page();
 			}
 			else if(ch2==2) {	//글 보기 선택시
-				view_page();
+				if(Bcontroller.getInstance().getBoardDb().size()<=0) {	// 아직 게시글DB의 크기가 0일때
+					System.err.println("[알림]아직 게시글이 없습니다.");
+				}else{view_page();}
 			}
 			else if(ch2==3) { //로그아웃 선택시
 				Mcontroller.getInstance().logOut(); //로그아웃 함수
@@ -132,20 +134,20 @@ public class Front {
 		if(ch3==1) {delete(bno);}			//삭제 선택시
 		else if(ch3==2) {update_page(bno);}	//수정 선택시
 		else if(ch3==3) {return;}			//뒤로가기 선택시
+		else {System.err.println("[알림] 잘못 입력하였습니다.");}
 	}//view_page e
 	
 	// 9. 게시물 삭제 페이지
 	public void delete(int bno) {
-		//유효성 검사 [ 현재 게시글의 작성자와 현재 로그인 된 회원과 같으면
-		if(Bcontroller.getInstance().getBoard(bno).getMember().equals(Mcontroller.getInstance().getLoginSession())) {
-			Bcontroller.getInstance().delete(bno);
+		boolean result = Bcontroller.getInstance().delete(bno);
+		if(result){
 			System.out.println("[알림] 게시글 삭제 성공");
 			return;
 		}else {
 			System.err.println("[알림] 삭제 권한이 없습니다.");
 			return;
 		}
-	}
+	} // delete e
 	
 	// 10. 게시글 수정 페이지
 	public void update_page(int bno) {
