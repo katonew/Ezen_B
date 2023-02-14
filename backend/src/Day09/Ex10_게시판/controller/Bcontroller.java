@@ -29,4 +29,16 @@ public class Bcontroller {
 		//3. 결과 반환
 		return false;
 	}
+	
+	// 3. 모든 게시물[여러개->list] 출력 처리 함수 
+		public ArrayList<Board> print() {
+			// 유효성검사 [ 생략 ] 검색,페이징처리 
+			return BoardDb;
+		}
+		// 4. 특정 게시물[1개->object] 출력 처리 함수 
+		public Board view( int bno ) {
+			// * 조회수 올리기 	// 객체명.set필드명( 객체명.get필드명()+1 );
+			BoardDb.get(bno).setView(   BoardDb.get(bno).getView()+1    );
+			return BoardDb.get( bno );
+		}
 }
