@@ -81,7 +81,7 @@ public class Front {
 			}else if(ch2==2) {	//글 보기 선택시
 				viewBoard(loginno);
 			}else if(ch2==3) {	//로그아웃 선택시
-				index();		//다시 index 함수로
+				return;
 			}else {System.out.println("잘못 입력하셨습니다.");}
 		} // while e
 	}// board e
@@ -120,7 +120,7 @@ public class Front {
 				editContent(ch3);
 			}
 		}else if(ch4==3) {	//로그아웃 선택시
-			board(loginno);
+			return;
 		}else {System.out.println("잘못 입력하셨습니다.");}
 	}
 	
