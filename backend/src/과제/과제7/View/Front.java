@@ -33,7 +33,7 @@ public class Front {
 			System.out.println("~~은행\t"+result.get(i).getAcountno()+"\t"+result.get(i).money);
 		}
 		
-	}
+	} 
 	
 	// 계좌 생성 페이지
 	public void makeAccount_page() {
