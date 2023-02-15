@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import 미니팀플.controller.Mcontroller;
+import 미니팀플.controller.MemoController;
 import 미니팀플.controller.Pcontroller;
+import 미니팀플.model.Memo;
 import 미니팀플.model.Product;
 /*
 	- 회원가입
@@ -88,14 +90,26 @@ public class Front {
 		System.out.println("-----------상품내역-----------");
 		System.out.println("번호\t상품이름\t상품정보\t가격\t판매자\t판매상태");
 		ArrayList<Product> result = Pcontroller.getInstance().printProduct();
-		for(int i;i<result.size();i++) {
-			System.out.println(i+"\t"+
+		for(int i = 0;i<result.size();i++) {
+			System.out.print(i+"\t"+
 								result.get(i).getName()+"\t"+
 								result.get(i).getContent()+"\t"+
 								result.get(i).getPrice()+"\t"+
-								result.get(i).getMember().getId()+"\t"+
-								result.get(i).isState()? "판매중" :"거래완료");
+								result.get(i).getMember().getId()+"\t");
+			if(result.get(i).isState()) {
+				System.out.println("판매중");
+			}else {System.out.println("판매완료");}
 		}
+		System.out.print("1.상품등록 2.상품보기 3.마이페이지 4.로그아웃 : ");
+		int ch = scanner.nextInt();
+		if(ch==1) {
+			plusProduct();
+		}else if(ch==2) {
+			getProduct();
+		}else if(ch==3) {
+			Mcontroller.getInstance().logOut();
+			return;
+		}else if(ch==4){}
 	}
 	
 	// 마이페이지 페이지
@@ -104,8 +118,12 @@ public class Front {
 		System.out.println("1. 내게온 쪽지 2. 내가 보낸쪽지 : ");
 		int sc = scanner.nextInt();
 		if(sc==1) {
-			receiveMemo();
-		}
+			ArrayList<Memo> result = MemoController.getInstance().receiveMemo();
+			receiveMemo(result);
+		}else if(sc == 2) {
+			ArrayList<Memo> result = MemoController.getInstance().mysendMemo();
+			mysendMemo(result);
+		}else {System.err.println("잘못입력하셨습니다.");}
 	}
 	// 상품 등록 페이지
 	public void plusProduct() {
@@ -120,11 +138,16 @@ public class Front {
 		
 	}
 	// 내게 온 쪽지 출력 페이지
-	public void receiveMemo() {
+	public void receiveMemo(ArrayList<Memo> result) {
+		System.out.println("-----내게 온 쪽지-------");
+		for(int i=0;i<result.size();i++) {
+			System.out.println("번호\t상품\t제목\t보낸사람");
+			System.out.println(i+"\t"+result.get(i).getProduct()+result.get(i).getTitle()+"\t"+result.get(i).getSendMember()+"\t");
+		}
 		
 	}
 	// 내가 보낸 쪽지 출력 페이지
-	public void mysendMemo() {
+	public void mysendMemo(ArrayList<Memo> result) {
 		
 	}
 	
