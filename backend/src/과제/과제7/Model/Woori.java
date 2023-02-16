@@ -16,8 +16,5 @@ public class Woori extends Account{
 		super.name = name;
 		super.money = money;
 		super.bankno = bankno;
-		System.out.println("우리은행 계좌생성을 해주셔서 감사합니다.");
 	}
-	
-	
 }
