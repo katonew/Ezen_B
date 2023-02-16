@@ -24,12 +24,15 @@ public class Controller {
 		int random1 = (int)((Math.random()*99)+1);
 		int random2 = (int)((Math.random()*99)+1);
 		Account account = null;
-		String Accountno = account.getBankno()+"-"+random1+"-"+random2;
+		
 		if(bank_Ch==1) {
+			String Accountno = "03"+"-"+random1+"-"+random2;
 			account = new Sinhan(Accountno, password, name, 0);
 		}else if(bank_Ch==2) {
+			String Accountno = "04"+"-"+random1+"-"+random2;
 			account = new Kookmin(Accountno, password, name, 0);
 		}else if(bank_Ch==3) {
+			String Accountno = "05"+"-"+random1+"-"+random2;
 			account = new Woori(Accountno, password, name, 0);
 		}
 		AccountList.add(account);
@@ -42,7 +45,7 @@ public class Controller {
 	public boolean plusmoney(String Accountno, int plusmoney) {
 		for(int i=0;i<AccountList.size();i++) {
 			if(Accountno.equals(AccountList.get(i).getAcountno())) {
-				AccountList.get(i).money += plusmoney;
+				AccountList.get(i).setMoney(AccountList.get(i).getMoney()+plusmoney);
 				return true;
 			}
 		}// for e

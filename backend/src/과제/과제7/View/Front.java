@@ -30,7 +30,7 @@ public class Front {
 		System.out.println("은행명\t계좌번호\t\t예금액");
 		ArrayList<Account> result = Controller.getInstance().PrintAccount();
 		for(int i=0;i<result.size();i++) {
-			System.out.println("~~은행\t"+result.get(i).getAcountno()+"\t"+result.get(i).money);
+			System.out.println("~~은행\t"+result.get(i).getAcountno()+"\t"+result.get(i).getMoney());
 		}
 		
 	} 
@@ -51,7 +51,14 @@ public class Front {
 			System.out.println("------------- 계좌 생성 완료  -----------");
 			System.out.println("계좌주 : "+result.getName());
 			System.out.println("계좌번호 : "+result.getAcountno());
-			System.out.println("은행 : ");
+			System.out.print("은행 : ");
+			if(result.getBankno().equals("03")) {
+				System.out.println("신한은행");
+			}else if(result.getBankno().equals("04")) {
+				System.out.println("국민은행");
+			}else if(result.getBankno().equals("05")) {
+				System.out.println("우리은행");
+			}
 		}
 		else {System.err.println("유효하지 않은 접근입니다.");}
 	}
