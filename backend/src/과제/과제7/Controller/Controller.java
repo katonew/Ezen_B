@@ -21,8 +21,8 @@ public class Controller {
 	
 	// 계좌 생성 메소드
 	public Account addAccount(int bank_Ch,String password, String name) {
-		int random1 = (int)((Math.random()*99)+1);
-		int random2 = (int)((Math.random()*99)+1);
+		int random1 = (int)((Math.random()*89)+10);
+		int random2 = (int)((Math.random()*89)+10);
 		Account account = null;
 		
 		if(bank_Ch==1) {
