@@ -18,7 +18,6 @@ public class SmartTelevision implements RemoteControl, Searchable{
 	@Override
 	public void serch(String url) {
 		System.out.println(url + "을 검색합니다.");
-		
 	}
 	
 	
