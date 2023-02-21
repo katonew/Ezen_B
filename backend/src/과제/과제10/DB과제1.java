@@ -29,7 +29,7 @@ public class DB과제1 {
 					//제품 테이블( 제품번호[정수] , 제품명[20] , 제품설명[100] , 제품가격[정수 );
 					//create table product(pno int,pname varchar(20), pcontent varchar(100),pprice int);
 					System.out.println("-- SQL구문 입력 : ");
-					sc.nextLine();
+					sc.nextLine(); //오류 방지용 nextLine;
 					String sql = sc.nextLine();
 					// sql에 대입
 					conn.prepareStatement(sql).execute();
