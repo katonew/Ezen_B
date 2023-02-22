@@ -51,9 +51,103 @@ public class MemberDao {
 	}// signup e
 	
 	// 2. 모든 회원 출력 [ 인수:X 반환:여러명[ArrayList vs 배열]회원[Member]]
-	public ArrayList<MemberDto> list() {
-		
+	public ArrayList<MemberDto> list() {	
+		//* 여러명의 회원 dto 객체를 저장하기 위한 리스트 선언
+		ArrayList<MemberDto> list = new ArrayList<>();
+		// 1. SQL 작성
+		String sql = "select *from member";
+		// 2. 연결된 DB에 작성된 SQL 대입
+		try {
+			ps = conn.prepareStatement(sql);
+			// 3. SQL 조작	[매개변수 없으면 생략]
+			// 4. SQL 실행	[SQL 결과를 rs 인터페이스에 저장]
+			rs = ps.executeQuery();	//결과 : 검색된 모든 레코드
+			// 5. SQL 결과
+				//레코드 --자바형태--> 객체 - DTO	// 레코드 1개 -> DTO 1개 -> 회원 1개
+			while( rs.next() ) {	//rs.next() 다음 레코드 이동 [ 없으면 false ] // 마지막 레코드까지 무한루프
+				//레코드 ---> 객체화 [ rs.get~~(필드순서번호)]
+				MemberDto dto = new MemberDto(
+						rs.getInt(1), rs.getString(2), rs.getString(3));
+				//1개 객체를 list에 담기
+				list.add(dto);
+			}
+			return list;
+		}catch (Exception e) {
+			System.out.println("DB 오류 : "+e.getMessage());
+		}
 		return null;
 	}//list e
 	
+	// 3. 비밀번호 수정 [ 인수 : 누구의(mno),비밀번호를 무엇으로(newpw) / 반환 : 성공/실패 ]
+	public boolean updatepw(int mno,String newpw) {
+		
+		// 1. SQL 작성
+		String sql = "update member set mpw = ? where mno = ?";
+		
+		// 2. 연결 DB에 SQL 대입
+		try {
+			ps = conn.prepareStatement(sql);
+		
+			// 3. SQL 조작
+			ps.setString(1, newpw);
+			ps.setInt(2, mno);
+			// 4. SQL 실행
+			ps.executeUpdate();	//insert , update, delete -> executeUpdate();	/ 결과 1개
+								// select -> executeQuery();					/ 결과 여러개
+			
+			// 5. SQL 결과
+			return true;
+		}catch (Exception e) {
+			System.out.println("DB 오류 : "+e.getMessage());
+			return false;
+		}
+	} // updatepw e
+	
+	// 4. 삭제 함수 [ 인수 : 어떤 회원을 삭제할건지(mno) 반환 : 성공/실패]
+	public boolean delete(int mno) {
+		
+		// 1. SQL 작성
+		String sql = "delete from member where mno = ?;";
+		
+		// 2. 연결 DB에 SQL 대입
+		try {
+			ps = conn.prepareStatement(sql);
+			// 3. SQL 조작
+			ps.setInt(1, mno);
+			// 4. SQL 실행
+			ps.executeUpdate();	
+			// 5. SQL 결과
+			return true;
+		}catch (Exception e) {
+			System.out.println("DB 오류 : "+e.getMessage());
+			return false;
+		}
+	} // delete e
+	
+	
+	
+	
 } // class e
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
