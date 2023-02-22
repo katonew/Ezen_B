@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 
@@ -46,8 +47,8 @@ public class ProductDao {
 		// 5. SQL 결과
 		return false;
 	}
-	// 제품 출력 함수
-	public ArrayList<ProductDto> print() {
+	// 관리자용 제품 출력 함수
+	public ArrayList<ProductDto> Print() {
 		ArrayList<ProductDto> list = new ArrayList<>();
 		// 1. SQL 작성
 		String sql = "select *from product;";
@@ -68,6 +69,7 @@ public class ProductDao {
 		// 5. SQL 결과
 		return null;
 	}
+	
 	// 제품 수정 함수
 	public boolean pupdate(int pno,String pname,int pprice) {
 		// 1. SQL 작성
@@ -120,5 +122,32 @@ public class ProductDao {
 		// 5. SQL 결과
 		return false;
 	}	
+	
+	//장바구니에 넣기 함수
+	public ProductDto choice(int pno) {
+		String sql = "select *from product where pno=?;";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, pno);
+			rs = ps.executeQuery();
+			
+			ProductDto dto = null;
+			if(rs.next()) {
+				dto = new ProductDto(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4));
+			}
+			if(dto.getPinven()<=0) {
+				return null;
+			}
+			sql = "update product set pinven = ? where pno = ?;";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, rs.getInt(4)-1);
+			ps.setInt(2, pno);
+			ps.executeUpdate();
+			return dto;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 }
