@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import Day15.Ex9_MVC패턴.MemberDto;
 
 public class ProductDao {
 	
