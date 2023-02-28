@@ -7,9 +7,9 @@ import Day20.gallary.Contoller.Mcontroller;
 public class IndexView {
 
 	//1. 싱글톤
-	private static IndexView dao = new IndexView();
+	private static IndexView view = new IndexView();
 	private IndexView() {}
-	public static IndexView getInstance() {return dao;}
+	public static IndexView getInstance() {return view;}
 			
 	private Scanner scanner = new Scanner(System.in);
 	
@@ -23,7 +23,7 @@ public class IndexView {
 				if(ch==1) {login();}
 				else if(ch==2) {signup();}
 			}catch (Exception e) {
-				System.out.println("잘못된 입력입니다.");
+				System.out.println("잘못된 입력 : " + e);
 				scanner = new Scanner(System.in);
 			}	
 		} // while e
@@ -54,10 +54,9 @@ public class IndexView {
 		boolean result = Mcontroller.getInstance().login(mid, mpw);
 		if(result) {
 			System.out.println("로그인 성공");
-			// 게시글 초기메뉴로 이동
+			BoardView.getInstance().index();
 		}
 		else {System.out.println("로그인 실패");}
-		
 	}
 	
 	
