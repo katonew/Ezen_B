@@ -67,22 +67,22 @@ public class BoardDao extends Dao{
 		try {
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
+			ArrayList<BoardDto> clist = new ArrayList<>();
 			while(rs.next()) {
-				ArrayList<BoardDto> clist = new ArrayList<>();
 				BoardDto dto = new BoardDto(rs.getInt(1), rs.getString(2), rs.getString(3), 
 						rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7));
 				clist.add(dto);
-				
 			}
+			return clist;
 		}catch (Exception e) {System.out.println(e);}
 		return null;
 	}
 	
 	// 5. 해당 카테고리의 모든 게시물 출력
 	public ArrayList<BoardDto> boardPrint(int cno) {
-		String sql = "select b.bno, b.btitle, b.bcontent, b.bdate, bview , m.mid, c.cname\r\n"
-				+ "    from board b, member m, category c\r\n"
-				+ "    where b.mno_fk = m.mno and b.cno_fk=c.cno and b.cno_fk=?;";
+		String sql = "select b.bno, b.btitle, b.bcontent, b.bdate, bview , m.mid, c.cname "
+				+ " from board b, member m, category c "
+				+ " where b.mno_fk = m.mno and b.cno_fk=c.cno and b.cno_fk=?;";
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setInt(1,cno);
@@ -92,6 +92,7 @@ public class BoardDao extends Dao{
 				BoardDto dto = new BoardDto(rs.getInt(1), rs.getString(2), rs.getString(3), 
 						rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7));
 				clist.add(dto);
+				return clist;
 			}
 		}catch (Exception e) {System.out.println(e);}
 		return null;

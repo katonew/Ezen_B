@@ -44,7 +44,6 @@ public class BoardView {
 		System.out.print("추가할 갤러리 이름 : ");
 		scanner.nextLine();
 		String cname = scanner.nextLine();
-		
 		boolean result = Bcontroller.getInstance().categoryAdd(cname);
 		if(result) {
 			System.out.println("등록완료 : 갤러리가 추가되었습니다.");
@@ -84,9 +83,9 @@ public class BoardView {
 	public void boardPrintRecent() {
 		ArrayList<BoardDto> blist = Bcontroller.getInstance().boardPrintRecent();
 		System.out.println("=====최신글 목록======");
-		System.out.printf("%10s\t%10s\t%10s\t%10s\t%10s\t%10s", "번호","제목","작성자","조회수","갤러리","작성일");
+		System.out.printf("%10s\t%10s\t%10s\t%10s\t%10s\t%10s\n", "번호","제목","작성자","조회수","갤러리","작성일");
 		for(BoardDto dto : blist) {
-			System.out.printf("%10s\t$10s\t$10s\t$10s\t$10s\t%10s", 
+			System.out.printf("%10s\t%10s\t%10s\t%10s\t%10s\t%10s\n", 
 					dto.getBno(),dto.getBtitle(),dto.getMid(),dto.getBview(),dto.getCname(),dto.getBdate());
 		}
 	}
@@ -95,8 +94,8 @@ public class BoardView {
 	public void boardPrint(int cno) {
 		ArrayList<BoardDto> blist = Bcontroller.getInstance().boardPrint(cno);
 		for(BoardDto dto : blist) {
-			System.out.printf("%10s\t%10s\t%10s\t%10s\t%10s", "번호","제목","작성자","작성일","조회수","갤러리");
-			System.out.printf("%10s\t%10s\t%10s\t%10s\t%10s", 
+			System.out.printf("%10s\t%10s\t%10s\t%10s\t%10s\n", "번호","제목","작성자","조회수","작성일");
+			System.out.printf("%10s\t%10s\t%10s\t%10s\t%10s\n", 
 					dto.getBno(),dto.getBtitle(),dto.getMid(),dto.getBview(),dto.getBdate());
 		} // for e
 		while(true) {
