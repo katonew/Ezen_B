@@ -137,11 +137,102 @@ function onupdate(bno){
 	})
 }
 
+//---------------------제품 -------------------
 
+function addproduct(){
+	console.log('addproduct() 함수 실행')
+	
+	let product = {
+		pname : document.querySelector('.pname').value,
+		pprice : document.querySelector('.pprice').value
+	}
+	console.log(product)
+	
+	$.ajax({
+		url : "/jspweb/Ex3/Product",
+		method : "post",
+		data : product,
+		success : (r) => {
+			console.log('post 응답성공');
+			if(r == 'true'){
+				alert('등록성공');
+				document.querySelector('.pname').value = "";
+				document.querySelector('.pprice').value = "";
+				plist();
+			}
+			else(alert('등록실패'))
+		} // success e
+	}) // ajax e
+	
+	
+} // 제품 등록 함수  e
+plist();
+function plist(){
+	$.ajax({
+		url : "/jspweb/Ex3/Product",
+		method : "get",
+		success : (r) =>{
+			console.log('get 응답 성공');
+			console.log(r);
+			let html = 
+			`<tr>
+					<th>제품번호</th>
+					<th>제품명</th>
+					<th>제품가격</th>
+					<th>비고</th>
+				</tr>`;
+			r.forEach((o,i) => {
+				html += 
+				`<tr>
+					<td>${o.pno}</td>
+					<td>${o.pname}</td>
+					<td>${o.pprice}</td>
+					<td>
+						<button onclick="pdelete(${o.pno})" type="button">삭제</button>
+						<button onclick="pupdate(${o.pno})" type="button">수정</button>
+					</td>
+				</tr>`;
+			});
+		document.querySelector('.producttable').innerHTML = html;
+		} // success e
+	}) // ajax e
+} // 제품출력함수 e
 
+// 제품 삭제
+function pdelete(pno){
+	$.ajax({
+		url : "/jspweb/Ex3/Product",
+		method : "delete",
+		data : { "pno" : pno},
+		success : (r) =>{
+			console.log('delete 함수 성공')
+			console.log(r)
+			if(r=='true'){
+				alert('삭제성공')
+			}else{alert('삭제실패')}
+			plist();
+		} // success e
+	}) // ajax e
+} // ondelete e
 
-
-
+// 수정 함수
+function pupdate(pno){
+	console.log('pupdate('+pno+')열림')
+	let newName = prompt('수정할 제품명 입력');
+	let newPrice = prompt('수정할 가격 입력');
+	$.ajax({
+		url : "/jspweb/Ex3/Product",
+		method : "put",
+		data : { "pno" : pno , "newName" : newName, "newPrice" : newPrice},
+		success : (r)=>{
+			console.log('put 함수 성공')
+			console.log(r)
+			if(r=='true'){alert('수정성공')
+			}else{alert('수정실패')}
+			plist();
+		}
+	})
+}
 
 
 

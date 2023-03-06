@@ -24,7 +24,7 @@
 	
 	<!--  
 	
-		jsp,js,dao 기존 파일 사용
+		jsp,js 기존 파일 사용
 		dao, dto, servlet 새로운 파일
 		
 		1. 제품 등록 [ 제품명, 가격 ]
@@ -34,6 +34,14 @@
 	
 	
 	 -->
+	 
+	 
+	<h3> 예제 3 : 제품출력 </h3>
+	제품명 : 	<input type="text" class="pname"> <br/>
+	제품가격 : <input type="text" class="pprice">	<br/>
+	<button onclick="addproduct()" type="button"> 제품 등록 </button>
+	
+	<table class="producttable" border="1"></table>
 	
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script type="text/javascript" src="index.js"></script>
