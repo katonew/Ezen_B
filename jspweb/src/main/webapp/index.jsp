@@ -8,5 +8,9 @@
 </head>
 <body>
 
+
+	<a href="/jspweb/member/signup.jsp">회원가입</a>
+	<a href="/jspweb/admin/info.jsp">회원출력</a>
+
 </body>
 </html>
