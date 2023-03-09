@@ -11,10 +11,10 @@ import model.dao.MemberDao;
 
 
 @WebServlet("/mconfirm")
-public class mconfirm extends HttpServlet {
+public class Mconfirm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
      
-    public mconfirm() {
+    public Mconfirm() {
         super();
     }
 
