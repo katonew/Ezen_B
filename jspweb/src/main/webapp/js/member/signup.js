@@ -81,9 +81,9 @@ function idcheck(){ // onkeyup
 			method : "get",
 			data : {"mid" : mid},
 			success : (r)=>{
-				console.log('ajax 통신');
+				console.log('아이디체크 ajax 통신');
 				// 응답결과 중복이 있으면 true
-				if(r=="true"){
+				if(r=='true'){
 					checkconfirm[0].innerHTML = "사용중인 아이디"
 				}else{
 					checkconfirm[0].innerHTML = "사용가능"

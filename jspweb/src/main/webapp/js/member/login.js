@@ -12,8 +12,10 @@ function login(){
 		method : "post",
 		data : { "mid" : mid, "mpwd" : mpwd },
 		success : (r)=>{
-			console.log('로그인 ajax 통신')
+			console.log('login ajax 성공')
 			console.log(r)
+			if(r=='true'){location.href="/jspweb/index.jsp";}
+			else{alert('로그인에 실패했습니다.');}
 		}
 	})
 	
