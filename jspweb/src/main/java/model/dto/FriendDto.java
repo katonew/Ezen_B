@@ -1,9 +1,9 @@
 package model.dto;
 
 public class FriendDto {
-	private int fno ;
-	private int ffrom ;
-	private int fto ;
+	private int fno;
+	private int ffrom;
+	private int fto;
 	
 	public FriendDto() {
 		// TODO Auto-generated constructor stub
@@ -44,7 +44,5 @@ public class FriendDto {
 	public String toString() {
 		return "FriendDto [fno=" + fno + ", ffrom=" + ffrom + ", fto=" + fto + "]";
 	}
-	
-	
 	
 }
