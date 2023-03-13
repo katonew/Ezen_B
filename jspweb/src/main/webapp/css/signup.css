@@ -49,15 +49,25 @@
 	width: 30%;
 	padding: 10px;
 }
-.pimgbox{	/*첨부파일 구역 */
-	display: flex;  align-items: center;
+/*첨부파일 구역 */
+
+.pimgbox{	
+	 align-items: center;
 }
+
 .premimg{	/* 첨부파일 이미지 미리보기 */
 	width: 200px;
     height: 200px;
     border: 1px solid #e8e8e8;
     border-radius: 50%;
+    align-items: center;
 }
+
+.mimg{
+	border-radius: 0px !important;
+	padding: 5px !important;
+}
+
 /* 회원가입 버튼 */
 .signupbtn{
 	width: 100%;
