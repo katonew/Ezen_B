@@ -110,9 +110,10 @@ public class Info extends HttpServlet {
 		// 1. 로그인 된 회원 탈퇴
 			// 1. 로그인 된 회원 아이디 가져오기 [ 세션(Object) ]
 		String mid = (String)request.getSession().getAttribute("login");
+		String mpwd = request.getParameter("mpwd");
 			System.out.println("mid : "+mid);
 		// 2. Dao에게 요청 후 결과 받기
-		boolean result = MemberDao.getInstance().Delete(mid);
+		boolean result = MemberDao.getInstance().Delete(mid,mpwd);
 		System.out.println("result : "+result);
 		// 3. 결과를 ajax에게 보내기
 		response.getWriter().print(result);
@@ -122,15 +123,58 @@ public class Info extends HttpServlet {
 	
 	// 3. 회원 정보 수정 
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1. 로그인 된 회원 수정
-			// 1. 필요한 데이터 요청
-		String mid = (String)request.getSession().getAttribute("login");	System.out.println("mid : " + mid);
-		String mpwd = request.getParameter("mpwd");							System.out.println("mpwd : " + mpwd);
-		String memail = request.getParameter("memail");						System.out.println("memail : " + memail);
-			// 2. Dao에게 요청 후 결과 받기
-		boolean result = MemberDao.getInstance().Update(mid, mpwd, memail);
-			// 3. 결과를 ajax에게 보내기
+		/*
+			 // 1. 로그인 된 회원 수정 
+			 	// 1. 필요한 데이터 요청 
+			 String mid = (String)request.getSession().getAttribute("login");
+			 System.out.println("mid : " + mid); 
+			 String mpwd =	 request.getParameter("mpwd"); 
+			 System.out.println("mpwd : " + mpwd); 
+			 String	 newmpwd = request.getParameter("newmpwd"); 
+			 System.out.println("newmpwd : " + newmpwd); 
+			 String memail = request.getParameter("memail");
+			 System.out.println("memail : " + memail); 
+			 	// 2. Dao에게 요청 후 결과 받기 
+			 boolean result = MemberDao.getInstance().Update(mid, mpwd, newmpwd, memail); 
+			 	// 3. 결과를 ajax에게 보내기 
+			 response.getWriter().print(result);
+		 */
+		
+		
+		// 1. 업로드 코드 구현
+			// 1. 업로드 한 파일을 해당 서버 경로로 업로드
+		String path = request.getSession().getServletContext().getRealPath("/member/pimg");
+			// 2. 객체
+		MultipartRequest multi = new MultipartRequest(
+				request, 
+				path , 
+				1024*1024*10,
+				"UTF-8",
+				new DefaultFileRenamePolicy()
+			);
+		String mid = (String)request.getSession().getAttribute("login");
+		String mpwd = multi.getParameter("mpwd");
+		String newmpwd = multi.getParameter("newmpwd");
+		String memail = multi.getParameter("memail");
+		String newmimg = multi.getFilesystemName("newmimg");
+		String defalutimg = multi.getParameter("defaultimg");
+		
+		// 3. 만약에 첨부파일이 없으면
+		if(newmimg==null) {
+			// 기존 이미지 파일을 그대로 사용
+			newmimg = MemberDao.getInstance().getMember(mid).getMimg();
+		}
+		if(defalutimg.equals("true")) { // 기본 프로필 사용
+			newmimg = null;
+		}
+		
+		// * 프로필 변경시 기존 프로필 실제파일 서버에서 삭제 [ 추가할 예정 ]
+		
+		
+		
+		boolean result = MemberDao.getInstance().Update(mid, mpwd, newmpwd, newmimg, memail);
 		response.getWriter().print(result);
+				
 	}
 	
 	

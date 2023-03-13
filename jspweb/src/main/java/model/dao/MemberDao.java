@@ -161,11 +161,12 @@ public class MemberDao extends Dao {
 	}// setPoint e
 	
 	// 9. 회원탈퇴 [ 인수 : mid / 반환 : boolean(성공/실패) ]
-	public boolean Delete(String mid) {
-		String sql = "delete from member where mid = ?;";
+	public boolean Delete(String mid, String mpwd) {
+		String sql = "delete from member where mid = ? and mpwd = ? ;";
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, mid);
+			ps.setString(2, mpwd);
 			int count = ps.executeUpdate(); // 삭제된 레코드 수 반환
 			if(count==1) {return true;} // 레코드 1개 삭제 성공시 true
 		} catch (Exception e) {System.out.println("회원탈퇴 오류 : " + e);}
@@ -174,13 +175,15 @@ public class MemberDao extends Dao {
 	
 	
 	// 10. 회원수정 [ 인수 : mid, mpwd, memail / 반환 : boolean(성공/실패)]
-	public boolean Update(String mid, String mpwd, String memail) {
-		String sql = "update member set mpwd=?, memail=? where mid = ?;";
+	public boolean Update(String mid, String mpwd, String newmpwd, String newmimg, String memail) {
+		String sql = "update member set mpwd=?, memail=? , mimg = ? where mid = ? and mpwd=? ; ";
 		try {
 			ps = con.prepareStatement(sql);
-			ps.setString(1, mpwd);
+			ps.setString(1, newmpwd);
 			ps.setString(2, memail);
-			ps.setString(3, mid);
+			ps.setString(3, newmimg);
+			ps.setString(4, mid);
+			ps.setString(5, mpwd);
 			int count = ps.executeUpdate(); // 수정된 레코드 수 반환
 			if(count==1) {return true;}		// 레코드 1개 수정 성공시 true
 		} catch (Exception e) {System.out.println("회원수정 오류 : " + e);}

@@ -15,7 +15,7 @@
 	<%@ include file="../footer.jsp" %>
 	
 	<!-- 사용자 정의 -->
-	<script src="/jspweb/js/member/info.js" type="text/javascript"></script>
+	<script src="/jspweb/js/admin/info.js" type="text/javascript"></script>
 	
 
 </body>

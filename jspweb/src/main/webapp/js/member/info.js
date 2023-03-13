@@ -24,13 +24,13 @@ function setdelete(){
 	$.ajax({
 		url : "/jspweb/member",
 		method : "delete",
-		//data : "",
+		data : { "mpwd" : document.querySelector('.mpwd').value },
 		success : (r)=>{
 			console.log('통신');
 			console.log(r);
-			if(r='true'){
+			if(r=='true'){
 				alert('탈퇴 성공')
-				location.href="/jspweb/logout.jsp";
+				location.href="/jspweb/member/logout.jsp";
 			}else{
 				alert('탈퇴 실패')
 			}
@@ -41,8 +41,6 @@ function setdelete(){
 // 2. 회원 수정
 function setupdate(){
 	console.log('setupdate 열림')
-	let pwd = prompt('새로운 비밀번호')
-	let memail = prompt('새로운 이메일')
 	$.ajax({
 		url : "/jspweb/member",
 		method : "put",

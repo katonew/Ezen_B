@@ -3,8 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<!-- 모달 CSS -->
+	<link href="/jspweb/css/modal.css" rel="stylesheet">
 </head>
 <body>
 	<%@ include file="/header.jsp" %>
@@ -26,12 +28,31 @@
 			<div>보유포인트</div>
 			<div class="mpoint"></div>
 		</div>
-		<button onclick="setupdate()" type="button">회원정보수정</button>
-		<button onclick="setdelete()" type="button">회원탈퇴</button>
+		<a href="/jspweb/member/update.jsp"><button onclick="setupdate()" type="button">회원정보수정</button></a>
+		<button onclick="openModal()" type="button">회원탈퇴</button>
+	</div>
+	
+	<!-- 모달 HTML  -->
+	<div class="modal_wrap">
+		<div class = "modal_box">
+			<h3 class="modal_title">회원탈퇴</h3>
+			<div class="modal_content">
+				정말 회원 탈퇴 하시겠습니까? </br>
+				비밀번호 확인 : <input type="password" class="mpwd">
+			</div>
+			<div class="modal_btn">
+				<button onclick="setdelete()" class="modal_check" type="button">탈퇴하기</button>
+				<button onclick="closeModal()" class="modal_cencel" type="button">취소</button>
+			</div>
+		</div>
 	</div>
 
-
+	
+	<!-- 모달 js -->
+	<script src="/jspweb/js/member/modal.js" type="text/javascript"></script>
+	<!-- info js -->
 	<script src="/jspweb/js/member/info.js" type="text/javascript"></script>
+	
 </body>
 </html>
 
