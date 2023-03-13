@@ -12,9 +12,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import model.dao.MemberDao;
 import model.dto.MemberDto;
 
-/**
- * Servlet implementation class Login
- */
 @WebServlet("/login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -23,6 +20,7 @@ public class Login extends HttpServlet {
         super();
        
     }
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		// 1. 세션[Object]에 담겨진 회원아이디 호출 

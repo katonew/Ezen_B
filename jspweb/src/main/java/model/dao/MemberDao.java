@@ -1,7 +1,7 @@
 package model.dao;
 
+import java.sql.Statement;
 import java.util.ArrayList;
-
 import model.dto.MemberDto;
 
 public class MemberDao extends Dao {
@@ -13,21 +13,41 @@ public class MemberDao extends Dao {
 	
 	// 1. 회원가입 
 	public boolean signtp( MemberDto dto ) {
-		String sql = "insert into member(mid,mpwd,memail,mimg)values(?,?,?,?)";
+		String sql = "insert into member(mid,mpwd,memail,mimg) values(?,?,?,?); ";
 		try {
-			ps = con.prepareStatement(sql);
+			// sql문 실행 후 PK값을 리턴받겠다.
+			ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ps.setString( 1 , dto.getMid() );
 			ps.setString( 2 , dto.getMpwd() );
 			ps.setString( 3 , dto.getMemail() );
 			ps.setString( 4 , dto.getMimg() );
-			ps.executeUpdate(); return true; 
+			ps.executeUpdate(); 
+			rs = ps.getGeneratedKeys(); // 리턴받은 pk값을 ps로 받기
+			if(rs.next()) {
+				int pk = rs.getInt(1);
+				setPoint("회원가입축하", 100, pk);
+			}
+			//회원가입 성공시 포인트 지급 [ 내용, 개수, 방금 회원가입 한 회원번호(PK)]
+			/*
+			 	- insert 이후에 자동으로 생성된 auto key 찾기
+			 	con.prepareStatement(sql)
+			 	1. 아래와 같이 변경
+			 	con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			 	- sql문 실행 후 PK값을 리턴받겠다.
+			 	2. 생성된 pk값 결과 담기
+			 	rs = ps.getGeneratedKeys();
+			 	3. 검색 된 레코드 결과에서 pk 호출
+			 	rs.next() ---- > rs.getInt(1);
+			 
+			*/
+			return true; 
 		}catch (Exception e) {System.out.println(e);}
 		return false;
 	}
 	// 2. 모든 회원 호출 [ 관리자기준  인수:x 반환:모든회원들의 dto ]
 	public ArrayList<MemberDto> getMemberList( ){
 		ArrayList<MemberDto> list = new ArrayList<>(); // 모든 회원들의 리스트 선언 
-		String sql = "select * from member";			// 1.SQL 명령어 작성 
+		String sql = "select * from member; ";			// 1.SQL 명령어 작성 
 		try {
 			ps = con.prepareStatement(sql);				// 2. 연결된 con 에 SQL 대입해서 ps 
 			rs = ps.executeQuery();						// 3. SQL 실행후 결과 RS 담고 
@@ -45,7 +65,7 @@ public class MemberDao extends Dao {
 	public boolean idCheck( String mid ) {
 												// 문자열 ' ' 필수 vs 정수/실수 ' ' 생략 
 		// String sql = "select * from member where mid = '"+mid+"'";
-		String sql = "select * from member where mid = ? ";
+		String sql = "select * from member where mid = ?; ";
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString( 1 , mid );	// ? 와일드 사용시
@@ -57,7 +77,7 @@ public class MemberDao extends Dao {
 	}
 	// 4. 아이디,비밀번호 검증   [ 로그인 ]
 	public boolean login( String mid , String mpwd ) {
-		String sql = "select * from member where mid = ? and mpwd = ?";
+		String sql = "select * from member where mid = ? and mpwd = ?; ";
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString( 1 , mid );
@@ -66,24 +86,30 @@ public class MemberDao extends Dao {
 			if( rs.next() ) {  return true; } // 만약에 조건에 충족한 레코드가 존재하면 
 		}catch (Exception e) {System.out.println(e);} return false;
 	}
-	// 5. 특정 회원1명 찾기 
+	
+	// 5. 특정 회원1명 찾기 [ + 보유 포인트 ] 
 	public MemberDto getMember( String mid ) {
-		String sql = "select * from member where mid = ? ";
+		String sql = "select m.mno,m.mid,m.mimg,m.memail, sum( p.mpamount) as mpoint "
+				+ "from member m, mpoint p "
+				+ "where m.mno = p.mno and m.mid=?;";
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString( 1 , mid );
 			rs = ps.executeQuery();
-			if( rs.next() ) {	// 비밀번호 제외한 검색된 레코드1개를 dto 1개 만들기 
+			if( rs.next() ) {	// 비밀번호 제외한 검색된 레코드1개를 dto 1개 만들기
+				// 결과 레코드 : m.mno[1],m.mid[2],m.mimg[3],m.memail[4], mpoint[5]
 				MemberDto dto = new MemberDto( 	rs.getInt(1), rs.getString(2), null, 
-						rs.getString(4), rs.getString(3) );
+						rs.getString(3), rs.getString(4) );
+				dto.setMpoint(rs.getInt(5));
 				return dto;	// 레코드1개 --> 회원1명 --> 회원dto 반환 
 			}
-		}catch (Exception e) {System.out.println(e);} 
+		}catch (Exception e) {System.out.println("특정회원 가져오기 오류 : "+e);} 
 		return null; // 없다.
 	}
+	
 	// 6. 아이디찾기 
 	public String findid( String memail ) {
-		String sql = "select mid from member where memail = ?";
+		String sql = "select mid from member where memail = ?; ";
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString( 1 , memail );
@@ -94,7 +120,7 @@ public class MemberDao extends Dao {
 	}
 	// 7. 비밀번호찾기 
 	public String findpwd( String mid , String memail , String updatePwd ) {
-		String sql = "select mno from member where mid = ? and memail = ?";
+		String sql = "select mno from member where mid = ? and memail = ?; ";
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString( 1 , mid );
@@ -116,5 +142,64 @@ public class MemberDao extends Dao {
 			}
 		}catch (Exception e) {System.out.println(e);} 
 		return "false";
+	}// findpwd e
+	
+	// 8. 포인트 함수 [ 1. 지급내용 2.지급개수 3. 대상 ]
+	public boolean setPoint(String content, int point, int mno) {
+		String sql = "insert into mpoint(mpcomment,mpamount,mno) values (?,?,?);";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString( 1 , content );
+			ps.setInt( 2 ,  point );
+			ps.setInt( 3 ,  mno );
+			ps.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			System.out.println("포인트 함수 에러 :" + e);
+		}
+		return false;
+	}// setPoint e
+	
+	// 9. 회원탈퇴 [ 인수 : mid / 반환 : boolean(성공/실패) ]
+	public boolean Delete(String mid) {
+		String sql = "delete from member where mid = ?;";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, mid);
+			int count = ps.executeUpdate(); // 삭제된 레코드 수 반환
+			if(count==1) {return true;} // 레코드 1개 삭제 성공시 true
+		} catch (Exception e) {System.out.println("회원탈퇴 오류 : " + e);}
+		return false;
 	}
-}
+	
+	
+	// 10. 회원수정 [ 인수 : mid, mpwd, memail / 반환 : boolean(성공/실패)]
+	public boolean Update(String mid, String mpwd, String memail) {
+		String sql = "update member set mpwd=?, memail=? where mid = ?;";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, mpwd);
+			ps.setString(2, memail);
+			ps.setString(3, mid);
+			int count = ps.executeUpdate(); // 수정된 레코드 수 반환
+			if(count==1) {return true;}		// 레코드 1개 수정 성공시 true
+		} catch (Exception e) {System.out.println("회원수정 오류 : " + e);}
+		return false;
+	}
+	
+	
+	
+	
+	
+	
+} // class e
+
+
+
+
+
+
+
+
+
+

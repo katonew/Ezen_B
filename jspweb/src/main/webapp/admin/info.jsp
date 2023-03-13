@@ -9,7 +9,7 @@
 <body>
 	<%@ include file="../header.jsp" %>
 	<h3> 모든 회원 명단 </h3>
-	<table class="allmember" border="1"></table>
+	<table class="mListTable" border="1"></table>
 	
 	
 	<%@ include file="../footer.jsp" %>
