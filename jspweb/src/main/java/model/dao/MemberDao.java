@@ -190,7 +190,19 @@ public class MemberDao extends Dao {
 		return false;
 	}
 	
-	
+	// 11. 회원 ID --> 회원 mno 반환
+	public int getMno(String mid) {
+		String sql = "select *from member where mid = ? ;";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, mid);
+			rs = ps.executeQuery(); // 수정된 레코드 수 반환
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (Exception e) {System.out.println("회원mno 반환 오류 : " + e);}
+		return 0;
+	}
 	
 	
 	

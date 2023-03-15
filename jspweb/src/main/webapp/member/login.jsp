@@ -19,10 +19,10 @@
 			<p> 환영합니다. 다양한 커뮤니티 플랫폼 제공합니다 </p>
 			
 			<div class="title">아이디</div>
-			<input onkeyup="idcheck()" maxlength="30" type="text" name="mid" 	class="mid" >
+			<input maxlength="30" type="text" name="mid" 	class="mid" >
 			
 			<div class="title">비밀번호</div>
-			<input onkeyup="pwdcheck()" 		maxlength="20"	type="password" name="mpwd" class="mpwd" >		
+			<input maxlength="20"	type="password" name="mpwd" class="mpwd" >		
 	
 			<div class="checkconfirm"></div>
 			
@@ -36,6 +36,7 @@
 	</div>
 	
 	<!-- 정의 js  -->	
+	<script src="/jspweb/js/member/signup.js" type="text/javascript"></script>
 	<script src="/jspweb/js/member/login.js" type="text/javascript"></script>
 </body>
 </html>
