@@ -13,13 +13,11 @@
 	<div  class="container">
 		
 		<h3> 게시물 목록</h3>
-		<a href="write.jsp">글쓰기</a>
-		
-		<table class="boardTable table">
-		
+		<table class="boardTable table table-hover">
+			
 		
 		</table>
-		
+		<a href="write.jsp">글쓰기</a>
 	</div>
 	
 	<script src="/jspweb/js/board/list.js" type="text/javascript"></script>

@@ -13,8 +13,9 @@ public class BoardDto {
 	private int mno;
 	private int cno;
 	
-	// 추가 -- > 작성자 ID , 카테고리 이름
+	// 추가 -- > 작성자 ID , 카테고리 이름, 작성자 이미지
 	private String mid;
+	private String mimg;
 	
     
 	// 1. 빈생성자 : 사용할 용도 거의 없음
@@ -28,7 +29,7 @@ public class BoardDto {
 		this.btitle = btitle;
 		this.bcontent = bcontent;
 		this.bfile = bfile;
-		this.bdate = bdate;
+		this.bdate = bdate.substring(0, 11);
 		this.bview = bview;
 		this.bup = bup;
 		this.bdown = bdown;
@@ -54,13 +55,23 @@ public class BoardDto {
 		this.btitle = btitle;
 		this.bcontent = bcontent;
 		this.bfile = bfile;
-		this.bdate = bdate;
+		this.bdate = bdate.substring(0, 11);
 		this.bview = bview;
 		this.bup = bup;
 		this.bdown = bdown;
 		this.mno = mno;
 		this.cno = cno;
 		this.mid = mid;
+	}
+    
+    
+
+	public String getMimg() {
+		return mimg;
+	}
+
+	public void setMimg(String mimg) {
+		this.mimg = mimg;
 	}
 
 	public int getBno() {

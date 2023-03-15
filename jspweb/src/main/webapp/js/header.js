@@ -1,4 +1,4 @@
-console.log('js열림');
+console.log('header js열림');
 
 let memberinfo = null;
 
@@ -43,7 +43,6 @@ function getLogin(){
 				}
 			
 			}
-			console.log( html );
 			document.querySelector(".submenu").innerHTML = html;
 		}
 	})

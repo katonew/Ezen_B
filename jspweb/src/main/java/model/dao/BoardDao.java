@@ -44,6 +44,23 @@ public class BoardDao extends Dao{
 		return list;
 	}
 	
-	
+	// 3. 개별 글 조희
+	public BoardDto getBoard(int bno){
+		BoardDto dto = null;
+		String sql = "select  board.*, member.mid, member.mimg from board natural join member where board.bno = ?;";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, bno);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				 dto = new BoardDto(
+					rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), 
+					rs.getString(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), 
+					rs.getInt(9),rs.getInt(10), rs.getString(11));
+				 return dto;
+			}
+		} catch (Exception e) {System.out.println("개별 글 출력 에러 : "+e);}
+		return null;
+	}
 
 }
