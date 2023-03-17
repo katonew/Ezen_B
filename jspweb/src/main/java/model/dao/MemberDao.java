@@ -45,11 +45,17 @@ public class MemberDao extends Dao {
 		return false;
 	}
 	// 2. 모든 회원 호출 [ 관리자기준  인수:x 반환:모든회원들의 dto ]
-	public ArrayList<MemberDto> getMemberList( int startrow, int listsize){
+	public ArrayList<MemberDto> getMemberList( int startrow, int listsize , String key , String keyword){
 		ArrayList<MemberDto> list = new ArrayList<>(); // 모든 회원들의 리스트 선언 
-		String sql = "select * from member order by mno asc limit ?,? ";			// 1.SQL 명령어 작성 
+		String sql = "";
+		if(key.equals("")&&keyword.equals("")) {
+			sql = "select * from member order by mno asc limit ?,? ";
+		}else {
+			sql = "select * from member where "+keyword+" like '%"+key+"%' order by mno asc limit ?,? ";	// 1.SQL 명령어 작성 
+		}
+		
 		try {
-			ps = con.prepareStatement(sql);				// 2. 연결된 con 에 SQL 대입해서 ps 
+			ps = con.prepareStatement(sql);				// 2. 연결된 con 에 SQL 대입해서 ps
 			ps.setInt(1, startrow);
 			ps.setInt(2, listsize);
 			rs = ps.executeQuery();						// 3. SQL 실행후 결과 RS 담고 
@@ -198,6 +204,19 @@ public class MemberDao extends Dao {
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, mid);
+			rs = ps.executeQuery(); // 수정된 레코드 수 반환
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (Exception e) {System.out.println("회원mno 반환 오류 : " + e);}
+		return 0;
+	}
+	
+	// 필요한 멤버 숫자 가져오기 메소드
+	public int membertotal() {
+		String sql = "select count(*) from member";
+		try {
+			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery(); // 수정된 레코드 수 반환
 			if(rs.next()) {
 				return rs.getInt(1);

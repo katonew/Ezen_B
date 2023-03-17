@@ -30,7 +30,7 @@
 			<option value="memail">이메일</option>
 		</select>
 		<input type="text" class="key" placeholder="검색내용">
-		<button type="button" onclick="serchMember()"></button>
+		<button type="button" onclick="serchMember()">검색</button>
 	</div>
 	
 	<%@ include file="../footer.jsp" %>

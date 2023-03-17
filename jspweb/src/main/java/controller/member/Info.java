@@ -95,19 +95,21 @@ public class Info extends HttpServlet {
     // 2. 회원1명 / 회원 여러명 호출 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int type = Integer.parseInt(request.getParameter("type"));
 		int page = Integer.parseInt(request.getParameter("page"));
 		int listsize = Integer.parseInt(request.getParameter("listsize"));
-		
-		if(type == 1) { // 모든 회원 출력
-			
-		}
-		else if(type == 2) { // 검색 출력
-			
-		}
-		
+		String key = request.getParameter("key");
+		String keyword = request.getParameter("keyword");
 		int startrow = (page-1)*listsize;
-		ArrayList<MemberDto> result = MemberDao.getInstance().getMemberList(startrow,listsize);	
+		int totalsize = MemberDao.getInstance().membertotal();
+		int totalpage = totalsize%listsize==0? totalsize%listsize : totalsize%listsize+1;
+		int btnsize = 5; // 최대 페이징버튼 출력수
+		int startbtn = ( (page-1) / btnsize ) * btnsize +1 ;
+		int endbtn = startbtn + (btnsize-1);
+		// * 단 마지막버튼수가 총페이지수보다 커지면 마지막버튼수 총페이지수로 대입 
+		if( endbtn > totalpage ) endbtn = totalpage;
+		
+		
+		ArrayList<MemberDto> result = MemberDao.getInstance().getMemberList(startrow,listsize,key,keyword);	
 		
 		// 1. Dao 에게 모든 회원명단 요청후 저장 
 		//ArrayList<MemberDto> result = MemberDao.getInstance().getMemberList();	
@@ -119,6 +121,7 @@ public class Info extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");			// 응답 데이터 한글 인코딩 
 		response.setContentType("application/json");	// 응답 데이터 타입
 		response.getWriter().print(jsonArray);			// 응답 데이터 보내기
+		
 	}
 	// 4. 회원탈퇴
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

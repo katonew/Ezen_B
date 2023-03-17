@@ -4,12 +4,13 @@ let memberObject = {
 	page : 1 , // page : 표시할 페이징번호
 	key : "" , 
 	keyword : "",
-	type : 1 // 1:전체출력 2:개별출력 
+	listsize : 3
 }
 
 getMemberList(1);
 function getMemberList(page){
-	let listsize = document.querySelector('.listsize').value;
+	memberObject.page = page;
+	memberObject.listsize = document.querySelector('.listsize').value;
 	$.ajax({
 		url: "/jspweb/member",
 		method : "get",
@@ -46,8 +47,9 @@ function getMemberList(page){
 
 
 function serchMember(){
-	pageObject.key = document.querySelector('.key').value;
-	pageObject.keyword = document.querySelector('.keyword').value;
+	console.log('검색버튼 눌림')
+	memberObject.key = document.querySelector('.key').value;
+	memberObject.keyword = document.querySelector('.keyword').value;
 	getMemberList(1);
 }
 

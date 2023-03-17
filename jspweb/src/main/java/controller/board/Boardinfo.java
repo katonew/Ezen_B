@@ -16,6 +16,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import model.dao.BoardDao;
 import model.dao.MemberDao;
+import model.dto.PageDto;
 
 
 @WebServlet("/board/info")
@@ -28,12 +29,41 @@ public class Boardinfo extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int type = Integer.parseInt(request.getParameter("type")) ;
-		System.out.println("type : " + type);
 		if(type==1) { // 타입이 1이면 전체 출력
-			ArrayList<BoardDto> result = BoardDao.getInstance().getBoardList();
+			
+			// -------------- 카테고리 별 출력 -------------//
+			// 1. 카테고리 매개변수 요청 [ cno ]	2.gettotalsize()/getBoardList() 조건 전달 
+			int cno = Integer.parseInt( request.getParameter("cno") );
+			
+			// -------------- 검색 처리 -----------------//
+			// 1. 검색에 필요한 매개변수 요청[ key, keyword ]   2.gettotalsize/getBoardList 조건 전달
+			String key = request.getParameter("key");			
+			String keyword = request.getParameter("keyword");
+			
+			// ------------- page 처리 --------------- //
+			// 1. 현재페이지[요청] , 2.페이지당 표시할게시물수 3.현재페이지[ 게시물시작  ]
+			int page = Integer.parseInt( request.getParameter("page") );
+			int listsize = Integer.parseInt( request.getParameter("listsize") ) ; // 화면에 표시할 게시물수 요청
+			int startrow = (page-1)*listsize; // 해당 페이지에서의 게시물 시작번호
+			
+			// ------------- page 버튼 만들기 ------------ //
+			// 1. 전체페이지수[ 총게시물레코드수/페이지당 표시수 ] 2. 페이지 표시할 최대버튼수 3. 시작버튼/마지막버튼 번호  
+			int totalsize = BoardDao.getInstance().gettotalsize( key , keyword , cno );
+			int totalpage = totalsize % listsize == 0 ? 	// 만약에 나머지가 0 이면 
+							totalsize/listsize :  totalsize/listsize+1;
+			int btnsize = 5; // 최대 페이징버튼 출력수
+			int startbtn = ( (page-1) / btnsize ) * btnsize +1 ; 
+			int endbtn = startbtn + (btnsize-1);
+			// * 단 마지막버튼수가 총페이지수보다 커지면 마지막버튼수 총페이지수로 대입 
+			if( endbtn > totalpage ) endbtn = totalpage;
+
+			ArrayList<BoardDto> result = BoardDao.getInstance().getBoardList( startrow , listsize , key , keyword , cno );
+
+			// page Dto 만들기 
+			PageDto pageDto = new PageDto(page, listsize, startrow, totalsize, totalpage, btnsize, startbtn, endbtn, result);
 			// JAVA 형식 --> JS 형식
 			ObjectMapper mapper = new ObjectMapper();
-			String jsonArray = mapper.writeValueAsString(result);
+			String jsonArray = mapper.writeValueAsString(pageDto);
 			// 응답
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("application/json");
@@ -173,7 +203,45 @@ public class Boardinfo extends HttpServlet {
 
 
 
-
+/*
+	총 게시물수 = 10		, 페이지당 표시할 게시물수 = 3
+	총 레코드수 = 10	총 레코드의 인덱스 : 0~9
+	1. 총 페이지수 = 012 , 345 , 678 , 9
+	
+	2. 페이지별 게시물시작 번호 찾기 
+		1페이지 요청 -> (1-1)*3	=> 0
+		2페이지 요청 -> (2-1)*3	=> 3
+		3페이지 요청 -> (3-1)*3	=> 6
+		
+	3. 시작버튼 , 마지막버튼 수 
+		7페이지	btnsize = 5
+				시작번호패턴 : 1 6 11 16 21
+		1페이지 -> 12345
+		2페이지 -> 12345
+		3페이지 -> 12345
+		4페이지 -> 12345
+		5페이지 -> 12345
+		6페이지 -> 678910	--> 67
+		7페이지 -> 678910	--> 67
+		
+		7페이지	btnsize = 3
+				시작번호패턴 : 1 4 7 10
+		1페이지 -> 123
+		2페이지 -> 123
+		3페이지 -> 123
+		4페이지 -> 456
+		5페이지 -> 456
+		6페이지 -> 456
+		7페이지 -> 7
+		
+			1페이지 	: 1-1 / 5 	*5 +1			-> 	0*5+1	 	1 
+ 			2페이지	: 2-1 / 5	*5 +1			->	0*5+1		1
+ 			3페이지 	: 3-1 / 5	*5 +1			->  0*5+1		1
+ 			4페이지	: 4-1 / 5	*5 +1			->	0*5+1		1
+ 			5페이지	: 5-1 / 5	*5 +1			->  0*5+1		1
+ 			6페이지	: 6-1 / 5 	*5 +1			->  1*5+1 		6
+ 			7페이지	: 7-1 / 5	*5 +1			->	1*5+1		6
+*/
 
 
 

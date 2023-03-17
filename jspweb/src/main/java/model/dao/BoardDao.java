@@ -27,11 +27,20 @@ public class BoardDao extends Dao{
 	} // bwrite e
 	
 	// 2. 모든 글 출력
-	public ArrayList<BoardDto> getBoardList(){
+	public ArrayList< BoardDto > getBoardList( int startrow , int listsize , String key , String keyword , int cno){
 		ArrayList<BoardDto> list = new ArrayList<>();
-		String sql = "select board.*, member.mid from member natural join board order by bdate desc";
+		String sql ="";
+		if( key.equals("") && keyword.equals("") ) { // 검색이 없다.
+			sql = "select b.* , m.mid from member m natural join board b where b.cno = " + cno
+					+ " order by b.bdate desc limit ? , ? ";
+		}else { // 검색이 있다.
+			sql = "select b.* , m.mid from member m natural join board b "
+					+ " where "+key+" like '%"+keyword+"%' and b.cno = " + cno
+					+ " order by b.bdate desc limit ? , ?";
+		}
 		try {
 			ps = con.prepareStatement(sql);
+			ps.setInt( 1 , startrow ); ps.setInt( 2 , listsize);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				BoardDto dto = new BoardDto(
@@ -42,6 +51,22 @@ public class BoardDao extends Dao{
 			}
 		} catch (Exception e) {System.out.println("모든 글 출력 에러 : "+e);}
 		return list;
+	}
+	
+	// 2-2 게시물/레코드 수 구하기 
+	public int gettotalsize( String key , String keyword, int cno ) {
+		String sql = "";
+		if( key.equals("") && keyword.equals("") ) { // 검색이 없다.
+			sql = " select count(*) from member m natural join board b where b.cno = "+cno;
+		}else { // 검색이 있다.
+			sql = " select count(*) from member m natural join board b "
+					+ " where "+key+" like '%"+keyword+"%' and b.cno = " + cno;
+		}
+		try {
+			ps =con.prepareStatement(sql); 
+			rs = ps.executeQuery();
+			if( rs.next() ) {return rs.getInt(1);}
+		}catch (Exception e) {System.err.println(e);} return 0;
 	}
 	
 	// 3. 개별 글 조희
@@ -63,6 +88,18 @@ public class BoardDao extends Dao{
 		return null;
 	} // getboard e
 	
+	// 4. 조회수/좋아수/싫어요 증가[update]
+	public boolean bIncrease( int type , int bno ) {
+		String sql ="";
+		// 만약에 타입이 1이면 bview 2이면 bup 3이면 bdown 를 1씩 증가 업데이트
+		if( type == 1 ) { sql="update board set bview 	= bview+1 	where bno = "+bno; }
+		if( type == 2 ) { sql="update board set bup 	= bup+1 	where bno = "+bno; }
+		if( type == 3 ) { sql="update board set bdown 	= bdown+1	where bno = "+bno; }
+		try {
+			ps = con.prepareStatement(sql); ps.executeUpdate(); return true;
+		}catch (Exception e) {System.out.println(e);}  return false;
+	}
+		
 	// 5. 게시물 삭제
 	public boolean bdelete(int bno) {
 		String sql = "delete from board where bno = " + bno ;
@@ -103,6 +140,8 @@ public class BoardDao extends Dao{
 		} catch (Exception e) {System.out.println("첨부파일삭제 DB오류 : " +  e);}
 		return false;
 	}
+	
+	
 	
 
 }
