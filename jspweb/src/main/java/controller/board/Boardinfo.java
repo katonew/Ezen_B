@@ -1,5 +1,6 @@
 package controller.board;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -95,12 +96,94 @@ public class Boardinfo extends HttpServlet {
 	}
 
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//업로드 담당
+		String path = request.getSession().getServletContext().getRealPath("/board/bfile");
+		MultipartRequest multi = new MultipartRequest(
+				request,  						// 1. 요청방식 
+				path , 							// 2. 첨부파일 가져와서 저장할 서버내 폴더 
+				1024*1024 * 10 ,				// 3. 첨부파일 허용 범위 용량[ 바이트단위 ] 10MB
+				"UTF-8" ,						// 4. 첨부파일 한글 인코딩 
+				new DefaultFileRenamePolicy() 	// 5. 동일한 첨부파일명이 존재했을때 뒤에 숫자 붙여서 식별
+				);
+		// 수정할 대상 + 수정된 정보 호출
+		int bno = Integer.parseInt(multi.getParameter("bno"));
+		int cno = Integer.parseInt(multi.getParameter("cno"));
+		String btitle = multi.getParameter("btitle");
+		String bcontent = multi.getParameter("bcontent");
+		String bfile = multi.getFilesystemName("bfile");
 		
+		/* 첨부파일의 수정 경우의 수
+			1. 기존에 첨부파일이 없었다. 	
+				--> 새로운 첨부파일이 없다. [행동 없음]
+				--> 새로운 첨부파일이 있다. [업로드 , 새로운 파일로 업데이트 처리]	
+			2. 기존에 첨부파일이 있었다. --> 
+				--> 새로운 첨부파일이 없다. [ 기존파일명으로 업데이트 처리 (그대로 사용) ]
+				--> 새로운 첨부파일이 있다. [ 업로드,새로운 파일로 업데이트 처리, 기존파일 삭제 ]
+		*/
+		String oldbfile = BoardDao.getInstance().getBoard(bno).getBfile();
+		
+		if(bfile==null) {	// 새로운 첨부파일이 없다.
+			bfile = oldbfile;
+		}else { // 새로운 첨부파일이 있다.
+			// 1. 수정 전 기존 첨부파일명 가져오기
+			String Filepath = request.getSession().getServletContext().getRealPath("/board/bfile/"+oldbfile);
+			File file = new File(Filepath);
+			if(file.exists()) {file.delete();}
+		}
+		
+		//dto
+		BoardDto dto = new BoardDto(bno, btitle, bcontent, bfile, cno);
+		System.out.println("dto : "+ dto);
+		//dao
+		boolean result = BoardDao.getInstance().bupdate(dto);
+		// 응답
+		response.getWriter().print(result);
 	}
 
 	
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int type = Integer.parseInt(request.getParameter("type"));
+		int bno =  Integer.parseInt(request.getParameter("bno")) ;
 		
-	}
+		//삭제 전 첨부파일명 구하기 [ 타입공통코드 ]
+		String bfile = BoardDao.getInstance().getBoard(bno).getBfile();
+		boolean result = true;
+		
+		if(type==1) { // db삭제 + 파일삭제
+			// [1] DB에서 삭제처리
+			result = BoardDao.getInstance().bdelete(bno);
+		}else if(type==2) { // DB업데이트 + 파일삭제
+			result = BoardDao.getInstance().bfiledelete(bno);
+		}
+		
+		// [ 삭제] 공통
+		if(result) { // 만약에 DB에서 레코드 삭제를 성공 했으면
+			String path = request.getSession().getServletContext().getRealPath("/board/bfile/"+bfile);
+			File file = new File(path); // 객체화
+			if(file.exists()){		// 만약에 파일이 존재하면
+				file.delete();		// 파일 삭제
+			}
+		}
+		response.getWriter().print(result);
+		
+	} // delete e
 
-}
+}// class e
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

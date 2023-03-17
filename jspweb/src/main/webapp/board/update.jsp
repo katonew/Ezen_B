@@ -9,38 +9,38 @@
 <body>
 	
 	<%@include file = "/header.jsp" %>
-	<!-- <script type="text/javascript">
-		if(memberinfo.mid==null){
-			alert('로그인하지 않으면 글을 쓸 수 없습니다.')
-			location.href= "/jspweb/member/login.jsp";
-		}
-	</script> -->
 	
 	<%
-		// JSP 로그인 여부 제어
+		// 1.JSP 로그인 여부 제어
 		Object o = request.getSession().getAttribute("login");
 		if( o==null){
 			response.sendRedirect("/jspweb/member/login.jsp");
 		}
+		// 2.HTTP url 안에 있는 bno 호출
+		int bno = Integer.parseInt(request.getParameter("bno"));
 	%>
 	
-	
+	<input type="hidden" class="bno" value="<%=bno%>">
 	<div class="container">
 		
-		<h3>글쓰기</h3>
-		<form class="writeForm">
-			카테고리 : <select class="cno" name="cno">
-						<option value="1">공지사항</option>
-						<option value="2">커뮤니티</option>
-						<option value="3">QnA</option>
-						<option value="4">노하우</option>
-					</select>
-			제목 : <input type="text" class="btitle" name="btitle">
-			내용 : <textarea rows="3" cols="3" class="bcontent" name="bcontent"></textarea>
-			첨부파일 : <input type="file" name="bfile">
-			<button onclick="bwrite()" type="button"> 쓰기 </button>
-		
-		
+		<h3>글수정</h3>
+		<form class="updateForm">
+			<div>
+				카테고리 : <select name="cno" class="cno">
+							<option value="1">공지사항</option>
+							<option value="2">커뮤니티</option>
+							<option value="3">QnA</option>
+							<option value="4">노하우</option>
+						</select>
+			</div>
+			<div>
+				제목 : <input type="text" class="btitle" name="btitle">
+			</div>
+			<div>
+				내용 : <textarea rows="5" cols="20" class="bcontent" name="bcontent"></textarea>
+			</div>
+			<div class="bfilebox"></div>
+			<button onclick="bupdate()" type="button"> 수정 </button>
 		
 		
 		</form>
@@ -49,7 +49,7 @@
 	
 	
 	
-	<script src="/jspweb/js/board/write.js" type="text/javascript"></script>
+	<script src="/jspweb/js/board/update.js" type="text/javascript"></script>
 	<!-- 
 		HTML =======> form [ 동기식 : 페이지 전환이 있음 ]
 		<form action="통신할URL" method="HTTP메소드">

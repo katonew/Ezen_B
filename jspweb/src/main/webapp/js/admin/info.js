@@ -1,11 +1,19 @@
 console.log( 'js열림')
 
-getMemberList();
-function getMemberList(){
+let memberObject = {
+	page : 1 , // page : 표시할 페이징번호
+	key : "" , 
+	keyword : "",
+	type : 1 // 1:전체출력 2:개별출력 
+}
+
+getMemberList(1);
+function getMemberList(page){
+	let listsize = document.querySelector('.listsize').value;
 	$.ajax({
 		url: "/jspweb/member",
 		method : "get",
-		//data : "" ,
+		data : memberObject ,
 		success : (r)=>{
 			console.log('ajax통신');
 			console.log( r );	// 응답 결과 데이터 확인 
@@ -18,12 +26,12 @@ function getMemberList(){
 							<th width="10%"> 이메일주소 </th>
 							<th width="10%"> 비고 </th>
 						</tr>`
-			r.forEach( (o,i) =>{
+			r.forEach( (o) =>{
 				// 2. 테이블 내용물 추가 구성 
 				// 만약에 회원 mimg 프로필이미지가 null 이면 기본프로필 사용 / 아니면 mimg 사용 
 				html +=	`<tr>
 							<td> ${ o.mno } </td>
-							<td> <img src="/jspweb/member/pimg/${ o.mimg == null ? 'default.webp' : o.mimg }" width="100%">  </td>
+							<td> <img width="30%" src="/jspweb/member/pimg/${ o.mimg == null ? 'default.webp' : o.mimg }" width="100%">  </td>
 							<td> ${ o.mid } </td>
 							<td> ${ o.memail } </td>
 							<td> </td>
@@ -35,3 +43,23 @@ function getMemberList(){
 		} // success e
 	}) // ajax e
 } // getmemberlist e
+
+
+function serchMember(){
+	pageObject.key = document.querySelector('.key').value;
+	pageObject.keyword = document.querySelector('.keyword').value;
+	getMemberList(1);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

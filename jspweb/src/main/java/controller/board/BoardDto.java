@@ -64,8 +64,18 @@ public class BoardDto {
 		this.mid = mid;
 	}
     
+    // 5. 수정용 생성자
+    public BoardDto(int bno, String btitle, String bcontent, String bfile, int cno) {
+		super();
+		this.bno = bno;
+		this.btitle = btitle;
+		this.bcontent = bcontent;
+		this.bfile = bfile;
+		this.cno = cno;
+	}
     
-
+    // getter & setter
+    
 	public String getMimg() {
 		return mimg;
 	}
@@ -160,6 +170,13 @@ public class BoardDto {
 
 	public void setMid(String mid) {
 		this.mid = mid;
+	}
+
+	@Override
+	public String toString() {
+		return "BoardDto [bno=" + bno + ", btitle=" + btitle + ", bcontent=" + bcontent + ", bfile=" + bfile
+				+ ", bdate=" + bdate + ", bview=" + bview + ", bup=" + bup + ", bdown=" + bdown + ", mno=" + mno
+				+ ", cno=" + cno + ", mid=" + mid + ", mimg=" + mimg + "]";
 	}
     
     

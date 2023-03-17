@@ -27,7 +27,12 @@ function getBoard(){
 				html = `${r.bfile} <button type="button" onclick="bdownload('${r.bfile}')">다운로드</button>`
 				document.querySelector('.bfile').innerHTML = html;
 			}
-			
+			// 로그인 된 회원과 작성자가 일치하면 수정/ 삭제 버튼 출력
+			if(memberinfo.mid==r.mid){
+				html = `<button onclick="bdelete(${bno},${r.cno})" type="button">삭제</button>
+						<button onclick="bupdate(${bno})" type="button">수정</button>`;
+				document.querySelector('.btnbox').innerHTML = html;
+			}
 			
 		}
 	})
@@ -50,6 +55,48 @@ function bdownload(bfile){
 	location.href="/jspweb/filedownload?bfile="+bfile;
 	
 }
+
+// 4. 게시글 삭제
+function bdelete(bno,cno){
+	$.ajax({
+		url : "/jspweb/board/info",
+		method : "delete",
+		data : { "type" : 1 , "bno" : bno},
+		success : (r)=>{
+			if(r=='true'){
+				alert('삭제 성공')
+				location.href="/jspweb/board/list.jsp?cno="+cno;
+			}else{alert('삭제 실패')}
+		}
+	})
+}
+
+// 수정함수 = 수정페이지로 이동
+function bupdate(bno){
+	location.href = "/jspweb/board/update.jsp?bno="+bno;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*

@@ -25,7 +25,8 @@ function bwrite(){
 			console.log(r)
 			if(r=='true'){
 				alert('글쓰기 성공')
-				location.href="/jspweb/board/list.jsp";
+				console.log(document.querySelector('.cno').value)
+				//location.href="/jspweb/board/list.jsp?cno="+document.querySelector('.cno').value;
 			}else{alert('글쓰기 실패')}
 			
 		} // success e

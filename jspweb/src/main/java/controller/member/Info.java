@@ -94,8 +94,24 @@ public class Info extends HttpServlet {
     
     // 2. 회원1명 / 회원 여러명 호출 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		int type = Integer.parseInt(request.getParameter("type"));
+		int page = Integer.parseInt(request.getParameter("page"));
+		int listsize = Integer.parseInt(request.getParameter("listsize"));
+		
+		if(type == 1) { // 모든 회원 출력
+			
+		}
+		else if(type == 2) { // 검색 출력
+			
+		}
+		
+		int startrow = (page-1)*listsize;
+		ArrayList<MemberDto> result = MemberDao.getInstance().getMemberList(startrow,listsize);	
+		
 		// 1. Dao 에게 모든 회원명단 요청후 저장 
-		ArrayList<MemberDto> result = MemberDao.getInstance().getMemberList();	
+		//ArrayList<MemberDto> result = MemberDao.getInstance().getMemberList();	
+		
 		// 2. JAVA객체 ---> JS객체 형변환 [ 서로 다른 언어 사용하니까 ]
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonArray = mapper.writeValueAsString( result );					
