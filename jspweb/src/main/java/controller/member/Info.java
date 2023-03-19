@@ -15,6 +15,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import model.dao.MemberDao;
 import model.dto.MemberDto;
+import model.dto.mpageDto;
 
 @WebServlet("/member")
 public class Info extends HttpServlet {
@@ -104,19 +105,23 @@ public class Info extends HttpServlet {
 		int totalpage = totalsize%listsize==0? totalsize%listsize : totalsize%listsize+1;
 		int btnsize = 5; // 최대 페이징버튼 출력수
 		int startbtn = ( (page-1) / btnsize ) * btnsize +1 ;
+		System.out.println("startbtn : "+startbtn);
 		int endbtn = startbtn + (btnsize-1);
-		// * 단 마지막버튼수가 총페이지수보다 커지면 마지막버튼수 총페이지수로 대입 
-		if( endbtn > totalpage ) endbtn = totalpage;
+		System.out.println("endbtn1 : "+endbtn);
+		// * 단 마지막버튼수가 총페이지수보다 커지면 마지막버튼수 총페이지수로 대입
+		System.out.println("endbtn2 : "+endbtn);
 		
 		
 		ArrayList<MemberDto> result = MemberDao.getInstance().getMemberList(startrow,listsize,key,keyword);	
 		
 		// 1. Dao 에게 모든 회원명단 요청후 저장 
-		//ArrayList<MemberDto> result = MemberDao.getInstance().getMemberList();	
+		//ArrayList<MemberDto> result = MemberDao.getInstance().getMemberList();
+		
+		mpageDto dto = new mpageDto(page, listsize, startrow, totalsize, totalpage, btnsize, startbtn, endbtn, result);
 		
 		// 2. JAVA객체 ---> JS객체 형변환 [ 서로 다른 언어 사용하니까 ]
 		ObjectMapper mapper = new ObjectMapper();
-		String jsonArray = mapper.writeValueAsString( result );					
+		String jsonArray = mapper.writeValueAsString( dto );					
 		// 3. 응답 
 		response.setCharacterEncoding("UTF-8");			// 응답 데이터 한글 인코딩 
 		response.setContentType("application/json");	// 응답 데이터 타입

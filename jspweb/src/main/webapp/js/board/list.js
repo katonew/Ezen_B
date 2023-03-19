@@ -29,6 +29,7 @@ function getBoardList(page){
 		data : pageObject ,	// 1:전체출력 2:개별출력 / page : 표시할 페이징번호
 		success : (r)=>{
 			console.log('list ajax 성공')
+			console.log(r)
 			let html = `<tr>
 							<th width="10%">번호</th>
 							<th width="30%">제목</th>

@@ -12,7 +12,6 @@
 	<!-- 모든페이지 공통 css -->
 	<link href="/jspweb/css/modal.css" rel="stylesheet">
 	<link href="/jspweb/css/index.css" rel="stylesheet">
-	
 </head>
 <body>
 	

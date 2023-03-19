@@ -14,8 +14,8 @@ public class mpageDto {
 	private int startbtn;	// 페이지별 시작 페이징버튼의 번호
 	private int endbtn;		// 페이지별 끝 페이징버튼의 번호
 	
-	// !! : 게시물 목록 
-	ArrayList<MemberDto> memberlist ; // 출력할 데이터[게시물] 리스트 
+	// 회원 목록 
+	ArrayList<MemberDto> memberlist ; // 출력할 데이터[회원] 리스트 
 
 	public mpageDto() {}
 

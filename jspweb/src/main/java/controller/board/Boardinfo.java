@@ -53,9 +53,11 @@ public class Boardinfo extends HttpServlet {
 							totalsize/listsize :  totalsize/listsize+1;
 			int btnsize = 5; // 최대 페이징버튼 출력수
 			int startbtn = ( (page-1) / btnsize ) * btnsize +1 ; 
+			System.out.println("startbtn : "+startbtn);
 			int endbtn = startbtn + (btnsize-1);
-			// * 단 마지막버튼수가 총페이지수보다 커지면 마지막버튼수 총페이지수로 대입 
-			if( endbtn > totalpage ) endbtn = totalpage;
+			System.out.println("endbtn1 : "+endbtn);
+			// * 단 마지막버튼수가 총페이지수보다 커지면 마지막버튼수 총페이지수로 대입
+			System.out.println("endbtn2 : "+endbtn);
 
 			ArrayList<BoardDto> result = BoardDao.getInstance().getBoardList( startrow , listsize , key , keyword , cno );
 

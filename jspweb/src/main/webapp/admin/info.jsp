@@ -18,9 +18,8 @@
 			<option>5</option>
 			<option>10</option>
 		</select>
-		<button onclick="getMemberList(1)" type="button"> 1 </button>
-		<button onclick="getMemberList(2)" type="button"> 2 </button>
-		<button onclick="getMemberList(3)" type="button"> 3 </button>
+		<div class="mpagebox"></div>
+		<div class="mseachcount"></div>
 	</div>
 	<div>
 		<select class="keyword">
