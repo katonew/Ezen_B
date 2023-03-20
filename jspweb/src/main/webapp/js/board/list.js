@@ -29,26 +29,25 @@ function getBoardList(page){
 		data : pageObject ,	// 1:전체출력 2:개별출력 / page : 표시할 페이징번호
 		success : (r)=>{
 			console.log('list ajax 성공')
-			console.log(r)
-			let html = `<tr>
-							<th width="10%">번호</th>
-							<th width="30%">제목</th>
-							<th width="10%">작성자</th>
-							<th width="20%">작성일</th>
-							<th width="10%">조회수</th>
-							<th width="10%">좋아요</th>
-							<th width="10%">싫어요</th>
-						</tr>`;
+			console.log(r.boardList)
+			let html = ``;
 			r.boardList.forEach((o)=>{
-				html += `<tr>
-							<td>${o.bno}</td>
-							<td><a href="/jspweb/board/view.jsp?bno=${o.bno}">${o.btitle}</a></td>
-							<td>${o.mid}</td>
-							<td>${o.bdate}</td>
-							<td>${o.bview}</td>
-							<td>${o.bup}</td>
-							<td>${o.bdown}</td>
-						</tr>`;
+				html += `<div class="bcontent">	<!-- 게시글 1개 -->
+							<div>
+								<img class="hpimg" src="/jspweb/member/pimg/${o.mimg==null ? 'default.webp':o.mimg}">
+								<span class="mid">${o.mid}</span>
+								<span class="bdate">${o.bdate}</span>
+							</div>
+							<div>
+								<a href="/jspweb/board/view.jsp?bno=${o.bno}"><div class="btitle">${o.btitle}</div></a>
+							</div>
+							<div class="contentbot">
+								<span><i class="fas fa-eye"></i><span class="bview">${o.bview}</span></span>
+								<span><i class="fas fa-thumbs-up"></i><span class="bup">${o.bup}</span></span>
+								<span><i class="fas fa-thumbs-down"></i><span class="bdown">${o.bdown}</span></span>
+								<span><i class="far fa-comment-dots"></i><span class="rcount">${o.rcount}</span></span>
+							</div>
+						</div>`;
 			document.querySelector('.boardTable').innerHTML = html;
 			
 			}) // forEach e
@@ -56,9 +55,9 @@ function getBoardList(page){
 			html = ''; // 기존에 들어있던 내용 제거 
 			// 이전 [ 만약에 현재 페이지가 1 이하 이면 이전페이지 없음 ]
 			html += page <= 1 ?
-					`<button onclick="getBoardList(${ page })" type="button"> 이전 </button>`
+					`<button onclick="getBoardList(${ page })" type="button" > < </button>`
 					:
-					` <button onclick="getBoardList(${ page-1 })" type="button"> 이전 </button> `
+					` <button onclick="getBoardList(${ page-1 })" type="button"> < </button> `
 			// 페이징 번호 버튼 들 
 			for( let i = r.startbtn ; i<=r.endbtn ; i++ ){ // 시작버튼번호 부터 마지막버튼번호 까지 버튼 생성 
 				html += `
@@ -68,9 +67,9 @@ function getBoardList(page){
 			// 다음 
 			// 다음 [ 만약에 현재 페이지가 총페이지수 이상이면 다음페이지 없음 ]
 			html += page >= r.totalpage ?
-					`<button onclick="getBoardList(${ page })" type="button"> 다음 </button>`
+					`<button onclick="getBoardList(${ page })" type="button"> > </button>`
 					:
-					`<button onclick="getBoardList(${ page+1 })" type="button"> 다음 </button>`
+					`<button onclick="getBoardList(${ page+1 })" type="button"> > </button>`
 			document.querySelector('.pagebox').innerHTML = html;
 			// -------------------- 게시물수 출력  --------------------- //
 			document.querySelector('.seachcount').innerHTML = `게시물 수 : ${ r.totalsize } `

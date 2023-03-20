@@ -32,3 +32,9 @@ function bwrite(){
 		} // success e
 	}) // ajax e
 } // bwrite e
+
+ $(document).ready(function() {
+        $('#summernote').summernote(
+			{height : 700}			
+		);
+    });

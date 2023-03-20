@@ -23,7 +23,7 @@
 	</div>
 	<div>
 		<select class="keyword">
-			<option>검색</option>
+			<option value="">검색</option>
 			<option value="mno">번호</option>
 			<option value="mid">아이디</option>
 			<option value="memail">이메일</option>
@@ -31,7 +31,6 @@
 		<input type="text" class="key" placeholder="검색내용">
 		<button type="button" onclick="serchMember()">검색</button>
 	</div>
-	
 	<%@ include file="../footer.jsp" %>
 	
 	<!-- 사용자 정의 -->

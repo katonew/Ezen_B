@@ -1,5 +1,8 @@
 package controller.board;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class BoardDto {
 
 	private int bno;
@@ -14,8 +17,9 @@ public class BoardDto {
 	private int cno;
 	
 	// 추가 -- > 작성자 ID , 카테고리 이름, 작성자 이미지
-	private String mid;
-	private String mimg;
+	private String mid;	// 작성자 아이디
+	private String mimg; // 작성자 프로필
+	private int rcount; // 댓글개수
 	
     
 	// 1. 빈생성자 : 사용할 용도 거의 없음
@@ -29,7 +33,7 @@ public class BoardDto {
 		this.btitle = btitle;
 		this.bcontent = bcontent;
 		this.bfile = bfile;
-		this.bdate = bdate.substring(0, 11);
+		this.bdate = bdate;
 		this.bview = bview;
 		this.bup = bup;
 		this.bdown = bdown;
@@ -55,7 +59,19 @@ public class BoardDto {
 		this.btitle = btitle;
 		this.bcontent = bcontent;
 		this.bfile = bfile;
-		this.bdate = bdate.substring(0, 11);
+		// 오늘 날짜와 작성일이 동일하면 시간표기 아니면 날짜만 표기
+			// 1. 오늘 날짜
+		Date date = new Date();
+		// 현재의 날짜를 SQL과 같은 포맷으로 설정
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String now = sdf.format(date);
+			// 2. 만약 오늘 날짜와 작성일이 동일하면
+			// now.split(" ")[0] : 오늘 날짜 , now.split(" ")[1] : 현재 시간
+		if(now.split(" ")[0].equals(bdate.split(" ")[0])) {
+			this.bdate = bdate.split(" ")[1];
+		}else { // 오늘 날짜와 작성일이 동일하지 않으면 날짜
+			this.bdate = bdate.substring(5, 11);
+		}
 		this.bview = bview;
 		this.bup = bup;
 		this.bdown = bdown;
@@ -75,10 +91,18 @@ public class BoardDto {
 	}
     
     // getter & setter
-    
+    public int getRcount() {
+		return rcount;
+	}
+
+	public void setRcount(int rcount) {
+		this.rcount = rcount;
+	}
+	
 	public String getMimg() {
 		return mimg;
 	}
+
 
 	public void setMimg(String mimg) {
 		this.mimg = mimg;

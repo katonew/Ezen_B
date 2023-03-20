@@ -3,8 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link href="/jspweb/css/list.css" rel="stylesheet">
+	<link href="/jspweb/css/view.css" rel="stylesheet">
 </head>
 <body>
 	<%@include file = "/header.jsp" %>
@@ -14,37 +16,42 @@
 		// 1. jsp 이용한 http url 변수 호출
 		String bno = request.getParameter("bno");
 	%>
-		<!-- JAVA 코드를 HTML에 출력하는 자리 -->
-	<div  class="container">
-		<h3> 게시물 개별 조회/ 보기</h3>
-		<div>
-			<div>게시물번호</div>
-			<div class="bno"><%=bno%></div>
+	<div hidden="hidden" class="bno"><%=bno%></div>
+	<div class="container">
+		<div class="boardbox">
+			<div class="viewtop">
+				<div class="mimg">
+					
+				</div>
+				<div class="rviewtop">
+					<div class="mid">작성자</div>
+					<div>
+						<span class="bdate">작성날짜</span>
+						<span><i class="fas fa-eye"></i><span class="bview">조회수</span></span>
+						<span><i class="fas fa-thumbs-up"></i><span class="bup">좋아요</span></span>
+						<span><i class="fas fa-thumbs-down"></i><span class="bdown">싫어요</span></span>
+					</div>
+				</div>
+			</div>
+			
+			<div class="btitle">제목자리</div>
+			<div class="bcontent">내용자리</div>
+			<div class ="updownbox">
+				<button onclick="bIncrease(2)" type="button" class="bup"><span><i class="fas fa-thumbs-up"><span class="bup2"></span></i></button>
+				<button onclick="bIncrease(3)" type="button" class="bdown"><span><i class="fas fa-thumbs-down"><span class="bdown2"></span></i></button>
+			</div>
+			<div class="bfilebox"><i class="fas fa-download"></i><span class="bfile"></span></div>
+			<div class="btnbox"></div>
+			<div class="replycount">댓글개수</div>
+			<div class="replywritebox">
+				<textarea  class="rcontent"></textarea>
+				<button  class="rwritebtn bbtn" type="button" onclick="rwrite()">댓글 등록</button>
+			</div>
+			<div class="replyListBox">댓글출력 들어갈 부분</div>
 		</div>
-		<div>
-			<div>작성일/조회수/좋아요/싫어요</div>
-			<div class="infobox"></div>
-		</div>
-		<div>
-			<div>작성자[프로필]</div>
-			<div class="pimgbox"></div>
-		</div>
-		<div>
-			<div>제목</div>
-			<div class="btitle"></div>
-		</div>
-		<div>
-			<div>내용</div>
-			<div class="bcontent"></div>
-		</div>
-		<div>
-			<div>첨부파일</div>
-			<div class="bfile"></div>
-		</div>
-		
-		<div class="btnbox"></div>
-		
 	</div>
+	
+	
 	<script src="/jspweb/js/board/view.js" type="text/javascript"></script>
 </body>
 </html>

@@ -98,7 +98,11 @@ function bfileDelete(bno){
 	}) // ajax e
 }
 
-
+ $(document).ready(function() {
+        $('#summernote').summernote(
+			{height : 700}			
+		);
+    });
 
 
 

@@ -37,8 +37,8 @@ function getMemberList(page){
 							<td> ${ o.mid } </td>
 							<td> ${ o.memail } </td>
 							<td> 
-								<button type="button">삭제</button>
-								<button type="button">수정</button>
+								<button type="button" disabled="disabled">삭제</button>
+								<button type="button" disabled="disabled">수정</button>
 							</td>
 						</tr>`
 			} ); // for end 

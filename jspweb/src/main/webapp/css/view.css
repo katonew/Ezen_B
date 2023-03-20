@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+.viewtop{
+	display: flex;
+	margin: 30px 0px; 
+}
+
+.rviewtop{
+	margin-left: 10px;
+}
+.btitle{
+	font-weight: bold;
+	font-size: 20px;
+	margin-bottom: 30px;
+}
+
+.bcontent{
+	padding: 10px;
+	margin-bottom: 30px;
+}
+
+.bfilebox{
+	border-top: 1px solid #eeeeee;
+	padding: 20px;
+}
+
+.rcontent{
+	width: 80%;
+	border: 1px solid #eeeeee;
+	border-radius: 10px;
+	padding: 10px;
+	margin-right : 10px;
+	resize: none; /* 사이즈 조절 금지 */
+}
+
+.replywritebox{
+	border: 1px solid #eeeeee;
+	padding: 20px;
+	border-radius: 20px;
+	display: flex;
+}
+
+.rwritebtn{
+	font-size: 15px;
+}
+.replycount{
+	font-size: 10px; 
+	margin: 20px 0px;
+}
+.btnbox{text-align: right;}
+
+.updownbox{text-align: center;}
+.updownbox button{
+	border: none;
+	border-radius: 50%;
+	background-color: white;
+	font-size: 30px;
+}
+.replyimg{width: 30px;}
+.rreply{
+	padding-left: 40px;
+	margin: 5px;
+}
+
