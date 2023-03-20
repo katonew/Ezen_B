@@ -161,7 +161,7 @@ function getReplyList(){
 function rereplyview(rno){
 	console.log('대댓글 출력 함수 s')
 	let rereplybox = `rereplybox${rno}`
-	let html = `<span>---------------${rno}번째 댓글의 하위댓글--------------</span>`;
+	let html = ``;
 	$.ajax({
 		url : "/jspweb/board/reply",
 		async : 'false', //동기식 통신
@@ -172,7 +172,7 @@ function rereplyview(rno){
 			r.forEach((o)=>{
 				if(o.rindex==rno){
 					html += `<div class="rreply">
-								<span>${o.mimg}</span>
+								<span><img src="/jspweb/member/pimg/${o.mimg==null? "default.webp" : o.mimg}" class="replyimg"></span>
 								<span>${o.mid}</span>
 								<span>${o.rdate}</span>
 								<span>${o.rcontent}</span>	
