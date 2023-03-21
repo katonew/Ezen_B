@@ -27,11 +27,9 @@ public class Login extends HttpServlet {
 		String mid = (String)request.getSession().getAttribute("login");
 		// 2. 로그인한 회원의 정보 호출 [ 비밀번호 빼고 ] 
 		MemberDto result =  MemberDao.getInstance().getMember( mid );
-			System.out.println( " result : " + request );
 			// JAVA객체 --> JS 객체 변환 
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(result);
-			System.out.println( " json : " + json );
 		// 3. 응답
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");

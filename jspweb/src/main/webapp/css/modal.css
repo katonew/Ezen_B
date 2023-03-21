@@ -5,6 +5,8 @@
 .modal_wrap{
 	background-color : rgb(160,160,160,50%);
 	position : fixed;	/* 고정위치 */
+	/* 카카오지도 z-index */
+	z-index : 999;		/* 다른 position css와 겹쳤을때 우선순위 */
 	top : 0;	left : 0; /* 왼쪽 상단 고정*/
 	width : 100%;	height : 100%; /*모든화면감싸기*/
 	/* 내용물 가운데 정렬 */
@@ -24,9 +26,8 @@
 }
 
 /* 모달 버튼 꾸미기 */
-.modal_btn button{
+.modal_btns button{
 	background-color: #eeeeee;
 	border-color : #eeeeee;
 	padding: 5px;
-	
 }
