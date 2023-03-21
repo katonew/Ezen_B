@@ -85,46 +85,50 @@ function drugstore(){
 	// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
 	var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
 	    markerPosition = new kakao.maps.LatLng(37.54699, 127.09598); // 마커가 표시될 위치입니다
-	    
-	$.get(
-		"https://api.odcloud.kr/api/3035882/v1/uddi:5fae3cf5-bc15-4eba-87d8-8289b74e659b_201912202015?page=1&perPage=100&serviceKey=t7sm4Yf%2F52aLATacOjIxj94G3uyWTYCP1%2FI1ONa0JLVa9%2Fhk7vz9mTokTdQ4dYTuVxBadEEVqiqlJhpFj%2FdK4Q%3D%3D",
-		function(r) {
-			console.log(r)
-			var position = [];
-			$(r.data).map(function(i, o){
-				let a = getaddress(o.주소);
-				console.log(a)
-				console.log(a.lat)
-				console.log(a.lng)
-		        // 결과값으로 받은 위치를 마커로 표시합니다
-	        	var marker = new kakao.maps.Marker({
-		            map: map,
-		            title: o.약국명,
-		            position: new kakao.maps.LatLng(position.lat, position.lng),
-		            image: markerImage
-		        });
-		        console.log(marker)
-		        // 위에서 생성된 마커 객체에 클릭이벤트 추가 하기
-		        kakao.maps.event.addListener(marker, 'click', function() {
-					// 모달 띄우기
-					openModal();
-					document.querySelector('.modal_title').innerHTML = `<h3>${o.약국명}</h3>`
-					document.querySelector('.modal_title').style.fontSize = '20px'; 
-					document.querySelector('.modal_content').innerHTML = 
-					`
-					<div>주소 : ${o.주소}</div>
-					<div>대표전화 : ${o.대표전화}</div>
-					`;
-				}); // addlistener e
-			    console.log(marker);
-				position.push(marker);
-	    });
-		clusterer.addMarkers(position);
-	    }// fun e
-	 ); // get e
+	$.ajax({
+	url : "https://api.odcloud.kr/api/3035882/v1/uddi:5fae3cf5-bc15-4eba-87d8-8289b74e659b_201912202015?page=1&perPage=100&serviceKey=t7sm4Yf%2F52aLATacOjIxj94G3uyWTYCP1%2FI1ONa0JLVa9%2Fhk7vz9mTokTdQ4dYTuVxBadEEVqiqlJhpFj%2FdK4Q%3D%3D",
+	method : "get",
+	async : false,
+	success : (r) => {
+		
+		// 주소-좌표 변환 객체를 생성합니다
+		var geocoder = new kakao.maps.services.Geocoder();
+		r.data.forEach( (o) =>{
+		
+				// 주소로 좌표를 검색합니다
+				geocoder.addressSearch( o.주소, function(result, status) {
+					
+				    // 정상적으로 검색이 완료됐으면 
+				     if (status === kakao.maps.services.Status.OK) {
+				    
+				    	// 결과값으로 받은 위치를 마커로 표시합니다
+				        let marker =  new kakao.maps.Marker({
+				            position : new kakao.maps.LatLng(result[0].y, result[0].x),
+				            image : markerImage
+				        });
+				        
+				        kakao.maps.event.addListener(marker, 'click', function() {
+							// 모달 띄우기
+							openModal();
+							document.querySelector('.modal_title').innerHTML = `<h3>${o.약국명}</h3>`
+							document.querySelector('.modal_title').style.fontSize = '20px'; 
+							document.querySelector('.modal_content').innerHTML = 
+							`
+							<div>주소 : ${o.주소}</div>
+							<div>대표전화 : ${o.대표전화}</div>
+							`;
+						}); // addlistener e
+				        
+				        clusterer.addMarker(marker);
+				    } 
+				});
+		})
+
+	}
+})
 } // 병원출력함수 e
 	
-	
+
 
 
 
