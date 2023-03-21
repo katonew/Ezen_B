@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title> 
+<meta charset="UTF-8">
+<title>Insert title here</title>
 </head>
 <body>
 
@@ -30,12 +30,15 @@
 		<div id="clickLatlng"></div>	<!-- 클릭한 위치에 좌표알기 -->
 		<!-- 지도가 표시되는 구역 -->
 		<div id="map" style="width:1200px;height:700px;"></div>
+		<button onclick="drugstore()" type="button">병원출력</button>
+		<button onclick="restaurant()" type="button">식당출력</button>
 	</div>
 	
 	
 	
 	<!-- 카카오 지도 API를 사용하기 위해 필요한 클래스/메소드 가지고 있는 JS라이브러리 -->
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1e6d590e52408e487c28d9762e541b00&libraries=clusterer"></script>
-	<script src="/jspweb/js/api/api2.js" type="text/javascript"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1e6d590e52408e487c28d9762e541b00&libraries=clusterer,services"></script>
+	<script src="/jspweb/js/api/api3.js" type="text/javascript"></script>
+
 </body>
 </html>
