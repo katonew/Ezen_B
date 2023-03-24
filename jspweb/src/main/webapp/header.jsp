@@ -35,6 +35,7 @@
 				<li> <a href="/jspweb/api/api2.jsp"> API2 </a> </li>
 				<li> <a href="/jspweb/api/api3.jsp"> API3[과제] </a> </li>
 				<li> <a href="/jspweb/board/chatting.jsp"> 채팅 </a> </li>
+				<li> <a href="/jspweb/product/write.jsp"> 상품등록 </a> </li>
 			</ul>
 			<!-- 서브메뉴 -->
 			<div class="submenu">

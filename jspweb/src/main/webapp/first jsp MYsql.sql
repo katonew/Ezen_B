@@ -97,6 +97,29 @@ create table board(
 -- 카테고리 임시 생성
 insert into category(cname) value ('노하우');
 select *from category;
+select *from member;
+/* 
+	제품 1개당 사진 1개면 제품테이블안에 사진 입력 가능
+	제품 1개당 사진이 여러개일때는 테이블 따로 구성
+    
 
+*/
+-- 제품 테이블
+drop table if exists product;
+create table product(
+	pno int auto_increment primary key,		-- 제품번호
+    pname varchar(500) not null,			-- 제품명
+    pcomment text not null,					-- 제품설명
+    pprice int not null,					-- 제품가격
+    pstate int default 1,					-- 상태 [ 1 : 판매중, 2 : 예약중, 3 : 판매완료 ]
+    plat varchar(100) not null,				-- 위도
+    plng varchar(100) not null,				-- 경도
+    pview int default 0,					-- 조회수
+    pdate datetime default now()			-- 등록일
+);
+-- 사진테이블
 
+-- 찜하기테이블
+
+-- 제품 쪽지 테이블
 

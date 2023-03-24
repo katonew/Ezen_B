@@ -10,9 +10,12 @@
 <body>
 	<%@ include file="/header.jsp" %>
 	
-	<div class="container">
+	<div class="container chattingwrap">
 	
-	
+		<!-- 접속 명단 출력구역 -->
+		<div class="connectlistbox">
+		
+		</div>
 		<div class="chatbox">
 			
 			<div class="contentbox"><!-- 채팅창 -->
@@ -24,8 +27,18 @@
 			
 			
 			<div class="chattingbtnbox">
-				<div>이모티콘</div>
-				<div>첨부파일</div>
+				<!-- 
+					bs : 드롭다운 
+						클릭위치 :  data-bs-toggle="dropdown"
+						드롭다운 표시할 위치 : class="dropdown-menu"
+				-->
+				<button class="emobtn" type="button" data-bs-toggle="dropdown">
+					<i class="far fa-smile"></i>
+				</button>
+				<!-- 드롭다운 클릭시 보이는 구역 -->
+				<div class="dropdown-menu emolist">
+					
+				</div>
 				<button class="sendbtn" disabled="disabled" onclick="보내기()" type="button">보내기</button>
 			</div>
 			

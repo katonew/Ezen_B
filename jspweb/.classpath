@@ -17,13 +17,6 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/jackson-annotations-2.14.2.jar"/>
-	<classpathentry kind="lib" path="C:/jackson-core-2.14.2.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/jackson-databind-2.14.2.jar"/>
 	<classpathentry kind="lib" path="C:/java-activation.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
@@ -39,5 +32,8 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/jackson-annotations-2.9.8.jar"/>
+	<classpathentry kind="lib" path="C:/jackson-core-2.9.8.jar"/>
+	<classpathentry kind="lib" path="C:/jackson-databind-2.9.8.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

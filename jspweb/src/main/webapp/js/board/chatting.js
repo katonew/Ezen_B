@@ -37,6 +37,7 @@ if(memberinfo.mid==null){ //memberinfo => headr.js에 존재하는 로그인 정
 	클라이언트소켓.onopen = function(e){서버소캣연결(e);}
 	클라이언트소켓.onmessage = function(e){메세지받기(e);}
 	클라이언트소켓.onclose = (e)=>{연결해제(e)}
+	클라이언트소켓.onerror = function(e){alert('문제발생'+e)}
 	
 }
 
@@ -45,45 +46,85 @@ if(memberinfo.mid==null){ //memberinfo => headr.js에 존재하는 로그인 정
 
 //2. 클라이언트 소켓이 접속했을때 이벤트/함수 정의 [@OnOpen]
 function 서버소캣연결(e){
-	document.querySelector('.contentbox').innerHTML += 
-	`<div class="alarm">
-		<span>-----${memberinfo.mid}님 채팅방입장-----</span>
-	</div>`
 	
-	}	// 접속했을때 하고싶은 함수 정의
+	자료보내기(memberinfo.mid+"님이 채팅방에 접속하셨습니다.","alarm")
+	
+}	// 접속했을때 하고싶은 함수 정의
 
-//3. 클라이언트소켓이 서버소켓에 메세지를 보내기 [@OnMessage]
+//3. 클라이언트소켓이 서버소켓에 메세지를 보내기 [@OnMessage] (1. 보내기 버튼 눌렀을때 2.입력창에서 엔터눌렀을때) type=msg
 function 보내기(){
 	console.log('메세지 전송')
 	let msgbox = document.querySelector('.msgbox').value
 	
 	// * 서버소켓에 메세지 전송하기
-	클라이언트소켓.send(msgbox);
+		// JSON형식의 문자열 타입을 만들어서 문자열 타입으로 전송
+		// JSON.parse(JSON형식의 문자열타입) : JSON형식의 타입의 문자열타입 --> JSON타입으로 변환
+		// JSON.stringify( JSON타입 --> JSON형식[모양]의 문자열타입 타입으로 변환)
+	let info = {
+		type : 'msg',
+		msgbox : msgbox
+	}
+	클라이언트소켓.send(JSON.stringify(info));
 	
 	// 전송성공시 입력창 초기화
 	document.querySelector('.msgbox').value = '';
+	msgcheck()
+}
+
+// 3-2 type에 따른 html 구별
+function 메세지타입구분(msg){
+	let json = JSON.parse(msg)
+	let html = '';
+	
+	
+	if(json.type == 'msg'){
+		html += `<div class="content">${json.msgbox}</div>`
+	}else if(json.type=='emo'){
+		html += `<div class="content emocontent"><img alt="" src="/jspweb/img/imoji/emo${json.msgbox}.gif" width="70px"></div>`
+	}
+	return html;
 }
 
 //4. 클라이언트 소켓으로부터 메세지가 왔을때
 function 메세지받기(e){
 	console.log(e)
-	console.log(e.data)
-	console.log(JSON.parse(e.data))	 //문자열 JSON -> JS문자열
-	if(JSON.parse(e.data).frommid==memberinfo.mid){
+	let data = JSON.parse(e.data)
+	// 명단[여러개=list/Array] vs 메시지 정보[1개=dto/object]
+		// Arraylist인지 확인
+	if(Array.isArray(data)){
+		console.log(data)
+		let html = '';
+		data.forEach((o)=>{
+			html += `
+			<div class="connectbox"><!-- 접속명단 1명기준 -->
+				<img alt="" src="/jspweb/member/pimg/${o.frommimg==null ? "default.webp" : o.frommimg}" class="hpimg">
+				<div class="name">${o.frommid}</div>			
+			</div>
+			`
+		})
+		document.querySelector('.connectlistbox').innerHTML = html;
+	}
+	else if(JSON.parse(data.msg).type=='alarm'){
+		document.querySelector('.contentbox').innerHTML += 
+			`<div class="alarm">
+				<span>${JSON.parse(data.msg).msgbox}</span>
+			</div>`;
+	}
+	else if(JSON.parse(e.data).frommid==memberinfo.mid){
 		contentbox.innerHTML += `
 		<div class="sendmsg">
-			<div class="date">${JSON.parse(e.data).time}</div>
-			<div class="content">${JSON.parse(e.data).msg}</div>
+			<div class="date">${data.time}</div>
+			${메세지타입구분(data.msg)}
 		</div>`
 	}else{
 		contentbox.innerHTML += 
 					`<div class="tomsg">
-						<span><img src="/jspweb/member/pimg/${JSON.parse(e.data).frommimg==null?"default.webp": JSON.parse(e.data).frommimg}" class="hpimg"></span>
+						<span><img src="/jspweb/member/pimg/${data.frommimg==null?"default.webp": JSON.parse(e.data).frommimg}" class="hpimg"></span>
 						<div class="rcontent">
-							<div class="name"> ${JSON.parse(e.data).frommid} </div>
+							<div class="name"> ${data.frommid} </div>
 							<div class="tocontent">
-								<div class="content"> ${JSON.parse(e.data).msg} </div>
-								<div class="date">${JSON.parse(e.data).time}</div>
+								${메세지타입구분(data.msg)}
+								<div class="date">${data.time}</div>
 							</div>
 						</div>
 					<div>`
@@ -96,19 +137,19 @@ function 메세지받기(e){
 
 // 5. 서버와 연결이 끊겼을때 [ 클라이언트 소켓 객체가 초기화 될때 -> 새로고침했을때, 페이지가 전환될 때]
 function 연결해제(e){
-	console.log('연결해제')
+	자료보내기(memberinfo.mid+"님이 채팅방에서 나갔습니다.","alarm")
 }
 
-
+// 6. 엔터키 누르면 전송
 function enterchat(){
 	if(window.event.keyCode == 13){
 		보내기();
 	}
 }
 
+// 입력창이 빈칸이면 보내기 막기
 function msgcheck(){
 	let msgbox = document.querySelector('.msgbox').value;
-	console.log(msgbox)
 	if(msgbox!=''){
 		document.querySelector('.sendbtn').disabled = '';
 	}else{
@@ -116,9 +157,23 @@ function msgcheck(){
 	}
 }
 
+getemo();
+// 7. 이모티콘 출력
+function getemo(){
+	let html = '';
+	for(let i=1; i<=43;i++){
+		html += `<img alt="" onclick="자료보내기(${i},'emo')" src="/jspweb/img/imoji/emo${i}.gif" width="70px">`
+	}
+	document.querySelector('.emolist').innerHTML = html;
+}
 
-
-
+function 자료보내기(msgbox, type){
+	let msg = {
+		type : type,
+		msgbox : msgbox
+	}
+	클라이언트소켓.send(JSON.stringify(msg));
+}
 
 
 
