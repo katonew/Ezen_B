@@ -120,6 +120,14 @@ create table product(
 -- 사진테이블
 
 -- 찜하기테이블
-
+drop table if exists plike;
+create table plike(
+	plikeno int auto_increment primary key,
+	mno int, 				-- 누가
+	pno int,				-- 어떤제품 찜했는지
+    foreign key (mno) references member(mno) on delete cascade,
+    foreign key (pno) references product(pno) on delete cascade
+);
 -- 제품 쪽지 테이블
 
+use jspweb;

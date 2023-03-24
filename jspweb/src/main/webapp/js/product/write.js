@@ -13,17 +13,22 @@ function onwrite(){
 	// 폼 데이터 격체에 필드 추가
 	writeFormData.set( "plat" , plat );
 	writeFormData.set( "plng" , plng );
-	
-	$.ajax({
-		url : "/jspweb/product/info",
-		method : "post",
-		data : writeFormData,
-		contentType : false,
-		processData : false,
-		success : (r)=>{
-			console.log(r)
-		}
-	})
+	if(plat!=0&&plng!=0){
+			$.ajax({
+			url : "/jspweb/product/info",
+			method : "post",
+			data : writeFormData,
+			contentType : false,
+			processData : false,
+			success : (r)=>{
+				console.log(r)
+				if(r=='true'){
+					alert('상품 등록이 성공되었습니다.')
+					location.href="/jspweb/index.jsp"
+				}else{alert('상품 등록에 실패하였습니다.')}
+			}
+		})
+	}
 	 
 }
 

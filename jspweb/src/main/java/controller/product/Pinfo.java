@@ -1,12 +1,15 @@
 package controller.product;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -25,6 +28,22 @@ public class Pinfo extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setCharacterEncoding("UTF-8");
+		String 동 = request.getParameter("동"); 	System.out.println("동 :" + 동);
+		String 서 = request.getParameter("서");	System.out.println("서 :" + 서);
+		String 남 = request.getParameter("남");	System.out.println("남 :" + 남);
+		String 북 = request.getParameter("북");	System.out.println("북 :" + 북);
+		
+		
+		ArrayList<ProductDto> result =  ProductDao.getInstance().getlist(동,서,남,북);
+		
+		ObjectMapper mapper = new ObjectMapper();
+
+		String json= mapper.writeValueAsString(result);
+
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json");
+		response.getWriter().print(json);
 	}
 
 	
