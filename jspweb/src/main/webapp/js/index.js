@@ -45,7 +45,7 @@ function getproductbox(동,서,남,북){
 		method : "get",
 		data : { "동": 동, "서" : 서, "남" : 남, "북" : 북},
 		success : (r)=>{
-	
+		console.log(r)
 	    // map ( (인덱스,반복객체명))
 	    var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
 	    imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다

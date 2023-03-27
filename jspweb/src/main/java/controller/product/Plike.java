@@ -24,8 +24,7 @@ public class Plike extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int pno = Integer.parseInt(request.getParameter("pno"));
 		int mno = MemberDao.getInstance().getMno((String)request.getSession().getAttribute("login"));
-		System.out.println("pno :" + pno);
-		System.out.println("mno :" + mno);
+		
 		
 		boolean result = ProductDao.getInstance().getplike(pno, mno);
 		response.getWriter().print(result);

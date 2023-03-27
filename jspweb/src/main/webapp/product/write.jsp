@@ -3,8 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style type="text/css">
+		.fileDrop{width:500px; height: 200px; overflow: auto; border: 1px solid red; }
+	</style>
 </head>
 <body>
 	<%@ include file="/header.jsp" %>
@@ -16,8 +19,22 @@
 			제품 가격 : 	<input name="pprice" type="text">	</br>
 			거래 위치 : 	
 			<div id="map" style="width:100%;height:350px;"></div>
+			<!-- <h5> 첨부파일 여러개</h5>
+			<input name="pfiles" type="file" multiple="multiple" accept="image/*"></br> -->
+			
+			<!-- 드래그 앤 드랍 : multiple -->
+			<div class="fileDrop">
+				[드래그앤드랍]여기에 첨부파일을 넣어주세요
+			</div>
+			
+			
+			
 			<button onclick="onwrite()" type="button">제품등록</button>
-		
+			<!--<h5> 첨부파일 한개</h5>
+			<input type="file" name="pfile" accept="image/*" >
+			 <input type="file" name="pfile" accept="audio/*" >
+			<input type="file" name="pfile" accept="video/*" >	 -->
+			
 		</form>
 		
 	</div>
