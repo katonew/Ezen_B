@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import model.dto.ChatDto;
 import model.dto.ProductDto;
 
 public class ProductDao extends Dao{
@@ -113,7 +114,7 @@ public class ProductDao extends Dao{
 		}
 		return 3;
 		
-	}
+	} // setplike e
 	
 	// 4. 해당 회원이 해당 제품 찜하기 상태인지 확인
 	public boolean getplike(int pno, int mno) {
@@ -126,7 +127,41 @@ public class ProductDao extends Dao{
 			if(rs.next()) {return true;}
 		} catch (Exception e) {System.out.println("getplikec 오류" + e);}
 		return false;
-	}
+	} // getplike e
+	
+	// 5. 제품에 채팅 등록
+	public boolean setChat(ChatDto dto) {
+		String sql = "insert into note(ncontent,pno,frommno,tomno) values (?,?,?,?)";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, dto.getNcontent());
+			ps.setInt(2, dto.getPno());
+			ps.setInt(3, dto.getFrommno());
+			ps.setInt(4, dto.getTomno());
+			int count = ps.executeUpdate();
+			if(count==1) {return true;}
+		} catch (Exception e) {	System.out.println("setChat 오류" + e);	}
+		return false;
+	} // setChat e
+	
+	// 6. 제품에 등록 채팅 [ 제품번호 일치, 현재 보고 있는 회원[로그인 회원] 받거나 보낸 내용들 ]
+	public ArrayList<ChatDto> getChatList(int pno , int mno){
+		ArrayList<ChatDto> list = new ArrayList<>();
+		String sql = "select *from note where pno = ? and (frommno = ? or tomno = ?)";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, pno);
+			ps.setInt(2, mno);
+			ps.setInt(3, mno);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				ChatDto dto = new ChatDto(rs.getInt(1), rs.getString(2), rs.getString(3),
+						rs.getInt(4), rs.getInt(5), rs.getInt(6));
+				list.add(dto);
+			}
+		} catch (Exception e)  {	System.out.println("getChatList 오류" + e);	}
+		return list;
+	} // getChatList e
 }
 
 

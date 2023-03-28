@@ -6,24 +6,29 @@ var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표�
 
 let productList = null;
 
+// 제품목록 출력
 function getproductList(){
-	let html = `<h3>제품 목록 페이지</h3>`;
-    productList.forEach((p)=>{
-		html +=  `<div>
- 					<span>${p.pname}</span>
-	  				<span>${p.pcomment}</span>
-	  				<span>${p.pprice}</span>
-	  				<span>${p.pstate==1? '판매중' : '판매완료' }</span>
-	  				<span>${p.pview}</span>
-	  				<span>${p.pdate}</span>
-	  				<span>
-		  				<button class="plikebtn" onclick="setplike(${p.pno})" type="button">
-		  					${getplike(p.pno)}
-		  				</button>
-	  				</span>
-	 			  </div>`
+	let html = ``;
+    productList.forEach((p,i)=>{
+		html +=  `<div onclick="productPrint(${i})" class="productbox">
+					<div class="pimgbox">
+						<img src="/jspweb/product/pimg/${p.pimgList[0]}">
+					</div>
+					<div class="pcontentbox">
+						<div class="pdate">${p.pdate}</div>
+						<div class="pname">${p.pname}</div>
+						<div class="pprice">${p.pprice.toLocaleString()}원</div>
+						<div class="petc">
+							<span><i class="fas fa-eye"></i>${p.pview}</span>
+							<span class="plikebtn"></span>
+							<span><i class="far fa-comment-dots"></i></span>10</span>
+						</div>
+					</div>
+				</div>`
+		getplike(p.pno)
 	  })
       document.querySelector('.productlistbox').innerHTML = html;
+    
 }
 
 
@@ -47,7 +52,7 @@ function getproductbox(동,서,남,북){
 		success : (r)=>{
 		console.log(r)
 	    // map ( (인덱스,반복객체명))
-	    var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
+	    var imageSrc = `/jspweb/img/mapmarker.png`, // 마커이미지의 주소입니다    
 	    imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
 	    imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 	    
@@ -56,30 +61,23 @@ function getproductbox(동,서,남,북){
 		// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
 		var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
 		
-	    var markers = $(r).map((i,p)=>{
+	    var markers = $(r).map((p,i)=>{
+			var imageSrc = `/jspweb/product/pimg/${i.pimgList[0]}`, // 마커이미지의 주소입니다    
+		    imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+		    imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+		    
+		    productList = r
+		    getproductList()
+			// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+			var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
+			
 	        let marker = new kakao.maps.Marker({
-	            position : new kakao.maps.LatLng(p.plat, p.plng),
+	            position : new kakao.maps.LatLng(i.plat, i.plng),
 	            image : markerImage 
 	        });
 	        // 마커에 클릭이벤트를 등록합니다
 			kakao.maps.event.addListener(marker, 'click', function() {
-				
-				let html =  `<button onclick="getproductList()">뒤로</button>
-							 <h3>제품 상세 페이지</h3>
-							 <div>
-				  				<div>${p.pname}</div>
-				  				<div>${p.pcomment}</div>
-				  				<div>${p.pprice}</div>
-				  				<div>${p.pstate==1? '판매중' : '판매완료' }</div>
-				  				<div>${p.pview}</div>
-				  				<div>${p.pdate}</div>
-				  				<div>
-					  				<button class="plikebtn" onclick="setplike(${p.pno})" type="button">
-					  					${getplike(p.pno)}
-					  				</button>
-				  				</div>
-				 			</div>`
-			    document.querySelector('.productlistbox').innerHTML = html;
+				productPrint(p);
 			});
 	        return marker;
 	    });
@@ -88,6 +86,149 @@ function getproductbox(동,서,남,북){
 	    } // success e
 	}); // ajax e
 } // fun e
+
+// 제품 개별 조회
+function productPrint(i){
+	let p = productList[i]
+	
+	// 이미지 슬라이드에 대입할 html 구성
+	let imghtml = ``;
+	p.pimgList.forEach((img,k)=>{
+		// bs class : active 현재 보여지는 이미지
+		if(k==0){
+			imghtml += `<div class="carousel-item active">
+				      <img src="/jspweb/product/pimg/${img}" class="d-block w-100" alt="...">
+				    </div>`
+		}else{
+			imghtml += `<div class="carousel-item">
+				      <img src="/jspweb/product/pimg/${img}" class="d-block w-100" alt="...">
+				    </div>`
+			
+		}
+		
+	})
+	let html = ``
+	 html += `<div class="pviewbox">
+				<div class="pviewinfo">
+					<div class="mimgbox">
+						<img alt="" src="/jspweb/member/pimg/${p.mimg==null? "default.webp" : p.mimg}" class="hpimg">
+						<span>작성자 : ${p.mid}</span>
+					</div>
+					<div class="backbtn">
+						<button class="pbadge" onclick="getproductList()" type="button">뒤로가기</button>
+					</div>
+				</div>
+				<!-- 이미지 캐러셀 : 이미지 슬라이드 -->
+				<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+				  <div class="carousel-inner">
+				    ${imghtml}
+				  </div>
+				  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+				    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				    <span class="visually-hidden">Previous</span>
+				  </button>
+				  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+				    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+				    <span class="visually-hidden">Next</span>
+				  </button>
+				</div> <!-- 캐러셀 e -->
+				<!-- 제품 상세 내용물 -->
+				<div class="pdate">${p.pdate}</div>
+				<div class="pname">${p.pname}</div>
+				<div class="pcomment">${p.pcomment}</div>
+				<div class="pstate">
+					<span class="pbadge">
+						${p.pstate==1? '판매중' : p.pstate==2? '거래중' : '판매완료' }
+					</span>
+				</div>
+				<div class="pprice">${p.pprice.toLocaleString()}원</div>
+				<div class="petc">
+					<span><i class="fas fa-eye"></i>${p.pview}</span>
+					<span><i class="fas fa-thumbs-up"></i>5</span>
+					<span><i class="far fa-comment-dots"></i></span>10</span>
+				</div>
+				<div class="pviewbtnbox">
+					<button type="button" class="plikebtn" onclick="setplike(${p.pno})"><i class="far fa-heart"></i></button>
+					<button onclick="chatprint(${i})" type="button">쪽지보내기</button>
+				</div>
+			</div>`
+    document.querySelector('.productlistbox').innerHTML = html;
+    getplike(p.pno);
+}// end
+
+//채팅 페이지 이동
+function chatprint(i){
+	let p = productList[i]
+	let chathtml = '';
+	$.ajax({
+		url : "/jspweb/product/chat",
+		method : "get",
+		async : false,
+		data : {"pno" : p.pno},
+		success : (r)=>{
+			console.log(r)
+			
+			
+			r.forEach((o)=>{
+				if(o.frommno == memberinfo.mno){
+					chathtml += `<div class="sendbox">${o.ncontent}</div>`
+				}else{
+					chathtml += `<div class="receivebox">${o.ncontent}</div>`
+				}
+				
+			})
+		}
+	})
+	
+	let html = `<div class="pchatbox">
+					<div class="pviewinfo">
+						<div class="mimgbox">
+							<img alt="" src="/jspweb/product/pimg/${p.pimgList[0]}" class="hpimg">
+							<span class="pname">${p.pname}</span>
+						</div>
+						<div class="backbtn">
+							<button class="pbadge" onclick="productPrint(${i})" type="button">뒤로가기</button>
+						</div>
+					</div>
+				</div>
+				<div class="chatcontent">
+					${chathtml}
+				</div>
+				<div class="chatbtn">
+					<textarea class="ncontentinput"></textarea>
+					<button onclick="sendchat(${p.pno}, ${p.mno})" type="button">전송</button>
+				</div>`;
+	document.querySelector('.productlistbox').innerHTML = html;
+	
+}
+
+// 5.
+function sendchat(pno, tomno){
+	let ncontent = document.querySelector('.ncontentinput').value;
+	$.ajax({
+		url : "/jspweb/product/chat",
+		method : "post",
+		data : { 
+			"pno" : pno, 
+			"ncontent" : ncontent,
+			"tomno" : tomno
+		},
+		success: (r)=>{
+			console.log(r)
+			if(r=='true'){
+				document.querySelector('.ncontentinput').value = '';
+			}else{
+				
+			}
+		} // success e
+	}) // ajax e
+} // sendchat e
+
+
+
+
+
+
 get동서남북();
 function get동서남북(){
 	// 지도의 현재 영역을 얻어옵니다 
@@ -138,20 +279,22 @@ function setplike(pno){
 
 
 
-// 해당 회원의 해당 제품 찜하기 상태 호출
+//해당 회원의 해당 제품 찜하기 상태 호출
 function getplike(pno){
 	if(memberinfo.mid==null){document.querySelector('.plikebtn').innerHTML = '♡'}
-	$.ajax({
+	else{
+		$.ajax({
 		url : "/jspweb/product/plike",
 		method : "get",
-		async : "false",
 		data : {"pno" : pno},
 		success : (r)=>{
-			console.log(r)
 			if(r =='true'){document.querySelector('.plikebtn').innerHTML = '♥' }
 			else{document.querySelector('.plikebtn').innerHTML = '♡'}
 		}
 	})
+		
+	}
+	
 	
 }
 
