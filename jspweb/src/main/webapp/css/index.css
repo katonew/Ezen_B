@@ -158,14 +158,32 @@ html, body{
 }
 
 
+/*--------제품별 받은 채팅방 목록-----------*/
+.chatlist{
+	display: flex;
+	margin: 20px;
+	border-bottom: 1px solid #eeeeee;
+	padding-bottom: 20px;
+}
+
+.frominfo{
+	margin-left: 15px;
+}
+.fromndate{
+	font-size: 8px;
+}
+.frommid{
+	font-size: 12px;
+}
+.fromncontent{
+	font-weight: bold;
+}
 
 
 
-
-
-
-
-
+.chatlist{
+	background-color: #e8e8e8;
+}
 
 
 

@@ -16,8 +16,8 @@ public class ProductDao extends Dao{
 	public static ProductDao getInstance() {return dao;}
 	
 	// 상품 등록 함수
-	public boolean onwrite(ProductDto dto) {
-		// 제품 등록
+	public synchronized boolean onwrite(ProductDto dto) {
+		// 제품 등록 [ synchronized 사용시(서블릿) 해당 메소드 동시사용불가 await ] 
 		String sql = "insert into product(pname,pcomment,pprice,plat,plng,mno) values(?,?,?,?,?,?)";
 		try {
 			ps = con.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS);
@@ -49,7 +49,7 @@ public class ProductDao extends Dao{
 		return false;
 	}
 	
-	public ArrayList<ProductDto> getlist(String 동,String 서,String 남,String 북){
+	public synchronized ArrayList<ProductDto> getlist(String 동,String 서,String 남,String 북){
 		ArrayList<ProductDto> list = new ArrayList<>();
 		String sql ="select p.*,m.mid,m.mimg from product p natural join member m  "
 				+ "where ? >= plng and ? <= plng and ? <= plat and ? >= plat ";
@@ -85,7 +85,7 @@ public class ProductDao extends Dao{
 	}
 	
 	// 찜하기 등록/ 취소 
-	public int setplike(int pno,int mno) {
+	public synchronized int setplike(int pno,int mno) {
 		
 		// 1. 찜 등록인지 취소인지 확인
 		String sql = "select *from plike where pno = ? and mno =?";
@@ -117,7 +117,7 @@ public class ProductDao extends Dao{
 	} // setplike e
 	
 	// 4. 해당 회원이 해당 제품 찜하기 상태인지 확인
-	public boolean getplike(int pno, int mno) {
+	public synchronized boolean getplike(int pno, int mno) {
 		String sql = "select *from plike where pno = ? and mno =?";
 		try {
 			ps = con.prepareStatement(sql);
@@ -130,7 +130,7 @@ public class ProductDao extends Dao{
 	} // getplike e
 	
 	// 5. 제품에 채팅 등록
-	public boolean setChat(ChatDto dto) {
+	public synchronized boolean setChat(ChatDto dto) {
 		String sql = "insert into note(ncontent,pno,frommno,tomno) values (?,?,?,?)";
 		try {
 			ps = con.prepareStatement(sql);
@@ -144,19 +144,45 @@ public class ProductDao extends Dao{
 		return false;
 	} // setChat e
 	
-	// 6. 제품에 등록 채팅 [ 제품번호 일치, 현재 보고 있는 회원[로그인 회원] 받거나 보낸 내용들 ]
-	public ArrayList<ChatDto> getChatList(int pno , int mno){
+	// 6. 제품에 등록 채팅 [ 1.채팅목록출력[js.9번함수] 2.채팅방 내 대화출력 [js.10번함수 ] ]
+	public synchronized ArrayList<ChatDto> getChatList(int pno , int mno, int chatmno){
 		ArrayList<ChatDto> list = new ArrayList<>();
-		String sql = "select *from note where pno = ? and (frommno = ? or tomno = ?)";
+		String sql = "";
+		if(chatmno != 0) {
+			sql = "select * from note where pno = ? and ((frommno = ? and tomno = ?) or (frommno = ? and tomno = ?))";
+		}else {
+			sql = "select * from note where pno = ? and (frommno = ? or tomno = ?)";
+		}
+		
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, pno);
 			ps.setInt(2, mno);
-			ps.setInt(3, mno);
+			ps.setInt(3, chatmno);
+			if(chatmno != 0) {
+				ps.setInt(1, pno);
+				ps.setInt(2, mno);
+				ps.setInt(3, chatmno);
+				ps.setInt(4, chatmno);
+				ps.setInt(5, mno);
+			}else {
+				ps.setInt(1, pno);
+				ps.setInt(2, mno);
+				ps.setInt(3, mno);
+			}
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				ChatDto dto = new ChatDto(rs.getInt(1), rs.getString(2), rs.getString(3),
 						rs.getInt(4), rs.getInt(5), rs.getInt(6));
+				
+				// 보낸 회원의 정보를 호출
+				sql = "select mid,mimg from member where mno = "+ rs.getInt(5); //rs.getInt(5) ==> frommno
+				ps = con.prepareStatement(sql);
+				ResultSet rs2 = ps.executeQuery();
+				if(rs2.next()) {
+					dto.setFrommid(rs2.getString(1));
+					dto.setFrommimg(rs2.getString(2));
+				}
 				list.add(dto);
 			}
 		} catch (Exception e)  {	System.out.println("getChatList 오류" + e);	}

@@ -54,3 +54,49 @@ a{ color: black; text-decoration: none; }
 	border: solid 1px #e8e8e8;
 	border-radius: 50%; /*둥근모서리*/
 }
+
+
+
+/*------ 알림 모달창 ---------*/
+.msgbox{
+	width: 200px; height: 100px;
+	border: 3px solid black;
+	background-color: white;
+	position: fixed;
+	left : 50%;
+	bottom: 50%;
+	z-index: 300;
+	opacity: 0;
+	/*애니메이션 효과 */
+	/* 특정 css 변화 있을때 css 변화시간(초)*/
+	transition : 0.5s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -9,7 +9,8 @@ public class ChatDto {
     private int frommno ;		// 채팅을 받는사람
     private int tomno ;			// 채팅을 보낸사람
     // 추가필드
-    
+    private String frommid;		// 보낸 사람의 아이디
+    private String frommimg;		// 보낸 사람의 프로필이미지
     
     public ChatDto() {}
 
@@ -22,6 +23,39 @@ public class ChatDto {
 		this.pno = pno;
 		this.frommno = frommno;
 		this.tomno = tomno;
+	}
+
+	public ChatDto(int nno, String ncontent, String ndate, int pno, int frommno, int tomno, String frommid,
+			String frommimg) {
+		super();
+		this.nno = nno;
+		this.ncontent = ncontent;
+		this.ndate = ndate;
+		this.pno = pno;
+		this.frommno = frommno;
+		this.tomno = tomno;
+		this.frommid = frommid;
+		this.frommimg = frommimg;
+	}
+
+
+	public String getFrommid() {
+		return frommid;
+	}
+
+
+	public void setFrommid(String frommid) {
+		this.frommid = frommid;
+	}
+
+
+	public String getFrommimg() {
+		return frommimg;
+	}
+
+
+	public void setFrommimg(String frommimg) {
+		this.frommimg = frommimg;
 	}
 
 

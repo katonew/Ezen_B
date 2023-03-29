@@ -16,7 +16,6 @@
 		<div id="map" style="width:75%; height:700px;"></div>
 		<!-- 사이드바 -->
 		<div class="productlistbox">
-			
 		</div> <!-- productlistbox e -->
 	</div>
 	
@@ -50,5 +49,19 @@
 
  -->
 
+<!-- 
+	// 해당 제품으로부터 채팅을 받은 목록
+	<div class="chatlist">
+		<div class="frommimg"><img src="/jspweb/member/pimg/default.webp" class="hpimg"></div>
+		<div class="frominfo">
+			<div class="fromndate">2023-03-29 10:02</div>
+			<div class="frommid">보낸사람 아이디</div>
+			<div class="fromncontent">마지막 채팅</div>
+		</div>
+	</div>
+
+
+
+ -->
 
 

@@ -16,6 +16,18 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
 </head>
 <body>
+
+	<div class="msgbox"> <!-- 모달창 -->
+		메세지가 도착했습니다.
+	</div>
+
+
+
+
+
+
+
+
 	
 	<div class="container"> <!-- bs 박스권 -->
 		<div class="header">
