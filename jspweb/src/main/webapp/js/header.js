@@ -34,7 +34,7 @@ function getLogin(){
 						</div>	<!-- 드롭다운 end  -->
 						${r.mid}님
 						<a href="#"> 쪽지함 </a>
-						<a href="#"> 포인트 </a>
+						<a href="/jspweb/member/point.jsp"> 포인트 </a>
 						`
 			
 			

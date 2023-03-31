@@ -1,5 +1,57 @@
 console.log( 'js열림')
 
+
+/* chart.js 차트 
+	new Chart('dom객체 , {차트 옵션});
+	{ type : '차트이름' : data : { 차트에 표시할 데이터 } , options : { 차트에 적용 될 옵션 } };
+	labels : 가로축
+*/
+
+
+/*
+	JSON = JS객체
+	let 객체명 { 필드명/키 : 데이터, 필드명/키 : 데이터, 필드명/키 : 데이터, 필드명/키 : 데이터}
+	
+	1. 해당 객체의 필드명만 호출
+		Object.keys(객체명)
+	2. 해당 객체의 값만 호출
+		Object.values(객체명)
+
+ */
+
+
+
+
+
+const ctx = document.getElementById('myChart');
+
+
+$.get("/jspweb/point", (r)=>{
+	console.log(r)
+	console.log(Object.keys(r))
+	console.log(Object.values(r))
+
+	new Chart(ctx, {
+		type: 'bar',	// bar : 막대차트 / line : 선 차트
+		data: {
+		  labels: Object.keys(r),
+		  datasets: [{
+		    label: '포인트 충전 내역',
+		    data: Object.values(r),
+		    borderWidth: 10
+		  }]
+		},
+		options: {
+		  scales: {
+		    y: {
+		      beginAtZero: true
+		    }
+		  }
+		}
+	});
+
+}) // ajax e
+
 let memberObject = {
 	page : 1 , // page : 표시할 페이징번호
 	key : "" , 
@@ -17,8 +69,6 @@ function getMemberList(page){
 		data : memberObject ,
 		success : (r)=>{
 			console.log('ajax통신');
-			console.log( r );
-			console.log( r.memberlist );	// 응답 결과 데이터 확인
 			// 1. 응답데이터 처리 
 				// 1. 테이블 헤더 구성 
 			let html = `<tr>
@@ -76,6 +126,23 @@ function serchMember(){
 	memberObject.keyword = document.querySelector('.keyword').value;
 	getMemberList(1);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
